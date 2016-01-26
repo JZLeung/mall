@@ -1,0 +1,46 @@
+.input{
+	font-size: 14px;
+    border: 1px solid #555;
+    padding: 5px 10px;}
+.btn{
+	border: 1px solid #555;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.bg-black{
+	background-color: #555;
+    color: #fff;}
+    .bg-black:hover{
+    	background-color: #847C7C;
+    	color: #e2e2e2;
+    	border: 1px solid #847C7C;}
+.head-top {
+    
+    width: 100%;
+    height: 40px;line-height: 40px;
+    background-color: #F5F5F5;}
+    .head-top .content{justify-content: flex-end;display: flex;}
+    .head-top span{margin-right: 20px;}
+    .head-top a{color: #808080;}
+.content{width: 1100px;margin: 0 auto;}
+.head-mid{
+	display: flex;
+	height: 150px;
+	//background-color: #F5F5F5;
+	width: 100%;
+	position: relative;
+	align-items:flex-end;
+	}
+	.head-mid .content{align-items:flex-end;margin-bottom: 40px;display: flex;}
+	.head-mid .left,.middle,.right{flex-grow:1;flex-direction:row-reverse;}
+	.head-mid .right{text-align: right;font-size: 0}
+	
+	.head-mid .menu-list{font-size: 0}
+	.head-mid .menu-list a{display: inline-block;padding: 3px 35px;;font-size: 13px;text-align: center;}
+	.head-mid .menu-list a:hover{background-color: #847C7C;color: #e2e2e2;}
+	.head-mid .menu-list a.active{background-color: #555;color: #fff;}
+
+	.head-mid .toolbar{width: 100%;background-color: #555;position: absolute;left: 0;height: 40px;bottom: 0;padding: 0 150px;}
+	.head-mid .toolbar a{color: #fff;text-align: left;padding: 0;margin-right: 40px;margin-top: 10px;}
+	.head-mid .toolbar a:hover{color: #fff;border-bottom: 2px solid #fff;background-color: transparent;}
