@@ -1,1 +1,0 @@
-<?php if (!defined('THINK_PATH')) exit();?>/tp/index.php/home/index/getid/123.html

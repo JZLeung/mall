@@ -1,0 +1,61 @@
+.login-top {
+  padding: 15px 0;
+  border-bottom: 2px solid;
+}
+.login-top .top-list {
+  margin-top: 15px;
+}
+.login-top .top-list li {
+  margin-right: 35px;
+}
+
+.login-container {
+  margin-top: 150px;
+}
+.login-container img {
+  width: 100%;
+}
+.login-container .left-container {
+  width: 554px;
+  border-right: 1px solid #e2e2e2;
+  padding: 50px 0;
+}
+.login-container .left-container .logo {
+  width: 252px;
+  margin: auto;
+}
+.login-container .right-container {
+  width: 504px;
+  padding: 10px 20px;
+}
+
+.login-box {
+  padding: 0 30px;
+}
+.login-box .head {
+  font-size: 20px;
+}
+.login-box li {
+  margin: 20px;
+}
+.login-box input {
+  padding: 15px;
+  border: 1px solid #f2f2f2;
+  width: 270px;
+  font-size: 16px;
+}
+.login-box .btn-submit {
+  background-color: #ff1901;
+  color: #fff;
+  font-weight: bold;
+  margin: auto;
+  width: 302px;
+}
+.login-box ul.error {
+  color: red !important;
+  margin-left: 20px;
+}
+.login-box ul.error li {
+  margin: 5px 0;
+  list-style: square inside !important;
+}

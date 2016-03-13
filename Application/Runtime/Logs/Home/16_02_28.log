@@ -1,0 +1,279 @@
+[ 2016-02-28T00:47:00+08:00 ] ::1 /tp/home/user/regist
+ERR: 无法加载控制器:User
+
+[ 2016-02-28T00:54:21+08:00 ] ::1 /tp/home/user/login/admin
+ERR: 参数错误或者未定义:username
+
+[ 2016-02-28T00:54:28+08:00 ] ::1 /tp/home/user/login/admin/admin
+ERR: 参数错误或者未定义:username
+
+[ 2016-02-28T00:54:58+08:00 ] ::1 /tp/home/user/login/admin/username/1
+ERR: 参数错误或者未定义:username
+
+[ 2016-02-28T00:58:24+08:00 ] ::1 /tp/home/user/home/user/login?username=admin
+ERR: 非法操作:home
+
+[ 2016-02-28T22:12:05+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000746s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001204s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.1330s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0027s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000710s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000756s ]
+
+[ 2016-02-28T22:12:16+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000492s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000933s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0125s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000714s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000758s ]
+
+[ 2016-02-28T22:12:51+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000775s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001371s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0128s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000900s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000943s ]
+
+[ 2016-02-28T22:14:29+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000482s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000881s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0131s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001945s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002130s ]
+
+[ 2016-02-28T22:14:34+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000672s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001174s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0110s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000730s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000776s ]
+
+[ 2016-02-28T22:14:45+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000571s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000960s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0101s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000680s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000725s ]
+
+[ 2016-02-28T22:14:57+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000968s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001698s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0122s ]
+NOTIC: [8] Undefined index: username D:\xampp\htdocs\tp\Application\Home\Controller\UserController.class.php 第 18 行.
+SQL: SELECT * FROM `tp_user` WHERE `username` = null  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000838s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000882s ]
+
+[ 2016-02-28T22:15:56+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000925s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001695s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0591s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000831s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000876s ]
+
+[ 2016-02-28T22:16:59+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000568s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001480s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0129s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000657s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000701s ]
+
+[ 2016-02-28T22:17:20+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001034s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001884s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0151s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000673s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000720s ]
+
+[ 2016-02-28T22:17:47+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000760s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001256s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000808s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000848s ]
+
+[ 2016-02-28T22:22:43+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000735s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001234s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0092s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000923s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000985s ]
+
+[ 2016-02-28T22:25:51+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000742s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001196s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0131s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001107s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001172s ]
+
+[ 2016-02-28T22:25:59+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000536s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000902s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0093s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin3'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000676s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000717s ]
+
+[ 2016-02-28T22:26:28+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001037s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001503s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0118s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'adsfasdf'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001074s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001137s ]
+
+[ 2016-02-28T22:26:33+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000496s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000859s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0129s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000675s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000715s ]
+
+[ 2016-02-28T22:26:36+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000504s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000910s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0118s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000640s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000684s ]
+
+[ 2016-02-28T22:58:07+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000458s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000859s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.1124s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0028s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001961s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002096s ]
+
+[ 2016-02-28T23:02:48+08:00 ] ::1 /tp/regist
+ERR: 非法操作:toRegist
+
+[ 2016-02-28T23:41:19+08:00 ] ::1 /tp/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000718s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001152s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000042s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000086s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014075s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014141s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000633s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000668s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000671s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000711s ]
+
+[ 2016-02-28T23:42:50+08:00 ] ::1 /tp/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000492s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000860s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000045s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000110s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006116s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006184s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000694s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000739s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000594s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000646s ]
+
+[ 2016-02-28T23:42:58+08:00 ] ::1 /tp/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001112s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001949s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000050s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000108s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009822s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009916s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000611s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000651s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000522s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000564s ]
+
+[ 2016-02-28T23:44:11+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001210s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002783s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0155s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001247s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001328s ]
+
+[ 2016-02-28T23:51:04+08:00 ] ::1 /tp/regist
+ERR: 无法加载控制器:Pssport
+
+[ 2016-02-28T23:52:49+08:00 ] ::1 /tp/Home/User/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000507s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001055s ]
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.0121s ]
+SQL: SELECT * FROM `tp_user` WHERE `username` = 'admin'  [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000774s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000831s ]
+

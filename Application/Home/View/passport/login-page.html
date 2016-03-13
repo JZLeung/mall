@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>YOHO Buy</title>
+	<link rel="shortcut icon" href="http://www.yohobuy.com/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="__PUBLIC__/css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/header.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/login.css">
+</head>
+<body>
+	<include file="./Public/html/login-top.html" />
+	<div class="container m-width login-container">
+		<div class="left-container left">
+			<div class="logo">
+				<img src="__PUBLIC__/images/login/login-logo.jpg" alt="">
+			</div>
+		</div>
+		<div class="right-container left">
+			<div class="login-box" id="login-box">
+				<form action="" id="form">
+				<ul>
+					<li>
+						<h2 class="head">会员登录</h2>
+					</li>
+					<li>
+						<input type="text" name="username" placeholder="邮箱/手机号码">
+						<ul class="uerror error"></ul>
+					</li>
+					<li>
+						<input type="password" name="password" placeholder="密码">
+						<ul class="perror error"></ul>
+					</li>
+					<li>
+						<input type="submit" value="登录" class="btn btn-submit" id="submit">
+					</li>
+				</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-1.12.0.js"></script>
+	<script src="__PUBLIC__/js/base.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			$('#login-box').find('#submit').click(function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: 'Home/User/login',
+					type: 'post',
+					dataType: 'json',
+					data: $('#form').serialize(),
+					success:function(data){
+						console.log(data);
+						if (data.code == 1) {
+							alert('登陆成功，跳转到首页');
+							//location.href = "__ROOT__";
+						}else{
+							$('.error').text('');
+							if (data.code == 0) {
+								$('span.perror').text(data.msg);
+							}else{
+								$('span.uerror').text(data.msg);
+							}
+						}
+					}
+				})
+				.done(function() {
+					console.log("success");
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+
+			});
+		});
+	</script>
+</body>

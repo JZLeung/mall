@@ -578,6 +578,9 @@ function vendor($class, $baseUrl = '', $ext='.php') {
  * @return Think\Model
  */
 function D($name='',$layer='') {
+    if (C('DB_TYPE') == 'mongo') {
+        return new  Think\Model\MongoModel($name);
+    }
     if(empty($name)) return new Think\Model;
     static $_model  =   array();
     $layer          =   $layer? : C('DEFAULT_M_LAYER');
@@ -594,7 +597,8 @@ function D($name='',$layer='') {
             $class      =   '\\Common\\'.$layer.'\\'.$name.$layer;
         }
         $model      =   class_exists($class)? new $class($name) : new Think\Model($name);
-    }else {
+    }
+    else {
         Think\Log::record('D方法实例化没找到模型类'.$class,Think\Log::NOTICE);
         $model      =   new Think\Model(basename($name));
     }
@@ -614,7 +618,7 @@ function M($name='', $tablePrefix='',$connection='') {
     if(strpos($name,':')) {
         list($class,$name)    =  explode(':',$name);
     }else{
-        $class      =   'Think\\Model';
+        $class      =   C('DB_TYPE') == 'mongo' ? 'Think\\Model\\MongoModel' : 'Think\\Model';
     }
     $guid           =   (is_array($connection)?implode('',$connection):$connection).$tablePrefix . $name . '_' . $class;
     if (!isset($_model[$guid]))
