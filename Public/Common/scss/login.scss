@@ -1,0 +1,35 @@
+$basecolor:#ef5b00;
+
+body{
+	background-color: #f5f5f5;
+}
+.login-w{
+	width: 350px;
+}
+.login2016{
+	position: relative;
+	width: 800px;
+	margin: 50px auto 0;
+	background-color: #fff;
+	padding: 30px 0;
+}
+.login-box{
+	//padding: 0 30px;
+	width: 360px;
+	margin: auto;
+	.head{
+		font-size: 20px;
+	    display: block;
+	    padding: 15px 0;
+	    width: 350px;
+	}
+	li{margin: 20px 0;text-align: center;}
+	input{padding: 15px;border: 1px solid #f2f2f2;width: 320px;font-size: 16px;}
+	.btn-submit{background-color: $basecolor;color: #fff;font-weight: bold;margin: auto;width: 352px;}
+	ul.error{
+		color: red !important;
+		margin-left: 20px;
+		li{margin: 5px 0;list-style: square inside !important;}
+	}
+}
+.login-w.sup-text{margin: 50px 0;}

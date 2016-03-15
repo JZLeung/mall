@@ -10,38 +10,33 @@ class UserController extends Controller {
     public function regist(){
     	$datas = $this->getPostData();
       $u = M('User');
-      $user = $this->findUserByName($data['username']);
+      $user = $this->findUserByName($datas['username']);
       if ($user) {
         $msg['code'] = -1;
         $msg['msg'] = '用户名已存在';
       }else{
-        $u->creat($data);
-        $res = $u->add();
+        $datas['uid'] = findLastId('user', $u);
+        //$u->creat($data);
+        $res = $u->add($datas);
+
         if ($res) {
+          $user = $this->findUserByName($datas['username']);
           $msg['code'] = 1;
           $msg['msg'] = '注册成功';
         }
       }
-      echo json_encode($msg);
 
-    	/*$u = M('User');
-      $data = $datas = I('post.');
-      $data['password'] = md5($datas['password']);
-      //$u->create($data);
-      //$res = $u->add();
-      var_dump($data);*/
+      session('user' , $user);
+      cookie('user', $user, 360);
+      echo json_encode($msg);
     }
 
     public function login(){
     	$u = M('user');
-      //var_dump($u);
     	$datas = $this->getPostData();
-      //var_dump($datas);
-      //$msg  = $u->login($datas);
-      //$u = D('User');
-      $user = $this->findUserByName($data['username']);
+      $user = $this->findUserByName($datas['username']);
       if ($user) {
-        if ($user['password'] == $data['password']) {
+        if ($user['password'] == $datas['password']) {
           $msg['code'] = 1;
           $msg['msg'] = '登录成功';
         }else{
@@ -51,8 +46,9 @@ class UserController extends Controller {
       }else{
         $msg['code'] = -1;
         $msg['msg'] = '用户名不存在';
-        
       }
+      session('user' , $user);
+      cookie('user', $user, 360);
       echo json_encode($msg);
     }
 
@@ -60,11 +56,11 @@ class UserController extends Controller {
       $u = D('User');
       //var_dump($this->$u);
       $map['username'] = $username;
-      return $u->where($map)->select();
+      return $u->where($map)->find();
     }
     private function getPostData(){
       $data = I('post.');
-      $data['password'] = md5($datas['password']);
+      $data['password'] = md5($data['password']);
       return $data;
     }
 }

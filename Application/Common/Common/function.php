@@ -28,3 +28,14 @@ function sendMail($to, $title, $content) {
 		return $r;
 	}
 }
+
+function findLastId($name, $db){
+    $update = array('$inc'=>array("id"=>1));
+    $query = array('name'=>$name);
+    $command = array(
+            'findandmodify'=>'ids', 'update'=>$update,
+            'query'=>$query, 'new'=>true, 'upsert'=>true
+    );
+    $id = $db->command($command);
+    return $id['value']['id'];
+}

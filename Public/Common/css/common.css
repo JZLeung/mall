@@ -1,0 +1,12 @@
+/*button*/
+.btn-submit, .btn-confirm {
+  border: none;
+  background-color: #ff6700;
+  color: #fff;
+}
+
+.btn-cancel {
+  border: none;
+  background-color: #b0b0b0;
+  color: #fff;
+}

@@ -13,4 +13,18 @@ class TestController extends Controller {
 			}
 		}
     }
+
+    public function test(){
+    	$u = M('user');
+    	$id = findLastId('user', $u);
+    	$user['name'] = 'test-user-'.$id;
+    	$user['pass'] = '123';
+    	$user['uid'] = $id;
+    	$res = $u->add($user);
+    	var_dump($res);
+    	//echo $id;
+    }
+    public function cookie($c='user'){
+    	var_dump(cookie($c));
+    }
 }

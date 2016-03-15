@@ -1,0 +1,58 @@
+.header2016 {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #333;
+}
+.content-w {
+    width: 1100px;
+    margin: auto;
+    position: relative;
+}
+.header2016 a {
+    padding-right: 10px;
+    padding-left: 5px;
+    color: #b0b0b0;
+}
+.header2016 .dev {
+    color: #666;
+}
+.nav-logo {
+    float: left;
+    margin-top: 25px;
+    width: 75px;
+}
+.nav-logo .logo{
+    display: block;
+    width: 100%;
+}
+.nav-bar {
+    margin-left: 100px;
+    margin-top: 50px;
+    font-size: 16px;
+}
+.nav-bar li.list-item {
+    margin: 0 15px;
+    padding: 15px;
+}
+.nav-bar li.list-item a:hover{
+    color: #ff6700;
+}
+.nav-search {
+    margin-top: 50px;
+}
+.nav-search .search {
+    padding: 10px 15px;
+    line-height: 1.4em;
+    border: 1px solid #b0b0b0;
+}
+.nav-search .search:focus,.nav-search .search:focus + .submit{
+  border-color: #ff6700;
+}
+.nav-search .submit {
+    background: transparent;
+    padding:10px 16px 11px;
+    border: 1px solid #b0b0b0;
+    border-left: none;
+    cursor: pointer;
+}

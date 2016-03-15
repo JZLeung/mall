@@ -47,7 +47,31 @@ a:visited{}
 /*--common--*/
 .m-width{width: 1150px;margin: 0 auto;}
 .horizon-list > li{float: left;}
-
+.sup-text {
+    margin: 50px;
+    border-top: 1px solid #e0e0e0;
+    position: relative;
+    text-align: center;
+    p{
+    	position: absolute;
+		display: block;
+		width: 150px;
+		text-align: center;
+		left: 50%;
+		margin-left: -75px;
+		top: -8px;
+		font-size: 16px;
+		background-color: white;
+		color: #b0b0b0;
+    }
+}
+span.hr {
+    display: inline-block;
+    width: 2px;
+    height: 0.8em;
+    background-color: #e0e0e0;
+    margin: 0 15px;
+}
 /*----clear float----*/
 .clear:after {
      content: ".";
@@ -74,12 +98,23 @@ a:visited{}
 
 .btn{
 	border: 1px solid #555;
-	padding: 5px 20px;
+	padding: 15px 25px;
 	color: #555;
 	cursor: pointer;
+	background-color: transparent;
 }
 
 /*input*/
 input.error{border: 1px solid red !important;}
 input.success{border: 1px solid green !important;}
 input.info{border: 1px solid rgb(25, 138, 230) !important;}
+
+.flex{
+    display: -moz-box;  /* Firefox */ 
+    display: -ms-flexbox;    /* IE10 */ 
+    display: -webkit-box;    /* Safari */  
+    display: -webkit-flex;    /* Chrome, WebKit */ 
+    display: box;  
+    display: flexbox;  
+    display: flex; 
+}
