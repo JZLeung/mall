@@ -4,14 +4,14 @@
 	<meta charset="UTF-8">
 	<title>xx账号 - 登录</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="/shop/Public/Common/css/common.css">
-	<link rel="stylesheet" href="/shop/Public/Common/css/header.css">
-	<link rel="stylesheet" href="/shop/Public/Common/css/login.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/login.css">
 </head>
 <body>
 	
 	<div class="container login2016">
-		<a href="/shop" style="color: #ef5b00;position: absolute;left: 15px;top: 15px;">< 返回首页</a>
+		<a href="/mall" style="color: #ef5b00;position: absolute;left: 15px;top: 15px;">< 返回首页</a>
 		<div class="login-box" id="login-box">
 			<form action="" id="form">
 			<ul>
@@ -35,7 +35,7 @@
 					</div>
 				</li>
 				<li>
-					<a href="/shop/regist">没有账号？立即注册</a>
+					<a href="/mall/regist">没有账号？立即注册</a>
 					<span class="hr"></span>
 					<a href="javascript:void(0);">忘记密码？</a>
 				</li>
@@ -45,8 +45,8 @@
 		
 	</div>
 	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-	<script src="/shop/Public/js/jquery-1.12.0.js"></script>
-	<script src="/shop/Public/js/base.js"></script>
+	<script src="/mall/Public/js/jquery-1.12.0.js"></script>
+	<script src="/mall/Public/js/base.js"></script>
 	<script>
 		$(document).ready(function() {
 
@@ -61,7 +61,7 @@
 						console.log(data);
 						if (data.code == 1) {
 							alert('登陆成功，跳转到首页');
-							location.href = "/shop";
+							location.href = "/mall";
 						}else{
 							$('.error').text('');
 							if (data.code == 0) {

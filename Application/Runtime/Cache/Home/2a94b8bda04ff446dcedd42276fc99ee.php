@@ -4,9 +4,10 @@
 	<meta charset="UTF-8">
 	<title>首页</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="/shop/Public/Common/css/reset.css">
-	<link rel="stylesheet" href="/shop/Public/Common/css/header.css">
-	<link rel="stylesheet" href="/shop/Public/Common/css/index.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
+	
+	<link rel="stylesheet" href="/mall/Public/Common/css/header.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/index.css">
 </head>
 <body>
 	
@@ -31,9 +32,9 @@
 				<span class="dev">|</span>
 				<a href="javascript:void(0)">退出</a>
 			<?php else: ?>
-				<a href="/shop/login">登陆</a>
+				<a href="/mall/login">登陆</a>
 				<span class="dev">|</span>
-				<a href="/shop/regist">注册</a><?php endif; ?>
+				<a href="/mall/regist">注册</a><?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -41,16 +42,26 @@
 	<div class="content-w clear">
 		<div class="nav-logo">
 			<a href="javascipt:;">
-				<img src="/shop/Public/Common/images/mi-logo.jpg" alt="" class="logo">
+				<img src="/mall/Public/Common/images/mi-logo.jpg" alt="" class="logo">
 			</a>
 		</div>
 		<div class="nav-bar left">
 			<ul class="horizon-list clear">
-				<li class="list-item"><a href="javascipt:;">分类1</a></li>
-				<li class="list-item"><a href="javascipt:;">分类2</a></li>
-				<li class="list-item"><a href="javascipt:;">分类3</a></li>
-				<li class="list-item"><a href="javascipt:;">分类4</a></li>
-				<li class="list-item"><a href="javascipt:;">分类5</a></li>
+				<li class="list-item">
+					<a href="javascipt:;">分类1</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类2</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类3</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类4</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类5</a>
+				</li>
 			</ul>
 		</div>
 		<div class="nav-search right">
@@ -64,11 +75,11 @@
 		<div class="content-w clear">
 			<div class="cursor-w">
 				<ul class="horizon-list list">
-					<li class="list-item"><img src="/shop/Public/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="/shop/Public/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="/shop/Public/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="/shop/Public/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="/shop/Public/Common/images/1.jpg" alt=""></li>
+					<li class="list-item"><img src="/mall/Public/Common/images/1.jpg" alt=""></li>
+					<li class="list-item"><img src="/mall/Public/Common/images/1.jpg" alt=""></li>
+					<li class="list-item"><img src="/mall/Public/Common/images/1.jpg" alt=""></li>
+					<li class="list-item"><img src="/mall/Public/Common/images/1.jpg" alt=""></li>
+					<li class="list-item"><img src="/mall/Public/Common/images/1.jpg" alt=""></li>
 				</ul>
 				<span class="nextbtn"></span>
 				<span class="prevbtn"></span>
@@ -78,10 +89,10 @@
 	<div class="sale-list clear">
 		<div class="content-w">
 			<ul class="horizon-list list">
-				<li class="list-item"><a href="javascript:void(0)"><img src="/shop/Public/Common/images/2.jpg" alt=""></a></li>
-				<li class="list-item"><a href="javascript:void(0)"><img src="/shop/Public/Common/images/2.jpg" alt=""></a></li>
-				<li class="list-item"><a href="javascript:void(0)"><img src="/shop/Public/Common/images/2.jpg" alt=""></a></li>
-				<li class="list-item"><a href="javascript:void(0)"><img src="/shop/Public/Common/images/2.jpg" alt=""></a></li>
+				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
+				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
+				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
+				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
 			</ul>
 		</div>
 	</div>
@@ -89,31 +100,31 @@
 		<div class="content-w">
 			<h1 class="header-2">明星产品</h1>
 			<div class="left item">
-				<img src="/shop/Public/Common/images/4c.jpg" alt="" class="image">
+				<img src="/mall/Public/Common/images/4c.jpg" alt="" class="image">
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
 				<p class="price">998元</p>
 			</div>
 			<div class="left item">
-				<img src="/shop/Public/Common/images/4c.jpg" alt="" class="image">
+				<img src="/mall/Public/Common/images/4c.jpg" alt="" class="image">
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
 				<p class="price">998元</p>
 			</div>
 			<div class="left item">
-				<img src="/shop/Public/Common/images/4c.jpg" alt="" class="image">
+				<img src="/mall/Public/Common/images/4c.jpg" alt="" class="image">
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
 				<p class="price">998元</p>
 			</div>
 			<div class="left item">
-				<img src="/shop/Public/Common/images/4c.jpg" alt="" class="image">
+				<img src="/mall/Public/Common/images/4c.jpg" alt="" class="image">
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
 				<p class="price">998元</p>
 			</div>
 			<div class="left item">
-				<img src="/shop/Public/Common/images/4c.jpg" alt="" class="image">
+				<img src="/mall/Public/Common/images/4c.jpg" alt="" class="image">
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
 				<p class="price">998元</p>
