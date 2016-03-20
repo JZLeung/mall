@@ -45,8 +45,8 @@
 		
 	</div>
 	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-	<script src="/mall/Public/js/jquery-1.12.0.js"></script>
-	<script src="/mall/Public/js/base.js"></script>
+	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
+	<script src="/mall/Public/Common/js/base.js"></script>
 	<script>
 		$(document).ready(function() {
 

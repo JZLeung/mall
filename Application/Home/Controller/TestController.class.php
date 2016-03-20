@@ -3,17 +3,31 @@ namespace Home\Controller;
 use Think\Controller;
 class TestController extends Controller {
     public function index(){
-		$Model =  M("user");
-
-		$a = $Model->select();
-		//print_r($a);
-		foreach ($a as $key => $value) {
-			foreach ($a[$key] as $k => $v) {
-				echo $k." : ".$v."<br>";
-			}
-		}
+		$this->display();
     }
 
+    public function upload1(){
+        $this->display();
+    }
+    public function upload(){
+        $config = array(
+            'maxSize' => 3145728,
+            'rootPath' => './Uploads/',
+            'savePath' => 'img',
+            'saveName' => array('uniqid',''),
+            'exts' => array('jpg', 'gif', 'png', 'jpeg'),
+            'autoSub' => true,
+            'subName' => array('date','Ymd'),
+        );
+        $upload = new \Think\Upload($config);// 实例化上传类
+        // 上传文件
+        $info = $upload->upload();
+        if(!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        }else{// 上传成功
+            $this->success('上传成功！');
+        }
+    }
     public function test(){
     	$u = M('user');
     	$id = findLastId('user', $u);
@@ -27,32 +41,34 @@ class TestController extends Controller {
     public function cookie($c='user'){
     	var_dump(cookie($c));
     }
-    public function test(){
-        /*$u = M('user');
-        $id = findLastId('user', $u);
-        $user['name'] = 'test-user-'.$id;
-        $user['pass'] = '123';
-        $user['uid'] = $id;
-        $res = $u->add($user);
-        var_dump($res);*/
-        //echo $id;
+
+    public function add2(){
+        $u = M('user');
+        for ($i=0; $i < 1000; $i++) { 
+            $data['username'] = 'user'.$i;
+            $data['password'] = '12345';
+            $u->add($data);
+            print_r($u->save());
+            echo "<br>";
+        }
     }
+
     public function add(){
         $data['title'] = '亮彩高光后盖';
         $data['subcribe'] = '官方模具 优质触感\r\n适用于小米2a';
-        $data['pictures'][]['src'] = 'Common/images/items/test/1.jpg';
-        $data['pictures'][]['title'] = '背面';
-        $data['pictures'][]['src'] = 'Common/images/items/test/2.jpg';
-        $data['pictures'][]['title'] = '侧面';
-        $data['pictures'][]['src'] = 'Common/images/items/test/3.jpg';
-        $data['pictures'][]['title'] = '倾斜';
+        $data['pictures'][0]['src'] = 'Common/images/items/test/1.jpg';
+        $data['pictures'][0]['title'] = '背面';
+        $data['pictures'][1]['src'] = 'Common/images/items/test/2.jpg';
+        $data['pictures'][1]['title'] = '侧面';
+        $data['pictures'][2]['src'] = 'Common/images/items/test/3.jpg';
+        $data['pictures'][2]['title'] = '倾斜';
         $data['price'] = '19';
         for ($i=0; $i < 1; $i++) { 
             $data['combos'][$i]['name'] = '颜色';
             for ($j=0; $j < 3; $j++) { 
-                $data['combos'][$i]['combo']['name'] = '颜色1';
-                $data['combos'][$i]['combo']['price'] = '20';
-                $data['combos'][$i]['combo']['pic'] = 'Common/images/items/test/3.jpg';
+                $data['combos'][$i]['combo'][$j]['name'] = '颜色1';
+                $data['combos'][$i]['combo'][$j]['price'] = '20';
+                $data['combos'][$i]['combo'][$j]['pic'] = 'Common/images/items/test/3.jpg';
 
             }
         }
@@ -67,8 +83,19 @@ class TestController extends Controller {
         $data['params'][1]['value'] = 'L/135mm*H/68mm*T/10mm';
         $data['params'][2]['name'] = '颜色';
         $data['params'][2]['value'] = '橙色';
+        echo "<pre>";
+        print_r($data);
+        //$items = M('items');
+        //$items->add($data);
+        //print_r($items->save());
+        //$this->assign('data', $data);
+        //$this->display();
+    }
 
-        $this->assign('data', $data);
-        $this->display();
+    public function find(){
+        $items = M('items');
+        $data['_id'] = '56ee81745bf767e01c000029';
+        echo "<pre>";
+        print_r($items->where($data)->select());
     }
 }

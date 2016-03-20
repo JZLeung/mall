@@ -1,0 +1,4 @@
+[ 2016-03-19T22:41:30+08:00 ] ::1 /mall/home/test
+ERR: Failed to connect to: localhost:27017: 由于目标计算机积极拒绝，无法连接。
+
+

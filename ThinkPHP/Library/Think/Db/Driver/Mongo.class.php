@@ -411,8 +411,13 @@ class Mongo extends Driver {
             }
             $this->debug(false);
             $this->_cursor =  $_cursor;
+            //print_r($_cursor);
             $resultSet  =  iterator_to_array($_cursor);
-            return $resultSet;
+            //以数组形式返回查询数据，以0123为索引
+            foreach ($resultSet as $key => $value) {
+                $resultSet2[] = $value;
+            }
+            return $resultSet2;
         } catch (\MongoCursorException $e) {
             E($e->getMessage());
         }
