@@ -63,7 +63,7 @@ class TestController extends Controller {
         $data['pictures'][2]['src'] = 'Common/images/items/test/3.jpg';
         $data['pictures'][2]['title'] = '倾斜';
         $data['price'] = '19';
-        for ($i=0; $i < 1; $i++) { 
+/*        for ($i=0; $i < 1; $i++) { 
             $data['combos'][$i]['name'] = '颜色';
             for ($j=0; $j < 3; $j++) { 
                 $data['combos'][$i]['combo'][$j]['name'] = '颜色1';
@@ -71,12 +71,48 @@ class TestController extends Controller {
                 $data['combos'][$i]['combo'][$j]['pic'] = 'Common/images/items/test/3.jpg';
 
             }
-        }
-        $data['detail'] = '<img src="/mall/Public/Common/images/items/test/d1.jpg" alt="">
-                <img src="/mall/Public/Common/images/items/test/d2.jpg" alt="">
-                <img src="/mall/Public/Common/images/items/test/d3.jpg" alt="">
-                <img src="/mall/Public/Common/images/items/test/d4.jpg" alt="">
-                <img src="/mall/Public/Common/images/items/test/d5.jpg" alt="">';
+        }*/
+
+        $data['attr'][] = array(
+                'name' => '颜色',
+                'value'=> ['White','Gold','Black','Pink',]
+                    /*array(
+                        'name'=>'White',
+                        'url'=>''
+                    ),
+                    array(
+                        'name'=>'Gold',
+                        'url'=>''
+                    ),
+                    array(
+                        'name'=>'Black',
+                        'url'=>''
+                    ),
+                    array(
+                        'name'=>'Pink',
+                        'url'=>''
+                    )*/
+            );
+        $data['attr'][] = array(
+                'name'=>'容量',
+                'value'=> ['16G','64G','128G']
+                    /*array(
+                        'name'=>'16G',
+                        'url'=>''
+                    ),
+                    array(
+                        'name'=>'64G',
+                        'url'=>''
+                    ),
+                    array(
+                        'name'=>'128G',
+                        'url'=>''
+                    )*/
+            );
+        $data['prices'] = array(
+        );
+
+        $data['detail'] = '<img src="/mall/Public/Common/images/items/test/d1.jpg" alt=""><img src="/mall/Public/Common/images/items/test/d2.jpg" alt=""><img src="/mall/Public/Common/images/items/test/d3.jpg" alt=""><img src="/mall/Public/Common/images/items/test/d4.jpg" alt=""><img src="/mall/Public/Common/images/items/test/d5.jpg" alt="">';
         $data['params'][0]['name'] = '工艺';
         $data['params'][0]['value'] = '喷漆';
         $data['params'][1]['name'] = '尺寸';
@@ -85,11 +121,11 @@ class TestController extends Controller {
         $data['params'][2]['value'] = '橙色';
         echo "<pre>";
         print_r($data);
-        //$items = M('items');
-        //$items->add($data);
-        //print_r($items->save());
-        //$this->assign('data', $data);
-        //$this->display();
+        /*$items = M('items');
+        $items->add($data);
+        print_r($items->save());*/
+        // $this->assign('data', $data);
+        // $this->display();
     }
 
     public function find(){

@@ -56,7 +56,15 @@
 				<div class="item-price">
 					<strong>{$data.price}</strong>元
 				</div>
-				<foreach name="data.combos" item="combo1">
+				<foreach name="data.attr" item="attribute">
+				<div class="item-other">
+					<div class="item-other-1 clear">
+						<p>{$attribute.name}</p>
+						<foreach name="attribute.value" item="vo">
+						<a href="javascript:;" class="other-item">{$vo}</a>
+						</foreach>
+				</foreach>
+				<!-- <foreach name="data.combos" item="combo1">
 					<div class="item-other">
 						<div class="item-other-1 clear">
 							<p>{$combo1.name}</p>
@@ -65,7 +73,7 @@
 							</foreach>
 						</div>
 					</div>
-				</foreach>
+				</foreach> -->
 				<!-- <div class="item-other">
 					<div class="item-other-1 clear">
 						<p>颜色：橙色</p>

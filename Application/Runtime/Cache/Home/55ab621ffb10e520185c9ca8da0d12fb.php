@@ -114,12 +114,16 @@
 				<div class="item-price">
 					<strong><?php echo ($data["price"]); ?></strong>元
 				</div>
-				<?php if(is_array($data["combos"])): foreach($data["combos"] as $key=>$combo1): ?><div class="item-other">
+				<?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attribute): ?><div class="item-other">
+					<div class="item-other-1 clear">
+						<p><?php echo ($attribute["name"]); ?></p>
+						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $key=>$vo): ?><a href="javascript:;" class="other-item active"><?php echo ($vo); ?></a><?php endforeach; endif; endforeach; endif; ?>
+				<!-- <?php if(is_array($data["combos"])): foreach($data["combos"] as $key=>$combo1): ?><div class="item-other">
 						<div class="item-other-1 clear">
 							<p><?php echo ($combo1["name"]); ?></p>
 							<?php if(is_array($combo1["combo"])): foreach($combo1["combo"] as $key=>$vo): ?><a href="javascript:;" class="other-item active"><img src="/mall/Public/<?php echo ($vo["pic"]); ?>" alt="<?php echo ($vo["name"]); ?>" data-price="<?php echo ($vo["price"]); ?>"></a><?php endforeach; endif; ?>
 						</div>
-					</div><?php endforeach; endif; ?>
+					</div><?php endforeach; endif; ?> -->
 				<!-- <div class="item-other">
 					<div class="item-other-1 clear">
 						<p>颜色：橙色</p>
