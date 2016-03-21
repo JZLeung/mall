@@ -63,6 +63,13 @@ img {
 .right-docs .item-other > div {
   margin: 20px 0;
 }
+.right-docs .item-other p.name {
+  margin: 5px 0;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  border-left: 3px solid #B7B2B2;
+  padding-left: 10px;
+}
 .right-docs button {
   margin-right: 10px;
   padding: 18px 60px;
@@ -71,10 +78,14 @@ img {
 .right-docs .other-item {
   width: 60px;
   display: inline-block;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #5F5A5A;
+  border-bottom-width: 4px;
   margin-right: 10px;
   padding: 5px;
   text-align: center;
+}
+.right-docs .other-item.active {
+  border-color: #ef5b00;
 }
 .right-docs .item-options {
   border: 1px solid #e0e0e0;

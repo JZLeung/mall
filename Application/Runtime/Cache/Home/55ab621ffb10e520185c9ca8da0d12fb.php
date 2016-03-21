@@ -114,12 +114,15 @@
 				<div class="item-price">
 					<strong><?php echo ($data["price"]); ?></strong>元
 				</div>
-				<?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attribute): ?><div class="item-other">
-					<div class="item-other-1 clear">
-						<p><?php echo ($attribute["name"]); ?></p>
-						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $key=>$vo): ?><a href="javascript:;" class="other-item"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
-					</div>
-				</div><?php endforeach; endif; ?>
+				<?php define('index1', '0'); ?>
+				
+				<div class="item-other">
+					<?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attribute): ?><div class="item-other-<?php echo ++ $index1;?> otherlist" id="other<?php echo ($index1); ?>">
+						<p class="name"><?php echo ($attribute["name"]); ?></p>
+						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $k=>$vo): ?><a href="javascript:;" class="other-item" data-attr="<?php echo ($k); ?>"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
+					</div><?php endforeach; endif; ?>
+				</div>
+				
 
 				<!-- <?php if(is_array($data["combos"])): foreach($data["combos"] as $key=>$combo1): ?><div class="item-other">
 						<div class="item-other-1 clear">
@@ -206,10 +209,14 @@
 	</div>
 	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script>
+	var prices = JSON.parse('<?php echo (json_encode($data["prices"])); ?>');
 		$(document).ready(function() {
+
+
 			var $pic = $('#picShow').find('img'),
 				$classify = $('#classify'),
-				$body = $('body');
+				$body = $('body'),
+				$otherlist = $('.otherlist');
 
 			var $comment = $('#item-comment'),
 				$detail = $('#item-detail'),
@@ -227,7 +234,7 @@
 				event.preventDefault();
 				$(this).addClass('active').siblings().removeClass('active');
 				$pic.attr('src', $(this).find('img').attr('src'));
-			});
+			}).children().eq(0).addClass('active');
 			//滚动事件
 			$(document).scroll(function(event) {
 				event.preventDefault();
@@ -250,6 +257,21 @@
 				$body.animate({scrollTop:target.offset().top - 100}, 600);
 				//target.addClass('active').siblings('a').removeClass('active');
 			});
+
+			//配置项
+			$otherlist.each(function(index, el) {
+				$(this).children().eq(1).addClass('active');
+			});
+			$otherlist.on('click', 'a', function(event) {
+				event.preventDefault();
+				$(this).addClass('active').siblings().removeClass('active');
+				var d=[];
+				$otherlist.find('.active').each(function(i,v){
+					d.push($(this).data('attr'));
+				})
+				console.log(prices[d.join(',')]);
+			});
+
 		});
 	</script>
 </body>

@@ -61,6 +61,13 @@ img{width: 100%;}
 	}
 	.item-other{
 		&> div{margin: 20px 0;}
+		p.name{
+			margin: 5px 0;
+			font-size: 1.5em;
+			line-height: 1.5em;
+		    border-left: 3px solid #B7B2B2;
+		    padding-left: 10px;
+		}
 	}
 	button{
 		margin-right: 10px;
@@ -70,10 +77,14 @@ img{width: 100%;}
 	.other-item {
 	    width: 60px;
 	    display: inline-block;
-	    border: 1px solid #e0e0e0;
+	    border: 1px solid #5F5A5A;
+	    border-bottom-width: 4px;
 	    margin-right: 10px;
 	    padding: 5px;
 	    text-align: center;
+	    &.active{
+			border-color: #ef5b00;
+	    }
 	}
 	.item-options {
 	    border: 1px solid #e0e0e0;

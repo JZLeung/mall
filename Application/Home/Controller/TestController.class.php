@@ -55,7 +55,7 @@ class TestController extends Controller {
 
     public function add(){
         $data['title'] = '亮彩高光后盖';
-        $data['subcribe'] = '官方模具 优质触感\r\n适用于小米2a';
+        $data['subscribe'] = '官方模具 优质触感<br>适用于小米2a';
         $data['pictures'][0]['src'] = 'Common/images/items/test/1.jpg';
         $data['pictures'][0]['title'] = '背面';
         $data['pictures'][1]['src'] = 'Common/images/items/test/2.jpg';
@@ -63,7 +63,7 @@ class TestController extends Controller {
         $data['pictures'][2]['src'] = 'Common/images/items/test/3.jpg';
         $data['pictures'][2]['title'] = '倾斜';
         $data['price'] = '19';
-/*        for ($i=0; $i < 1; $i++) { 
+        /*for ($i=0; $i < 1; $i++) { 
             $data['combos'][$i]['name'] = '颜色';
             for ($j=0; $j < 3; $j++) { 
                 $data['combos'][$i]['combo'][$j]['name'] = '颜色1';
@@ -130,8 +130,66 @@ class TestController extends Controller {
 
     public function find(){
         $items = M('items');
-        $data['_id'] = '56ee81745bf767e01c000029';
+        $data['_id'] = '56ef872eba5a75442900002a';
         echo "<pre>";
         print_r($items->where($data)->select());
+    }
+
+    public function update(){
+        //$items = M('items');
+        $data['_id'] = '56ef872eba5a75442900002a';
+        //更新配置存储方式
+        /*$datas['attr'][] = array(
+            'name' => '颜色',
+            'value'=> array(
+                'w' => '白色',
+                'g' => '金色',
+                'b' => '黑色',
+                'p' => '粉色'
+            )
+        );
+        $datas['attr'][] = array(
+            'name'=>'容量',
+            'value'=> array(
+                '16'    => '16G',
+                '64'    => '64G',
+                '128'   => '128G'
+            )
+        );*/
+        //添加价格
+        $price = array(
+            'w,16' => '2299',
+            'w,64' => '2699',
+            'w,128' => '3299',
+            'b,16' => '2099',
+            'b,64' => '2499',
+            'b,128' => '3099',
+            'p,16' => '2499',
+            'p,64' => '2899',
+            'p,128' => '3399',
+            'g,16' => '2299',
+            'g,64' => '2699',
+            'g,128' => '3299'
+        );
+        //--0321--使用sku表，单独存放规格
+        //更新价格
+        $sku = M('sku');
+        $id = '56ef872eba5a75442900002a';
+        foreach ($price as $key => $value) {
+            $datas[] = array(
+                'id' => $id,
+                'name' => $key,
+                'price' => $value,
+                'stock' => 12
+            );
+        }
+
+        //$datas['prices']['w,16'] = 1999;
+        echo "<pre>";
+        print_r($datas);
+
+        $res = $sku->add($datas);
+        print_r($res);
+
     }
 }

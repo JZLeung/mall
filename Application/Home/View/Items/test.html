@@ -56,16 +56,19 @@
 				<div class="item-price">
 					<strong>{$data.price}</strong>元
 				</div>
-				<foreach name="data.attr" item="attribute">
+				<define name="index1" value="0" />
+				
 				<div class="item-other">
-					<div class="item-other-1 clear">
-						<p>{$attribute.name}</p>
-						<foreach name="attribute.value" item="vo">
-						<a href="javascript:;" class="other-item">{$vo}</a>
+					<foreach name="data.attr" item="attribute">
+					<div class="item-other-{++ $index1} otherlist" id="other{$index1}">
+						<p class="name">{$attribute.name}</p>
+						<foreach name="attribute.value" item="vo" key="k">
+						<a href="javascript:;" class="other-item" data-attr="{$k}">{$vo}</a>
 						</foreach>
 					</div>
+					</foreach>
 				</div>
-				</foreach>
+				
 
 				<!-- <foreach name="data.combos" item="combo1">
 					<div class="item-other">
@@ -158,10 +161,14 @@
 	</div>
 	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
 	<script>
+	var prices = JSON.parse('{$data.prices|json_encode}');
 		$(document).ready(function() {
+
+
 			var $pic = $('#picShow').find('img'),
 				$classify = $('#classify'),
-				$body = $('body');
+				$body = $('body'),
+				$otherlist = $('.otherlist');
 
 			var $comment = $('#item-comment'),
 				$detail = $('#item-detail'),
@@ -179,7 +186,7 @@
 				event.preventDefault();
 				$(this).addClass('active').siblings().removeClass('active');
 				$pic.attr('src', $(this).find('img').attr('src'));
-			});
+			}).children().eq(0).addClass('active');
 			//滚动事件
 			$(document).scroll(function(event) {
 				event.preventDefault();
@@ -202,6 +209,21 @@
 				$body.animate({scrollTop:target.offset().top - 100}, 600);
 				//target.addClass('active').siblings('a').removeClass('active');
 			});
+
+			//配置项
+			$otherlist.each(function(index, el) {
+				$(this).children().eq(1).addClass('active');
+			});
+			$otherlist.on('click', 'a', function(event) {
+				event.preventDefault();
+				$(this).addClass('active').siblings().removeClass('active');
+				var d=[];
+				$otherlist.find('.active').each(function(i,v){
+					d.push($(this).data('attr'));
+				})
+				console.log(prices[d.join(',')]);
+			});
+
 		});
 	</script>
 </body>
