@@ -117,7 +117,10 @@
 				<?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attribute): ?><div class="item-other">
 					<div class="item-other-1 clear">
 						<p><?php echo ($attribute["name"]); ?></p>
-						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $key=>$vo): ?><a href="javascript:;" class="other-item active"><?php echo ($vo); ?></a><?php endforeach; endif; endforeach; endif; ?>
+						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $key=>$vo): ?><a href="javascript:;" class="other-item"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
+					</div>
+				</div><?php endforeach; endif; ?>
+
 				<!-- <?php if(is_array($data["combos"])): foreach($data["combos"] as $key=>$combo1): ?><div class="item-other">
 						<div class="item-other-1 clear">
 							<p><?php echo ($combo1["name"]); ?></p>

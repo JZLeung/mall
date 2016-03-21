@@ -3,20 +3,20 @@
 	// The mappings of source directory and output directory
 	"mappings": [
 		{	
-			"src": "./scss/",
-			"dest": "./css/"
+			"src": "./Common/scss/",
+			"dest": "./Common/css/"
 		}
 	],
 
 	// Add the ignore rules that Koala will not search them.
 	// e.g. ["*.json", "*.txt", "test", "path/libs"]
-	"ignores": ["*.css","images/"],
+	"ignores": ["*.css","*.js","*.jpg"],
 
 	// Compile options of Sass.
 	"options": {
 
 		// Output style. Can be nested (default), compact, compressed, or expanded.
-		"outputStyle": "nested",
+		"outputStyle": "expanded",
 
 		// Emit comments in the generated CSS indicating the corresponding source line.
 		"lineComments": false,

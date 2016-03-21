@@ -121,9 +121,9 @@ class TestController extends Controller {
         $data['params'][2]['value'] = '橙色';
         echo "<pre>";
         print_r($data);
-        /*$items = M('items');
+        $items = M('items');
         $items->add($data);
-        print_r($items->save());*/
+        print_r($items->save());
         // $this->assign('data', $data);
         // $this->display();
     }
