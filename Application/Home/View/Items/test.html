@@ -19,6 +19,9 @@
 </head>
 <body>
 	<include file='./Public/Template/index/_header_.html' />
+	<if condition="!$data">
+		没有该商品
+	<else />
 	<!-- 目录导航 -->
 	<div class="head-nav">
 		<div class="content-w">
@@ -36,6 +39,7 @@
 			<div class="left-pics clear left">
 				<div class="pic-list left" id="picList">
 					<ul>
+
 						<foreach name="data.pictures" item="pic">
 							<li><img src="__PUBLIC__/{$pic.src}" alt="{$pic.title}"></li>
 						</foreach>
@@ -45,7 +49,7 @@
 					</ul>
 				</div>
 				<div class="pic-big left" id="picShow">
-					<img src="__PUBLIC__/Common/images/items/test/1.jpg" alt="">
+					<img src="__PUBLIC__/{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
 				</div>
 			</div>
 			<div class="right-docs left">
@@ -54,7 +58,7 @@
 					{$data.subscribe}
 				</div>
 				<div class="item-price">
-					<strong>{$data.price}</strong>元
+					<strong id="price"></strong>元
 				</div>
 				<define name="index1" value="0" />
 				
@@ -63,12 +67,12 @@
 					<div class="item-other-{++ $index1} otherlist" id="other{$index1}">
 						<p class="name">{$attribute.name}</p>
 						<foreach name="attribute.value" item="vo" key="k">
-						<a href="javascript:;" class="other-item" data-attr="{$k}">{$vo}</a>
+							<a href="javascript:;" class="other-item" data-attr="{$k}">{$vo}</a>
 						</foreach>
 					</div>
 					</foreach>
 				</div>
-				
+				<p>剩余：<strong id="stock"></strong>件</p>
 
 				<!-- <foreach name="data.combos" item="combo1">
 					<div class="item-other">
@@ -138,7 +142,7 @@
 			<div class="content-w">
 				<div class="params-detail clear">
 					<div class="left-img left">
-						<img src="__PUBLIC__/Common/images/items/test/1.jpg" alt="">
+						<img src="__PUBLIC__/{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
 					</div>
 					<div class="right-params">
 						<foreach name="data.params" item="p">
@@ -159,11 +163,11 @@
 		</div>
 		<div style="width: 100%;height: 1000px;"></div>
 	</div>
+	</if>
 	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
 	<script>
 	var prices = JSON.parse('{$data.prices|json_encode}');
 		$(document).ready(function() {
-
 
 			var $pic = $('#picShow').find('img'),
 				$classify = $('#classify'),
@@ -173,7 +177,9 @@
 			var $comment = $('#item-comment'),
 				$detail = $('#item-detail'),
 				$params = $('#item-params'),
-				aAll = $classify.find('a');
+				aAll = $classify.find('a'),
+				$price = $('#price'),
+				$stock = $('#stock');
 
 			var clHeight = $classify.offset().top,
 				Height1 = $detail.offset().top  - 170,
@@ -186,7 +192,7 @@
 				event.preventDefault();
 				$(this).addClass('active').siblings().removeClass('active');
 				$pic.attr('src', $(this).find('img').attr('src'));
-			}).children().eq(0).addClass('active');
+			}).find('li').eq(0).addClass('active');
 			//滚动事件
 			$(document).scroll(function(event) {
 				event.preventDefault();
@@ -210,18 +216,32 @@
 				//target.addClass('active').siblings('a').removeClass('active');
 			});
 
-			//配置项
+
 			$otherlist.each(function(index, el) {
 				$(this).children().eq(1).addClass('active');
 			});
-			$otherlist.on('click', 'a', function(event) {
-				event.preventDefault();
-				$(this).addClass('active').siblings().removeClass('active');
+			//配置项
+			function getNowOption(){
 				var d=[];
 				$otherlist.find('.active').each(function(i,v){
 					d.push($(this).data('attr'));
 				})
-				console.log(prices[d.join(',')]);
+				return d.join(',');
+			}
+
+			function setNowOption(){
+				var nowIndex = getNowOption();
+				console.log(nowIndex);
+				$price.text(prices[nowIndex]['price']);
+				$stock.text(prices[nowIndex]['stock']);
+			}
+
+			setNowOption();
+
+			$otherlist.on('click', 'a', function(event) {
+				event.preventDefault();
+				$(this).addClass('active').siblings().removeClass('active');
+				setNowOption()
 			});
 
 		});

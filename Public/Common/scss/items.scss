@@ -72,13 +72,14 @@ img{width: 100%;}
 	button{
 		margin-right: 10px;
 		padding: 18px 60px;
+		font-size: 1.2em;
 		/* &:nth-child(1){margin-left: 0} */
 	}
 	.other-item {
 	    width: 60px;
 	    display: inline-block;
-	    border: 1px solid #5F5A5A;
-	    border-bottom-width: 4px;
+	    border: 2px solid #5F5A5A;
+	    border-bottom-width: 6px;
 	    margin-right: 10px;
 	    padding: 5px;
 	    text-align: center;

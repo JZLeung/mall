@@ -79,6 +79,8 @@
 	</div>
 </div>
 
+	<?php if(!$data): ?>没有该商品
+	<?php else: ?>
 	<!-- 目录导航 -->
 	<div class="head-nav">
 		<div class="content-w">
@@ -96,6 +98,7 @@
 			<div class="left-pics clear left">
 				<div class="pic-list left" id="picList">
 					<ul>
+
 						<?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$pic): ?><li><img src="/mall/Public/<?php echo ($pic["src"]); ?>" alt="<?php echo ($pic["title"]); ?>"></li><?php endforeach; endif; ?>
 						<!-- <li class="active"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></li>
 						<li><img src="/mall/Public/Common/images/items/test/2.jpg" alt=""></li>
@@ -103,7 +106,7 @@
 					</ul>
 				</div>
 				<div class="pic-big left" id="picShow">
-					<img src="/mall/Public/Common/images/items/test/1.jpg" alt="">
+					<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 				</div>
 			</div>
 			<div class="right-docs left">
@@ -112,7 +115,7 @@
 					<?php echo ($data["subscribe"]); ?>
 				</div>
 				<div class="item-price">
-					<strong><?php echo ($data["price"]); ?></strong>元
+					<strong id="price"></strong>元
 				</div>
 				<?php define('index1', '0'); ?>
 				
@@ -122,7 +125,7 @@
 						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $k=>$vo): ?><a href="javascript:;" class="other-item" data-attr="<?php echo ($k); ?>"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
 					</div><?php endforeach; endif; ?>
 				</div>
-				
+				<p>剩余：<strong id="stock"></strong>件</p>
 
 				<!-- <?php if(is_array($data["combos"])): foreach($data["combos"] as $key=>$combo1): ?><div class="item-other">
 						<div class="item-other-1 clear">
@@ -188,7 +191,7 @@
 			<div class="content-w">
 				<div class="params-detail clear">
 					<div class="left-img left">
-						<img src="/mall/Public/Common/images/items/test/1.jpg" alt="">
+						<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 					</div>
 					<div class="right-params">
 						<?php if(is_array($data["params"])): foreach($data["params"] as $key=>$p): ?><label for=""><?php echo ($p["name"]); ?>：<?php echo ($p["value"]); ?></label><?php endforeach; endif; ?>
@@ -206,12 +209,11 @@
 			</div>
 		</div>
 		<div style="width: 100%;height: 1000px;"></div>
-	</div>
+	</div><?php endif; ?>
 	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script>
 	var prices = JSON.parse('<?php echo (json_encode($data["prices"])); ?>');
 		$(document).ready(function() {
-
 
 			var $pic = $('#picShow').find('img'),
 				$classify = $('#classify'),
@@ -221,7 +223,9 @@
 			var $comment = $('#item-comment'),
 				$detail = $('#item-detail'),
 				$params = $('#item-params'),
-				aAll = $classify.find('a');
+				aAll = $classify.find('a'),
+				$price = $('#price'),
+				$stock = $('#stock');
 
 			var clHeight = $classify.offset().top,
 				Height1 = $detail.offset().top  - 170,
@@ -234,7 +238,7 @@
 				event.preventDefault();
 				$(this).addClass('active').siblings().removeClass('active');
 				$pic.attr('src', $(this).find('img').attr('src'));
-			}).children().eq(0).addClass('active');
+			}).find('li').eq(0).addClass('active');
 			//滚动事件
 			$(document).scroll(function(event) {
 				event.preventDefault();
@@ -258,18 +262,39 @@
 				//target.addClass('active').siblings('a').removeClass('active');
 			});
 
-			//配置项
+
 			$otherlist.each(function(index, el) {
 				$(this).children().eq(1).addClass('active');
 			});
-			$otherlist.on('click', 'a', function(event) {
-				event.preventDefault();
-				$(this).addClass('active').siblings().removeClass('active');
+			//配置项
+			function getNowOption(){
 				var d=[];
 				$otherlist.find('.active').each(function(i,v){
 					d.push($(this).data('attr'));
 				})
-				console.log(prices[d.join(',')]);
+				return d.join(',');
+			}
+
+			function setNowOption(){
+				var nowIndex = getNowOption();
+				console.log(nowIndex);
+				$price.text(prices[nowIndex]['price']);
+				$stock.text(prices[nowIndex]['stock']);
+			}
+
+			setNowOption();
+
+			$otherlist.on('click', 'a', function(event) {
+				event.preventDefault();
+				$(this).addClass('active').siblings().removeClass('active');
+				setNowOption()
+				/*$otherlist.find('.active').each(function(i,v){
+					d.push($(this).data('attr'));
+				})
+				nowIndex = getNowOption();
+				console.log(prices[nowIndex]['price']);
+				$price.text(prices[nowIndex]['price']);
+				$stock.text(prices[nowIndex]['stock']);*/
 			});
 
 		});

@@ -15,7 +15,7 @@ return array(
     'URL_ROUTE_RULES' => array(
         'login' => 'Home/Passport/toLogin',
         'regist' => 'Home/Passport/toRegist',
-        '/^item\/(\d+)$/' => 'Home/Items/index?id=:1'
+        '/^item\/(\w+)$/' => 'Home/Items/index?id=:1'
     ),
     //'配置项'=>'配置值'
     'DB_TYPE' => 'mongo', // 数据库类型
@@ -25,4 +25,6 @@ return array(
     'DB_PWD' => '', // 密码
     'DB_PORT' => '27017', // 端口
     'DB_NAME'=>'tp_mall',// 数据库名
+
+    'URL_MODEL' => 2,
 );
