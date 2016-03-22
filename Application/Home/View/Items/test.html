@@ -20,7 +20,10 @@
 <body>
 	<include file='./Public/Template/index/_header_.html' />
 	<if condition="!$data">
-		没有该商品
+		<div class="nodata">
+			没有该商品
+		</div>
+		
 	<else />
 	<!-- 目录导航 -->
 	<div class="head-nav">
@@ -166,7 +169,7 @@
 	</if>
 	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
 	<script>
-	var prices = JSON.parse('{$data.prices|json_encode}');
+	var prices = JSON.parse('{$prices|json_encode}');
 		$(document).ready(function() {
 
 			var $pic = $('#picShow').find('img'),

@@ -212,7 +212,7 @@
 	</div><?php endif; ?>
 	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script>
-	var prices = JSON.parse('<?php echo (json_encode($data["prices"])); ?>');
+	var prices = JSON.parse('<?php echo (json_encode($prices)); ?>');
 		$(document).ready(function() {
 
 			var $pic = $('#picShow').find('img'),
@@ -288,13 +288,6 @@
 				event.preventDefault();
 				$(this).addClass('active').siblings().removeClass('active');
 				setNowOption()
-				/*$otherlist.find('.active').each(function(i,v){
-					d.push($(this).data('attr'));
-				})
-				nowIndex = getNowOption();
-				console.log(prices[nowIndex]['price']);
-				$price.text(prices[nowIndex]['price']);
-				$stock.text(prices[nowIndex]['stock']);*/
 			});
 
 		});

@@ -4,24 +4,24 @@ use Think\Controller;
 class ItemsController extends Controller {
     public function index($id = 0){
         //echo $id;
-        if (strlen($id) != 24) {
+        /*if (strlen($id) != 24) {
             $data = null;
-        }else{
+        }else{*/
             $items = M('items');
-            $data['_id'] = $id;
             try {
-                $data = $items->where($data)->find();
-                $data['prices'] = $this->getPrices($data['id']);
+                $data = $items->where(array('id' => (int)$id))->find();
+                $prices = $this->getPrices((int)$id);
             } catch (Exception $e) {
                 $data = $e;
             }
-        }
+        //}
         
-        
+        print_r($data);
         /*foreach($datas as $k => $v){
             $data = $datas[$k];
         }*/
         $this->assign('data', $data);
+        $this->assign('prices', $prices);
         $this->display('test');
     }
     public function test(){
