@@ -53,7 +53,7 @@
 			$('#login-box').find('#submit').click(function(event) {
 				event.preventDefault();
 				$.ajax({
-					url: 'Home/User/login',
+					url: 'Home/Passport/login',
 					type: 'post',
 					dataType: 'json',
 					data: $('#form').serialize(),
@@ -64,11 +64,7 @@
 							location.href = "/mall";
 						}else{
 							$('.error').text('');
-							if (data.code == 0) {
-								$('span.perror').text(data.msg);
-							}else{
-								$('span.uerror').text(data.msg);
-							}
+							
 						}
 					}
 				})

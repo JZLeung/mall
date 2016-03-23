@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Admin\Controller;
 use Think\Controller;
 class PassportController extends Controller {
     public function index(){
@@ -14,8 +14,8 @@ class PassportController extends Controller {
     public function regist(){
     	$datas = $this->getPostData();
       $u = M('User');
-      $user = $this->findUserByName($datas['username']);
-      if ($user) {
+      $admin = $this->findUserByName($datas['username']);
+      if ($admin) {
         $msg['code'] = -1;
         $msg['msg'] = '用户名已存在';
       }else{
@@ -24,35 +24,41 @@ class PassportController extends Controller {
         $res = $u->add($datas);
 
         if ($res) {
-          $user = $this->findUserByName($datas['username']);
+          $admin = $this->findUserByName($datas['username']);
           $msg['code'] = 1;
           $msg['msg'] = '注册成功';
         }
       }
 
-      session('user' , $user);
-      cookie('user', $user, 360);
+      session('admin' , $admin);
+      cookie('admin', $admin, 360);
       echo json_encode($msg);
     }
 
     public function login(){
     	$u = M('user');
     	$datas = $this->getPostData();
-      $user = $this->findUserByName($datas['username']);
-      if ($user) {
-        if ($user['password'] == $datas['password']) {
-          $msg['code'] = 1;
-          $msg['msg'] = '登录成功';
+      $admin = $this->findUserByName($datas['username']);
+      if ($admin) {
+        if ($admin['usertype'] == 5) {
+          if ($admin['password'] == $datas['password']) {
+            $msg['code'] = 1;
+            $msg['msg'] = '登录成功';
+          }else{
+            $msg['code'] = 0;
+            $msg['msg'] = '登录失败，请检查用户名和密码';
+          }
         }else{
           $msg['code'] = 0;
-          $msg['msg'] = '登录失败';
+          $msg['msg'] = '你不是管理员，登陆失败';
         }
+        
       }else{
         $msg['code'] = -1;
         $msg['msg'] = '用户名不存在';
       }
-      session('user' , $user);
-      cookie('user', $user, 360);
+      session('admin' , $admin);
+      cookie('admin', $admin, 360);
       echo json_encode($msg);
     }
     private function findUserByName($username){

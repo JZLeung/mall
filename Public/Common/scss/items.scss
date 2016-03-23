@@ -60,6 +60,7 @@ img{width: 100%;}
 	    margin: 20px 0;
 	}
 	.item-other{
+		margin-bottom: 10px 0;
 		&> div{margin: 20px 0;}
 		p.name{
 			margin: 5px 0;
@@ -68,6 +69,9 @@ img{width: 100%;}
 		    border-left: 3px solid #B7B2B2;
 		    padding-left: 10px;
 		}
+	}
+	.item-buttons{
+		margin: 10px 0;
 	}
 	button{
 		margin-right: 10px;
@@ -81,8 +85,9 @@ img{width: 100%;}
 	    border: 2px solid #5F5A5A;
 	    border-bottom-width: 6px;
 	    margin-right: 10px;
-	    padding: 5px;
+	    padding: 15px;
 	    text-align: center;
+	    flex: 1;
 	    &.active{
 			border-color: #ef5b00;
 	    }
@@ -132,9 +137,17 @@ img{width: 100%;}
 	}
 }
 .item-content {
-	.content-m {
-	    width: 600px;
+	.content {
 	    margin: auto;
+	}
+	.content-s {
+	    width: 750px;
+	}
+	.content-m {
+	    width: 900px;
+	}
+	.content-l {
+		width: 1150px;
 	}
 }
 .item-params{
@@ -149,10 +162,15 @@ img{width: 100%;}
 	.right-params{
 		margin-left: 160px;
 		font-size: 14px;
+		flex-wrap: wrap;
 	}
 	label{
 		display: inline-block;
-		width: 33%;
+		max-width: 33%;
+		min-width: 32%;
 		padding: 10px 0;
+		margin-bottom: 10px;
+		border-left: 3px solid #e4e4e4;
+		padding-left: 6px;
 	}
 }

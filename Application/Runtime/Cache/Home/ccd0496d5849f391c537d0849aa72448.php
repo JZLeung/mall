@@ -65,7 +65,7 @@
 				}*/
 				//return false;
 				$.ajax({
-					url: 'Home/User/regist',
+					url: 'Home/Passport/regist',
 					type: 'post',
 					dataType: 'json',
 					data: $('#form').serialize(),

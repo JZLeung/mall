@@ -16,7 +16,7 @@
 			<form action="" id="form">
 			<ul>
 				<li>
-					<p class="head">会员登录</p>
+					<p class="head">后台登录</p>
 				</li>
 				<li>
 					<input type="text" name="username" placeholder="邮箱/手机号码">
@@ -35,8 +35,8 @@
 					</div>
 				</li>
 				<li>
-					<a href="__ROOT__/regist">没有账号？立即注册</a>
-					<span class="hr"></span>
+					<!-- <a href="__ROOT__/regist">没有账号？立即注册</a>
+					<span class="hr"></span> -->
 					<a href="javascript:void(0);">忘记密码？</a>
 				</li>
 			</ul>
@@ -53,7 +53,7 @@
 			$('#login-box').find('#submit').click(function(event) {
 				event.preventDefault();
 				$.ajax({
-					url: 'Home/Passport/login',
+					url: 'Admin/Passport/login',
 					type: 'post',
 					dataType: 'json',
 					data: $('#form').serialize(),
@@ -61,7 +61,7 @@
 						console.log(data);
 						if (data.code == 1) {
 							alert('登陆成功，跳转到首页');
-							location.href = "__ROOT__";
+							location.href = "__ROOT__/Admin";
 						}else{
 							alert(data.msg);
 							

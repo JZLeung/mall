@@ -66,6 +66,15 @@
 .sale-list li.list-item:nth-child(1) {
     margin-left: 0;
 }
+a > img {
+    width: 100%;
+}
+.sale-item {
+    justify-content: space-around;
+    flex: 1;
+    padding: 5px;
+    width: 200px;
+}
 
 /*明星产品*/
 .star-list{

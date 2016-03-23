@@ -5,7 +5,7 @@
 	<title>首页</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
-	
+	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/header.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/index.css">
 </head>
@@ -86,14 +86,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="sale-list clear">
-		<div class="content-w">
-			<ul class="horizon-list list">
+	<div class="sale-list ">
+		<div class="content-w flex">
+			<div class="sale-item"><a  href="item/2" ><img src="/mall/Public/Common/images/2.jpg" alt=""></a></div>
+			<div class="sale-item"><a  href="item/2" ><img src="/mall/Public/Common/images/2.jpg" alt=""></a></div>
+			<div class="sale-item"><a  href="item/2" ><img src="/mall/Public/Common/images/2.jpg" alt=""></a></div>
+			<div class="sale-item"><a  href="item/2" ><img src="/mall/Public/Common/images/2.jpg" alt=""></a></div>
+			<!-- <ul class="horizon-list list">
 				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
 				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
 				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
 				<li class="list-item"><a href="item/3"><img src="/mall/Public/Common/images/2.jpg" alt=""></a></li>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 	<div class="star-list clear">

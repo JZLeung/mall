@@ -60,6 +60,9 @@ img {
   border-left: none;
   margin: 20px 0;
 }
+.right-docs .item-other {
+  margin-bottom: 10px 0;
+}
 .right-docs .item-other > div {
   margin: 20px 0;
 }
@@ -69,6 +72,9 @@ img {
   line-height: 1.5em;
   border-left: 3px solid #B7B2B2;
   padding-left: 10px;
+}
+.right-docs .item-buttons {
+  margin: 10px 0;
 }
 .right-docs button {
   margin-right: 10px;
@@ -82,8 +88,9 @@ img {
   border: 2px solid #5F5A5A;
   border-bottom-width: 6px;
   margin-right: 10px;
-  padding: 5px;
+  padding: 15px;
   text-align: center;
+  flex: 1;
 }
 .right-docs .other-item.active {
   border-color: #ef5b00;
@@ -132,9 +139,17 @@ img {
   background-color: #f5f5f5;
 }
 
-.item-content .content-m {
-  width: 600px;
+.item-content .content {
   margin: auto;
+}
+.item-content .content-s {
+  width: 750px;
+}
+.item-content .content-m {
+  width: 900px;
+}
+.item-content .content-l {
+  width: 1150px;
 }
 
 .item-params .params-detail {
@@ -148,9 +163,14 @@ img {
 .item-params .right-params {
   margin-left: 160px;
   font-size: 14px;
+  flex-wrap: wrap;
 }
 .item-params label {
   display: inline-block;
-  width: 33%;
+  max-width: 33%;
+  min-width: 32%;
   padding: 10px 0;
+  margin-bottom: 10px;
+  border-left: 3px solid #e4e4e4;
+  padding-left: 6px;
 }

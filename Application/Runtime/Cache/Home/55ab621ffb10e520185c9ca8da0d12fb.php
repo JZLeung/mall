@@ -79,7 +79,10 @@
 	</div>
 </div>
 
-	<?php if(!$data): ?>没有该商品
+	<?php if(!$data): ?><div class="nodata">
+			没有该商品
+		</div>
+		
 	<?php else: ?>
 	<!-- 目录导航 -->
 	<div class="head-nav">
@@ -90,7 +93,7 @@
 			<span class="nav-sub">/</span>
 			<a href="javascript:;">后盖</a>
 			<span class="nav-sub">/</span>
-			<a href="javascript:;"><?php echo ($data["title"]); ?></a>
+			<a href="javascript:;"><?php echo ($data["name"]); ?></a>
 		</div>
 	</div>
 	<div class="item-profile">
@@ -122,7 +125,9 @@
 				<div class="item-other">
 					<?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attribute): ?><div class="item-other-<?php echo ++ $index1;?> otherlist" id="other<?php echo ($index1); ?>">
 						<p class="name"><?php echo ($attribute["name"]); ?></p>
-						<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $k=>$vo): ?><a href="javascript:;" class="other-item" data-attr="<?php echo ($k); ?>"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
+						<div class="flex selection">
+							<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $k=>$vo): ?><a href="javascript:;" class="other-item" data-attr="<?php echo ($k); ?>"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
+						</div>
 					</div><?php endforeach; endif; ?>
 				</div>
 				<p>剩余：<strong id="stock"></strong>件</p>
@@ -180,7 +185,7 @@
 	<div class="item-detail">
 		
 		<div class="item-content" id="item-detail">
-			<div class="content-m">
+			<div class="content content-<?php echo ($data["content"]); ?>">
 				<?php echo ($data["detail"]); ?>
 			</div>
 		</div>
@@ -193,7 +198,7 @@
 					<div class="left-img left">
 						<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 					</div>
-					<div class="right-params">
+					<div class="right-params flex">
 						<?php if(is_array($data["params"])): foreach($data["params"] as $key=>$p): ?><label for=""><?php echo ($p["name"]); ?>：<?php echo ($p["value"]); ?></label><?php endforeach; endif; ?>
 						<!-- <label for="">工艺：喷漆</label>
 						<label for="">尺寸：L/135mm*H/68mm*T/10mm</label>
@@ -264,7 +269,7 @@
 
 
 			$otherlist.each(function(index, el) {
-				$(this).children().eq(1).addClass('active');
+				$(this).find('a').eq(0).addClass('active');
 			});
 			//配置项
 			function getNowOption(){
