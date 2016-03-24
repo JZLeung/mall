@@ -1,0 +1,294 @@
+[ 2016-03-24T10:40:48+08:00 ] ::1 /mall/Public/assets/css/dpl-min.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:48+08:00 ] ::1 /mall/Public/assets/css/bui-min.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:48+08:00 ] ::1 /mall/Public/assets/js/jquery-1.8.1.min.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:48+08:00 ] ::1 /mall/Public/assets/js/bui-min.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:48+08:00 ] ::1 /mall/Public/assets/css/main.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:48+08:00 ] ::1 /mall/Public/assets/js/config-min.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:52+08:00 ] ::1 /mall/Public/assets/css/dpl-min.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:52+08:00 ] ::1 /mall/Public/assets/css/main.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:40:52+08:00 ] ::1 /mall/Public/assets/css/bui-min.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T10:45:27+08:00 ] ::1 /mall/main/menu.php
+ERR: 无法加载模块:Main
+
+[ 2016-03-24T10:45:28+08:00 ] ::1 /mall/main/second-menu.php
+ERR: 无法加载模块:Main
+
+[ 2016-03-24T10:45:29+08:00 ] ::1 /mall/main/menu.php
+ERR: 无法加载模块:Main
+
+[ 2016-03-24T10:45:57+08:00 ] ::1 /mall/main/second-menu.php
+ERR: 无法加载模块:Main
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/css/admin.css
+ERR: 无法加载模块:Css
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/Public/Admin/pintu/pintuer.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/Public/Admin/pintu/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/Public/Admin/pintu/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:00:39+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/Public/Admin/pintu/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/Public/Admin/pintu/css/pintuer.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/Public/Admin/pintu/pintuer.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/Public/Admin/pintu/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:01:02+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:43+08:00 ] ::1 /mall/Public/Admin/pintu/pintuer.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:43+08:00 ] ::1 /mall/Public/Admin/pintu/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:43+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:01:43+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:01:44+08:00 ] ::1 /mall/Public/Admin/pintu/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:44+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:44+08:00 ] ::1 /mall/Public/Admin/pintu/css/pintuer.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:44+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/Public/Admin/pintu/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/Public/Admin/pintu/pintuer.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/Public/Admin/pintu/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/Public/Admin/pintu/css/pintuer.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:01:46+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:01:47+08:00 ] ::1 /mall/Public/Admin/pintu/css/pintuer.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/Public/Admin/pintu/css/pintuer.css
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/Public/Admin/pintu/js/pintuer.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:02:17+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:02:42+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:03:11+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:03:11+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:03:11+08:00 ] ::1 /mall/js/admin.js
+ERR: 无法加载模块:Js
+
+[ 2016-03-24T11:03:11+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:03:11+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:04:02+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:04:02+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:04:02+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:04:02+08:00 ] ::1 /mall/Public/Admin/pintu/face.jpg
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:04:36+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:04:36+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:04:36+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:04:36+08:00 ] ::1 /mall/images/logo.png
+ERR: 无法加载模块:Images
+
+[ 2016-03-24T11:05:13+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:13+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:13+08:00 ] ::1 /mall/i/mall/Public/Admin/pintu/mages/logo.png
+ERR: 无法加载模块:I
+
+[ 2016-03-24T11:05:19+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:19+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:19+08:00 ] ::1 /mall/i/mall/Public/Admin/pintu/images/logo.png
+ERR: 无法加载模块:I
+
+[ 2016-03-24T11:05:30+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:30+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:30+08:00 ] ::1 /mall/i/mall/Public/Admin/pintu/images/logo.png
+ERR: 无法加载模块:I
+
+[ 2016-03-24T11:05:49+08:00 ] ::1 /mall/Public/Admin/pintu/js/jquery.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:49+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:05:52+08:00 ] ::1 /mall/content.html
+ERR: 无法加载模块:Content
+
+[ 2016-03-24T11:06:35+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:06:36+08:00 ] ::1 /mall/system.html
+ERR: 无法加载模块:System
+
+[ 2016-03-24T11:08:33+08:00 ] ::1 /mall/system.html
+ERR: 无法加载模块:System
+
+[ 2016-03-24T11:08:52+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:11:02+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:21:32+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:21:38+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:32:26+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:33:10+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:33:46+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:34:04+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:38:52+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:38:58+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:42:04+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+
+[ 2016-03-24T11:42:38+08:00 ] ::1 /mall/Public/Admin/pintu/js/respond.js
+ERR: 无法加载模块:Public
+

@@ -63,7 +63,7 @@
 							alert('登陆成功，跳转到首页');
 							location.href = "/mall";
 						}else{
-							$('.error').text('');
+							alert(data.msg);
 							
 						}
 					}
