@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>商品页</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/items.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/header.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/items.css">
 	<style>
 		.fixed{
 			position: fixed;
@@ -18,13 +18,72 @@
 	</style>
 </head>
 <body>
-	<include file='./Public/Template/Index/_header_.html' />
-	<if condition="!$data">
-		<div class="nodata">
+	
+<div class="header2016">
+	<div class="content-w clear">
+		<div class="left">
+			<a href="javascript:void(0)">菜单1</a>
+			<span class="dev">|</span>
+			<a href="javascript:void(0)">菜单2</a>
+			<span class="dev">|</span>
+			<a href="javascript:void(0)">菜单3</a>
+			<span class="dev">|</span>
+			<a href="javascript:void(0)">菜单4</a>
+			<span class="dev">|</span>
+			<a href="javascript:void(0)">菜单5</a>
+			<span class="dev">|</span>
+			<a href="javascript:void(0)">菜单6</a>
+			<span class="dev">|</span>
+		</div>
+		<div class="right">
+			<?php if($username): ?><a href="javascript:void(0)"><?php echo ($username); ?></a>
+				<span class="dev">|</span>
+				<a href="javascript:void(0)">退出</a>
+			<?php else: ?>
+				<a href="/mall/login">登陆</a>
+				<span class="dev">|</span>
+				<a href="/mall/regist">注册</a><?php endif; ?>
+		</div>
+	</div>
+</div>
+<div class="nav2016">
+	<div class="content-w clear">
+		<div class="nav-logo">
+			<a href="/mall">
+				<img src="/mall/Public/Common/images/mi-logo.jpg" alt="" class="logo">
+			</a>
+		</div>
+		<div class="nav-bar left">
+			<ul class="horizon-list clear">
+				<li class="list-item">
+					<a href="javascipt:;">分类1</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类2</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类3</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类4</a>
+				</li>
+				<li class="list-item">
+					<a href="javascipt:;">分类5</a>
+				</li>
+			</ul>
+		</div>
+		<div class="nav-search right">
+				<input type="text" class="search left">
+				<input type="submit" class="submit">
+		</div>
+	</div>
+</div>
+
+	<?php if(!$data): ?><div class="nodata">
 			没有该商品
 		</div>
 
-	<else />
+	<?php else: ?>
 	<!-- 目录导航 -->
 	<div class="head-nav">
 		<div class="content-w">
@@ -34,7 +93,7 @@
 			<span class="nav-sub">/</span>
 			<a href="javascript:;">后盖</a>
 			<span class="nav-sub">/</span>
-			<a href="javascript:;">{$data.name}</a>
+			<a href="javascript:;"><?php echo ($data["name"]); ?></a>
 		</div>
 	</div>
 	<div class="item-profile">
@@ -43,66 +102,56 @@
 				<div class="pic-list left" id="picList">
 					<ul>
 
-						<foreach name="data.pictures" item="pic">
-							<li><img src="__PUBLIC__/{$pic.src}" alt="{$pic.title}"></li>
-						</foreach>
-						<!-- <li class="active"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></li>
-						<li><img src="__PUBLIC__/Common/images/items/test/2.jpg" alt=""></li>
-						<li><img src="__PUBLIC__/Common/images/items/test/3.jpg" alt=""></li> -->
+						<?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$pic): ?><li><img src="/mall/Public/<?php echo ($pic["src"]); ?>" alt="<?php echo ($pic["title"]); ?>"></li><?php endforeach; endif; ?>
+						<!-- <li class="active"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></li>
+						<li><img src="/mall/Public/Common/images/items/test/2.jpg" alt=""></li>
+						<li><img src="/mall/Public/Common/images/items/test/3.jpg" alt=""></li> -->
 					</ul>
 				</div>
 				<div class="pic-big left" id="picShow">
-					<img src="__PUBLIC__/{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
+					<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 				</div>
 			</div>
 			<div class="right-docs left">
-				<h2 class="item-title">{$data.title}</h2>
+				<h2 class="item-title"><?php echo ($data["title"]); ?></h2>
 				<div class="item-desc">
-					{$data.subscribe}
+					<?php echo ($data["subscribe"]); ?>
 				</div>
 				<div class="item-price">
 					<strong id="price"></strong>元
 				</div>
-				<define name="index1" value="0" />
+				<?php define('index1', '0'); ?>
 
 				<div class="item-other">
-					<foreach name="data.attr" item="attribute">
-					<div class="item-other-{++ $index1} otherlist" id="other{$index1}">
-						<p class="name">{$attribute.name}</p>
+					<?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attribute): ?><div class="item-other-<?php echo ++ $index1;?> otherlist" id="other<?php echo ($index1); ?>">
+						<p class="name"><?php echo ($attribute["name"]); ?></p>
 						<div class="flex selection">
-							<foreach name="attribute.value" item="vo" key="k">
-								<a href="javascript:;" class="other-item" data-attr="{$k}">{$vo}</a>
-							</foreach>
+							<?php if(is_array($attribute["value"])): foreach($attribute["value"] as $k=>$vo): ?><a href="javascript:;" class="other-item" data-attr="<?php echo ($k); ?>"><?php echo ($vo); ?></a><?php endforeach; endif; ?>
 						</div>
-					</div>
-					</foreach>
+					</div><?php endforeach; endif; ?>
 				</div>
 				<p>剩余：<strong id="stock"></strong>件</p>
 
-				<!-- <foreach name="data.combos" item="combo1">
-					<div class="item-other">
+				<!-- <?php if(is_array($data["combos"])): foreach($data["combos"] as $key=>$combo1): ?><div class="item-other">
 						<div class="item-other-1 clear">
-							<p>{$combo1.name}</p>
-							<foreach name="combo1.combo" item="vo">
-							<a href="javascript:;" class="other-item active"><img src="__PUBLIC__/{$vo.pic}" alt="{$vo.name}" data-price="{$vo.price}"></a>
-							</foreach>
+							<p><?php echo ($combo1["name"]); ?></p>
+							<?php if(is_array($combo1["combo"])): foreach($combo1["combo"] as $key=>$vo): ?><a href="javascript:;" class="other-item active"><img src="/mall/Public/<?php echo ($vo["pic"]); ?>" alt="<?php echo ($vo["name"]); ?>" data-price="<?php echo ($vo["price"]); ?>"></a><?php endforeach; endif; ?>
 						</div>
-					</div>
-				</foreach> -->
+					</div><?php endforeach; endif; ?> -->
 				<!-- <div class="item-other">
 					<div class="item-other-1 clear">
 						<p>颜色：橙色</p>
-						<a href="javascript:;" class="other-item active"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></a>
-						<a href="javascript:;" class="other-item"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></a>
-						<a href="javascript:;" class="other-item"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></a>
+						<a href="javascript:;" class="other-item active"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></a>
+						<a href="javascript:;" class="other-item"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></a>
+						<a href="javascript:;" class="other-item"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></a>
 					</div>
 				</div>
 				<div class="item-other">
 					<div class="item-other-1 clear">
 						<p>颜色：橙色</p>
-						<a href="javascript:;" class="other-item active"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></a>
-						<a href="javascript:;" class="other-item"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></a>
-						<a href="javascript:;" class="other-item"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></a>
+						<a href="javascript:;" class="other-item active"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></a>
+						<a href="javascript:;" class="other-item"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></a>
+						<a href="javascript:;" class="other-item"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></a>
 					</div>
 				</div> -->
 				<div class="item-buttons">
@@ -136,8 +185,8 @@
 	<div class="item-detail">
 
 		<div class="item-content" id="item-detail">
-			<div class="content content-{$data.content}">
-				{$data.detail}
+			<div class="content content-<?php echo ($data["content"]); ?>">
+				<?php echo ($data["detail"]); ?>
 			</div>
 		</div>
 		<div class="item-params" id="item-params">
@@ -147,12 +196,10 @@
 			<div class="content-w">
 				<div class="params-detail clear">
 					<div class="left-img left">
-						<img src="__PUBLIC__/{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
+						<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 					</div>
 					<div class="right-params flex">
-						<foreach name="data.params" item="p">
-							<label for="">{$p.name}：{$p.value}</label>
-						</foreach>
+						<?php if(is_array($data["params"])): foreach($data["params"] as $key=>$p): ?><label for=""><?php echo ($p["name"]); ?>：<?php echo ($p["value"]); ?></label><?php endforeach; endif; ?>
 						<!-- <label for="">工艺：喷漆</label>
 						<label for="">尺寸：L/135mm*H/68mm*T/10mm</label>
 						<label for="">颜色：橙色</label>
@@ -167,11 +214,10 @@
 			</div>
 		</div>
 		<div style="width: 100%;height: 1000px;"></div>
-	</div>
-	</if>
-	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
+	</div><?php endif; ?>
+	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script>
-	var prices = JSON.parse('{$prices|json_encode}');
+	var prices = JSON.parse('<?php echo (json_encode($prices)); ?>');
 		$(document).ready(function() {
 
 			var $pic = $('#picShow').find('img'),

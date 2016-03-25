@@ -18,7 +18,7 @@
 	</style>
 </head>
 <body>
-	<include file='./Public/Template/index/_header_.html' />
+	<include file='./Public/Template/Index/_header_.html' />
 	<!-- 目录导航 -->
 	<div class="head-nav">
 		<div class="content-w">
@@ -95,11 +95,11 @@
 				<span class="dev">|</span>
 				<a href="hrefjavascript:;">商品提问</a>
 			</div>
-		</div>	
+		</div>
 	</div>
-	
+
 	<div class="item-detail">
-		
+
 		<div class="item-content" id="item-detail">
 			<div class="content-m">
 				<img src="__PUBLIC__/Common/images/items/test/d1.jpg" alt="">
@@ -150,7 +150,7 @@
 				Height1 = $detail.offset().top  - 170,
 				Height2 = $params.offset().top  - 170,
 				Height3 = $comment.offset().top - 170;
-				
+
 			console.log(Height1+":"+Height2+":"+Height3);
 			//预览图选择
 			$('#picList').on('click', 'li', function(event) {
@@ -162,11 +162,11 @@
 			$(document).scroll(function(event) {
 				event.preventDefault();
 				var top = $(this).scrollTop();
-					
+
 				if (top >= clHeight - 70) {
 					$classify.addClass('fixed');
-					//top >= Height1 ? aAll.removeClass('active').eq(1).addClass('active') : 
-					top >= Height2 && top < Height3 ? aAll.removeClass('active').eq(1).addClass('active') : 
+					//top >= Height1 ? aAll.removeClass('active').eq(1).addClass('active') :
+					top >= Height2 && top < Height3 ? aAll.removeClass('active').eq(1).addClass('active') :
 					top >= Height3 ? aAll.removeClass('active').eq(2).addClass('active') :
 					aAll.removeClass('active').eq(0).addClass('active');
 				}else{

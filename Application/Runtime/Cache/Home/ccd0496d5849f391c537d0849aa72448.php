@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>xx账号 - 登录</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/login.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/login.css">
 </head>
 <body>
-	<include file="./Public/html/login-top.html" />
+	
 	<div class="container login2016">
-		<a href="__ROOT__" style="color: #ef5b00;position: absolute;left: 15px;top: 15px;">< 返回首页</a>
+		<a href="/mall" style="color: #ef5b00;position: absolute;left: 15px;top: 15px;">< 返回首页</a>
 		<div class="login-box" id="login-box">
 			<form action="" id="form" onsubmit="return false;">
 			<ul>
@@ -42,9 +42,9 @@
 		</div>
 	</div>
 	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
-	<script src="__PUBLIC__/Common/js/jquery.validate.js"></script>
-	<script src="__PUBLIC__/Common/js/base.js"></script>
+	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
+	<script src="/mall/Public/Common/js/jquery.validate.js"></script>
+	<script src="/mall/Public/Common/js/base.js"></script>
 	<script>
 		$(document).ready(function() {
 			function getObjectArray(source){
@@ -73,7 +73,7 @@
 						console.log(data);
 						if (data.code == 1) {
 							alert('注册成功，将跳转到首页');
-							location.href = "__ROOT__";
+							location.href = "/mall";
 						}else{
 							alert(data.msg);
 						}

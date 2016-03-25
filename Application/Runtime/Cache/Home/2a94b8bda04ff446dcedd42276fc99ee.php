@@ -41,7 +41,7 @@
 <div class="nav2016">
 	<div class="content-w clear">
 		<div class="nav-logo">
-			<a href="javascipt:;">
+			<a href="/mall">
 				<img src="/mall/Public/Common/images/mi-logo.jpg" alt="" class="logo">
 			</a>
 		</div>

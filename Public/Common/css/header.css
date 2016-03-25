@@ -45,6 +45,7 @@
     padding: 10px 15px;
     line-height: 1.4em;
     border: 1px solid #b0b0b0;
+    height: 18px;
 }
 .nav-search .search:focus,.nav-search .search:focus + .submit{
   border-color: #ff6700;
@@ -54,5 +55,6 @@
     padding:11px 16px ;
     border: 1px solid #b0b0b0;
     border-left: none;
+    height: 40px;
     cursor: pointer;
 }
