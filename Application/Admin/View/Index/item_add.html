@@ -56,7 +56,7 @@
                                     <div class="form-group">
                                         <label>描述</label>
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Enter text" name="pic.title" data-pid="">
+                                            <input class="form-control" placeholder="Enter text" data-pid="">
                                             <div class="input-group-addon btn btn-danger" id="delImg">
                                                 <i class="fa fa-trash-o"></i>
                                             </div>
@@ -77,7 +77,7 @@
                                 <!-- 基本信息 -->
                                 <div class="form-group">
                                     <label>标题</label>
-                                    <input class="form-control" placeholder="Enter text" name="phone.title">
+                                    <input class="form-control" placeholder="Enter text" name="title">
                                     <p class="help-block">商品标题</p>
                                 </div>
                                 <div class="form-group">
@@ -127,6 +127,12 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
+                    <div class="panel-heading">套餐/组合</div>
+                    <div class="panel-body">
+                        
+                    </div>
+                </div>
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         详细内容
                     </div>
@@ -166,18 +172,24 @@
                 addImg = $("#addImg");
 
             var default_img = '__PUBLIC__/Common/images/default.png';
+
+            //提交表单
             btn.on('click', function(event) {
                 event.preventDefault();
-                $.post('../Items/index', itemData, function(data, textStatus, xhr) {
+                $.post('../Items/index', {data: itemData}, function(data, textStatus, xhr) {
                     console.log(data);
                 });
+                getItemData();
+                console.log(itemData);
                 return false;
             });
-            $('#form').on('change', 'input,textarea', function(event) {
+
+            //保存数据
+            /*$('#form').on('change', 'input,textarea', function(event) {
                 event.preventDefault();
                 var name = this.name,
                     value = this.value;
-                if (name == "pic.title") {
+                if (name == "pictitle") {
                     var id = $(this).data('pid');
                     itemData['pic'] || (itemData['pic'] = {});
                     itemData['pic'][id] || (itemData['pic'][id] = {});
@@ -185,9 +197,9 @@
                     piclist.find('img[data-pid="'+id+'"]').attr('alt', value);
                 }else
                     itemData[name] = value;
-            });
+            });*/
 
-
+            //选择图片
             function selectImg(img){
                 picshow.find('img').attr('src', img.src);
                 var me = img;
@@ -196,11 +208,13 @@
                 });
                 console.log("You've selected the Image . PID is "+$(me).data('pid'));
             }
+            //点击选择图片
             piclist.on('click', 'img', function(event) {
                 event.preventDefault();
                 selectImg(this)
             });
 
+            //删除图片
             delImg.on('click', function(event) {
                 event.preventDefault();
                 var id = $(this).prev().data('pid');
@@ -208,6 +222,7 @@
                     
                 if (del.length == 0) {alert('没有可以删除的图片');return;}
                 del.remove();
+                itemData['pic'][id] = null;
                 var images = piclist.find('img');
                 if (images.length > 0) {
                     selectImg(images[0]);
@@ -238,6 +253,8 @@
                     }
                 });
             });*/
+
+            //异步上传图片
             $fileupload.fileupload({
                 url: '../Upload/upload',
                 dataType: 'json',
@@ -261,6 +278,8 @@
                     }*/
                 }
             })
+
+            //初始化编辑器
             editor = new Simditor({
                 textarea: $('#editor'),
                 defaultImage: '__PUBLIC__/Common/images/default.png',
@@ -273,6 +292,24 @@
                 },
                 //optional options
             });
+            //获取表单的所有数据
+            function getItemData(){
+                $("#form").find('input,select,textarea').each(function(index, el) {
+                    var name = this.name,
+                        value = this.value;
+                    if (name && value) {
+                        itemData[name] = value;
+                    }
+                    
+                });
+                itemData['pic'] = [];
+                piclist.find('img').each(function(index, el) {
+                    var src = this.src,
+                        title = this.alt;
+                    itemData['pic'].push({'src':src, 'title': title});
+                });
+                //return 
+            }
         });
     </script>
 </div>

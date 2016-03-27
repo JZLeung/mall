@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="/mall/Public/Common/css/login.css">
 </head>
 <body>
-	
 	<div class="container login2016">
 		<a href="/mall" style="color: #ef5b00;position: absolute;left: 15px;top: 15px;">< 返回首页</a>
 		<div class="login-box" id="login-box">

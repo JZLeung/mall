@@ -1,0 +1,171 @@
+[ 2016-03-28T00:07:19+08:00 ] ::1 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.012710s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.021713s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+SQL: tp_mall.getCollection(user) [ RunTime:0.0016s ]
+SQL: tp_mall.user.find({"username":"admin"}).limit(1) [ RunTime:0.0002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.005253s ]
+INFO: [ app_end ] --END-- [ RunTime:0.005380s ]
+
+[ 2016-03-28T00:07:34+08:00 ] ::1 /mall/Admin/Upload/upload
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.010951s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.012017s ]
+
+[ 2016-03-28T00:08:17+08:00 ] ::1 /mall/Admin/Upload/upload
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000525s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001078s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-03-28T00:08:20+08:00 ] ::1 /mall/Admin/Upload/upload
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004057s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005996s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-03-28T00:08:38+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002903s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003848s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.013925s ]
+INFO: [ app_end ] --END-- [ RunTime:0.014152s ]
+
+[ 2016-03-28T00:09:10+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002828s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003788s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.008969s ]
+INFO: [ app_end ] --END-- [ RunTime:0.009166s ]
+
+[ 2016-03-28T00:09:35+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001948s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003091s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001326s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001387s ]
+
+[ 2016-03-28T00:10:15+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001242s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001780s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001237s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001292s ]
+
+[ 2016-03-28T00:10:41+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001332s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001939s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001177s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001230s ]
+
+[ 2016-03-28T00:10:51+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001384s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001889s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001251s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001304s ]
+
+[ 2016-03-28T00:11:03+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001582s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002192s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001404s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001475s ]
+
+[ 2016-03-28T00:11:14+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001203s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001709s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001311s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001364s ]
+
+[ 2016-03-28T00:11:14+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001172s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001695s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001160s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001210s ]
+
+[ 2016-03-28T00:11:15+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001221s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001714s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001211s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001267s ]
+
+[ 2016-03-28T00:11:15+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001163s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001668s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001179s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001227s ]
+
+[ 2016-03-28T00:11:15+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001178s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001695s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001195s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001247s ]
+
+[ 2016-03-28T00:11:32+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000823s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001228s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001024s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001108s ]
+
+[ 2016-03-28T00:12:01+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001411s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002356s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001023s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001106s ]
+
+[ 2016-03-28T00:12:20+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002645s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003584s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002003s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002215s ]
+
+[ 2016-03-28T00:12:35+08:00 ] ::1 /mall/Admin/Upload/upload
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000584s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001187s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-03-28T00:12:37+08:00 ] ::1 /mall/Admin/Upload/upload
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001209s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001838s ]
+NOTIC: [2] call_user_func() expects parameter 1 to be a valid callback, no array or string given D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Upload.class.php 第 170 行.
+
+[ 2016-03-28T00:12:40+08:00 ] ::1 /mall/Admin/Items/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001218s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001823s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001251s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001311s ]
+

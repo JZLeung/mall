@@ -14,6 +14,8 @@
     <link href="/mall/Public/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
     <link href="/mall/Public/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
     <link href="/mall/Public/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/mall/Public/Common/css/simditor.css" />
+    <link rel="stylesheet" href="/mall/Public/Common/css/jquery.fileupload.css">
     <style>
         .list-group-item{margin-bottom: 5px;}
     </style>
@@ -117,27 +119,43 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-6">
+                                <!-- 上传图片 -->
                                 <div class="col-lg-3">
                                     <div class="list-group" id="piclist">
-                                        <img src="http://img10.360buyimg.com/n1/jfs/t2503/30/882326252/32149/16a84c13/5631d227N94dd67f8.jpg" alt="" class="img-thumbnail list-group-item" data-pid="1">
-                                        <img src="//img11.360buyimg.com/n1/jfs/t1972/28/898142046/38869/26ab43bd/5631d229N6d2d3180.jpg" alt="" class="img-thumbnail list-group-item" data-pid="2">
+                                        <div class="fileinput-button img-thumbnail list-group-item text-center" id="addImg" style="display: block;">
+                                            <i class="fa fa-plus"></i>
+                                            <input id="fileupload" type="file" name="fileupload">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-lg-offset-1" id="picshow">
 
-                                    <img src="http://img10.360buyimg.com/n1/jfs/t2503/30/882326252/32149/16a84c13/5631d227N94dd67f8.jpg" alt="" class="img-thumbnail">
+                                    <img src="" alt="" class="img-thumbnail">
                                     <div class="form-group">
                                         <label>描述</label>
-                                        <input class="form-control" placeholder="Enter text" name="pic.title" data-pid="1">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="Enter text" data-pid="">
+                                            <div class="input-group-addon btn btn-danger" id="delImg">
+                                                <i class="fa fa-trash-o"></i>
+                                            </div>
+                                        </div>
                                         <p class="help-block">图片描述</p>
                                     </div>
-                                    <input type="file" id="fileupload" name="pic.name">
+                                    <!-- <input type="file" id="uploadfile" name="uploadfile"> -->
+                                    <!-- <span class="btn btn-success fileinput-button">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Add files...</span>
+                                        
+                                    </span> -->
                                 </div>
                             </div>
+
+
                             <div class="col-lg-6">
+                                <!-- 基本信息 -->
                                 <div class="form-group">
                                     <label>标题</label>
-                                    <input class="form-control" placeholder="Enter text" name="phone.title">
+                                    <input class="form-control" placeholder="Enter text" name="title">
                                     <p class="help-block">商品标题</p>
                                 </div>
                                 <div class="form-group">
@@ -184,41 +202,72 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            
-                        </div>
-                        <div class="row">
-                        	<button type="submit" id="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">套餐/组合</div>
+                    <div class="panel-body">
+                        
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        详细内容
+                    </div>
+                    <div class="panel-body">
+                        <!-- 编辑器 -->
+                        <textarea id="editor" placeholder="Balabala"></textarea>
                     </div>
                 </div>
                 <!-- /.panel -->
+                <div class="row">
+                    <button type="submit" id="submit" class="btn btn-default">Submit Button</button>
+                    <button type="reset" class="btn btn-default">Reset Button</button>
+                </div>
             </form>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
 	</div>
+
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/module.min.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/hotkeys.min.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/uploader.min.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/simditor.min.js"></script>
     <script src="/mall/Public/Common/js/ajaxfileupload.js"></script>
+    <script src="/mall/Public/Common/js/upload/jquery.ui.widget.js"></script>
+    <script src="/mall/Public/Common/js/upload/jquery.fileupload.js"></script>
     <script>
-        var itemData = {};
+        var itemData = {},
+            pid = 1,
+            $fileupload = $('#fileupload'),
+            editor;
 
         $(document).ready(function() {
             var btn = $('#submit'),
                 picshow = $('#picshow'),
-                piclist = $('#piclist');
+                piclist = $('#piclist'),
+                delImg = $("#delImg"),
+                addImg = $("#addImg");
+
+            var default_img = '/mall/Public/Common/images/default.png';
+
+            //提交表单
             btn.on('click', function(event) {
                 event.preventDefault();
-                $.post('../Items/index', itemData, function(data, textStatus, xhr) {
+                $.post('../Items/index', {data: itemData}, function(data, textStatus, xhr) {
                     console.log(data);
                 });
+                getItemData();
+                console.log(itemData);
                 return false;
             });
-            $('#form').on('change', 'input,textarea', function(event) {
+
+            //保存数据
+            /*$('#form').on('change', 'input,textarea', function(event) {
                 event.preventDefault();
                 var name = this.name,
                     value = this.value;
-                if (name == "pic.title") {
+                if (name == "pictitle") {
                     var id = $(this).data('pid');
                     itemData['pic'] || (itemData['pic'] = {});
                     itemData['pic'][id] || (itemData['pic'][id] = {});
@@ -226,27 +275,119 @@
                     piclist.find('img[data-pid="'+id+'"]').attr('alt', value);
                 }else
                     itemData[name] = value;
-            });
+            });*/
 
+            //选择图片
+            function selectImg(img){
+                picshow.find('img').attr('src', img.src);
+                var me = img;
+                picshow.find('input').each(function(index, el) {
+                    $(this).data('pid', $(me).data('pid')).val(me.alt);
+                });
+                console.log("You've selected the Image . PID is "+$(me).data('pid'));
+            }
+            //点击选择图片
             piclist.on('click', 'img', function(event) {
                 event.preventDefault();
-                picshow.find('img').attr('src', this.src);
-                picshow.find('input').data('pid', $(this).data('pid')).val(this.alt);
-
+                selectImg(this)
             });
 
-            $('#fileupload').change(function(event) {
+            //删除图片
+            delImg.on('click', function(event) {
+                event.preventDefault();
+                var id = $(this).prev().data('pid');
+                var del = piclist.find('img[data-pid='+id+']');
+                    
+                if (del.length == 0) {alert('没有可以删除的图片');return;}
+                del.remove();
+                itemData['pic'][id] = null;
+                var images = piclist.find('img');
+                if (images.length > 0) {
+                    selectImg(images[0]);
+                }else{
+                    picshow.find('img').attr('src', '');
+                }
+            });
+
+            /*addImg.on('click', function(event) {
+                event.preventDefault();
+                var img = document.createElement('img');
+                img.src = default_img;
+                $(img).data('pid', pid).addClass('img-thumbnail list-group-item').insertBefore($(this));
+                pid++;
+                selectImg(img);
+            });*/
+            /*$('#uploadfile').change(function(event) {
                 $.ajaxFileUpload({
                     type:'post',
                     secureuri:false,
                     url:'../Upload/upload',
-                    fileElementId : 'fileupload',
+                    fileElementId : 'uploadfile',
                     success:function(data){
-                        console.log(data);
+                        //var $da = $(data).find('#info');
+                        data = $.parseJSON(data);
+                        console.log(data.filename);
                         //$('#upload').replaceWith('<input type="file" name="myFile" id="upload">'); 
                     }
                 });
+            });*/
+
+            //异步上传图片
+            $fileupload.fileupload({
+                url: '../Upload/upload',
+                dataType: 'json',
+                done: function (e, data) { 
+                    console.log(data.result);
+                    var fileinfo = data.result;
+                    var filepath = '/mall'+fileinfo['file_path'];
+                        //id = $fileupload.data('pid');
+
+                    //if (id == undefined) {
+                        var img = document.createElement('img');
+                        img.src = filepath;
+                        var $img = $(img).attr('data-pid', pid).addClass('img-thumbnail list-group-item');
+                        //piclist.append($img);
+                        selectImg(img);
+                        $img.insertBefore(addImg);
+                        pid++;
+                    /*}else{
+                        piclist.find('img').eq(id-1).attr('src', filepath);
+                        picshow.find('img').attr('src', filepath);
+                    }*/
+                }
+            })
+
+            //初始化编辑器
+            editor = new Simditor({
+                textarea: $('#editor'),
+                defaultImage: '/mall/Public/Common/images/default.png',
+                upload: {
+                    url: '../Upload/upload',
+                    params: {'editor': true},
+                    fileKey: 'upload_file',
+                    connectionCount: 3,
+                    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+                },
+                //optional options
             });
+            //获取表单的所有数据
+            function getItemData(){
+                $("#form").find('input,select,textarea').each(function(index, el) {
+                    var name = this.name,
+                        value = this.value;
+                    if (name && value) {
+                        itemData[name] = value;
+                    }
+                    
+                });
+                itemData['pic'] = [];
+                piclist.find('img').each(function(index, el) {
+                    var src = this.src,
+                        title = this.alt;
+                    itemData['pic'].push({'src':src, 'title': title});
+                });
+                //return 
+            }
         });
     </script>
 </div>

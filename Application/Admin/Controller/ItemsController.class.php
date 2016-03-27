@@ -3,10 +3,13 @@ namespace Admin\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
     public function index($id = 0){
-        $data = I('post.');
+        $json = I('post.data');
+
         echo "<pre>";
-        $data['desc'] = implode(split("\r\n", $data['desc']), '<br />');
-        print_r($data);
+        //$data = json_decode('['.$json.']');
+        //echo $json;
+        //$data['desc'] = implode(split("\r\n", $data['desc']), '<br />');
+        print_r(($json));
 
     }
 
