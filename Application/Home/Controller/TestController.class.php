@@ -204,25 +204,16 @@ class TestController extends Controller {
         print_r($items->where($datas)->save($data));
     }
 
-    public function updatePrice($name, $price, $stock = 0){
-        //echo "$name : $value";
-        $sku = M('sku');
-        $id = 2;
-        $data['id'] = $id;
-        $data['name'] = $name;
-        $datas['price'] = $price;
-        $datas['stock'] = $stock;
-        print_r($data);
-        $sku->where($data)->save($datas);
-    }
-    public function updateImg(){
-        $data['pictures'][0]['src'] = 'Common/images/items/phone/apple/w.jpg';
-        $data['pictures'][0]['title'] = '黑色';
-        $data['pictures'][1]['src'] = 'Common/images/items/phone/apple/g.jpg';
-        $data['pictures'][1]['title'] = '金色';
-        $data['pictures'][2]['src'] = 'Common/images/items/phone/apple/b.jpg';
-        $data['pictures'][2]['title'] = '银白色';
-        $data['pictures'][3]['src'] = 'Common/images/items/phone/apple/p.jpg';
-        $data['pictures'][3]['title'] = '玫瑰金';
+
+    public function testUpdate(){
+        $items = M('items');
+        $data['params'][0]['name'] = '品牌1';
+        $data['params'][0]['value'] = '小米2';
+        $data['params'][1]['name'] = '型号';
+        $data['params'][1]['value'] = 'MI 5';
+        $data['params'][2]['name'] = '屏幕尺寸';
+        $data['params'][2]['value'] = '5.15英寸';
+        $data['score'] = 'set';
+        $items->where(array('id' => 2))->save($data);
     }
 }

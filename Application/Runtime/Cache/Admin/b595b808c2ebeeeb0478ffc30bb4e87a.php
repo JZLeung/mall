@@ -57,7 +57,7 @@
                   <a href="#"><i class="fa fa-th-large"></i> 商品列表</a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-plus"></i> 添加商品</a>
+                  <a href="Admin/Index/item_add"><i class="fa fa-plus"></i> 添加商品</a>
                 </li>
                 <li>
                   <a href="#"><i class="fa fa-list-alt"></i> 广告设置<span class="fa arrow"></span></a>
@@ -95,7 +95,10 @@
         </div>
       </div>
     </nav>
-
+<script src="/mall/Public/Admin/sb/js/jquery.min.js"></script>
+  <script src="/mall/Public/Admin/sb/js/bootstrap.min.js"></script>
+  <script src="/mall/Public/Admin/sb/js/metisMenu.min.js"></script>
+  <script src="/mall/Public/Admin/sb/js/sb-admin-2.js"></script>
     <!-- begin of the content -->
     <div id="page-wrapper">
       <div class="row">
@@ -198,7 +201,3 @@
     <!-- end of the content -->
     <!-- end of _header_.html -->
   </div>
-  <script src="/mall/Public/Admin/sb/js/jquery.min.js"></script>
-  <script src="/mall/Public/Admin/sb/js/bootstrap.min.js"></script>
-  <script src="/mall/Public/Admin/sb/js/metisMenu.min.js"></script>
-  <script src="/mall/Public/Admin/sb/js/sb-admin-2.js"></script>

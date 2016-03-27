@@ -17,7 +17,9 @@ class IndexController extends Controller {
             cookie('admin', $admin, 600);
             $this->show();
         }
-    	
+    }
 
+    public function item_add(){
+        $this->display();
     }
 }
