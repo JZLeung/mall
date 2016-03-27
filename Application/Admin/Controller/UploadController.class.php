@@ -23,18 +23,27 @@ class UploadController extends Controller {
 		//print_r($upload);
 
 		$info = $upload->upload();
-
+		$isEditor = I('post.editor', false);
+		//echo $isEditor;
 		if(!$info) {// 上传错误提示错误信息
 			//$this->error($upload->getError());
 			//echo $upload->getError();
-			$data['error'] = $upload->getError();
+			$data['msg'] = $upload->getError();
+			$data['success'] = false;
 			$this->ajaxReturn($data);
 		}else{// 上传成功
 			//print_r($info);
 			//$i = 0;
-			$data['path'] = '/Uploads/Images/';
+			//$data['path'] = '/Uploads/Images/';
+			$root = '/Uploads/Images/';
+			if ($isEditor == true) {
+				$root = '/mall'.$root;
+			}
+			$data['msg'] = 'upload success';
+			$data['success'] = true;
+			$data['editor'] = $isEditor;
 			foreach ($info as $key => $value) {
-				$data['filename'] = $value['savepath'].$value['savename'];
+				$data['file_path'] = $root.$value['savepath'].$value['savename'];
 			}
 			$this->ajaxReturn($data);
 		}
