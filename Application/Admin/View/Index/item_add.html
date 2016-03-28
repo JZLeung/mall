@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
     <style>
         .list-group-item{margin-bottom: 5px;}
+        td,th{text-align: center;}
+        .delcolbtn{margin-left: 10px}
     </style>
 </head>
 
@@ -129,31 +131,66 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">套餐/组合</div>
                     <div class="panel-body">
-                        <div class="form-inline">
-                          增加新的配置：
-                          <div class="input-group">
-                            <input type="text" class="form-control" id="newColName">
-                            <div class="input-group-addon btn btn-success" id="addCol"><i class="fa fa-plus"></i></div>
-                          </div>
+                        <div id="configures"></div>
+                        <div class="row text-center">
+                            <button class="btn btn-success" id="newConfig"><i class="fa fa-plus"></i></button>
                         </div>
-                        <table class="table table-striped table-hover" id="table">
+                        <div id="configTem" class="hidden">
+                            <div class="well config">
+                                <div class="form-inline">
+                                    名字：<input type="text" class="form-control">
+                                    <div class="config-items">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="panel panel-default">
+                    <div class="panel-heading">套餐/组合</div>
+                    <div class="panel-body">
+                        <div class="form-inline" style="margin-bottom: 10px;">
+                            
+                            <div class="input-group">
+                                <div class="input-group-addon">增加新的配置</div>
+                                <input type="text" class="form-control" id="newColName">
+                                <div class="input-group-addon btn btn-success" id="addCol"><i class="fa fa-plus"></i></div>
+                            </div>
+                        </div>
+                        <div class="form-inline" style="margin-bottom: 10px;">
+                            给配置
+                            <select id="configSelector">
+                                <option value="">请添加新的配置</option>
+                            </select>
+                            添加新配置项
+                            <input type="text" class="form-control" id="newDataName">
+                            <button class="btn btn-success" id="addData"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover" id="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>操作</th>
+                                    <th>价格</th>
+                                    <th>
+                                        操作
+                                        <button class="btn btn-success btn-sm" id="addRow"><i class="fa fa-plus"></i></button>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th>1</th>
-                                    <th>
-
-                                    </th>
+                                    <th scope="row">1</th>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm delbtn"><i class="fa fa-trash-o"></i></button>
+                                        <button class="btn btn-primary btn-sm resetbtn"><i class="fa fa-repeat"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         详细内容
@@ -191,8 +228,7 @@
                 picshow = $('#picshow'),
                 piclist = $('#piclist'),
                 delImg = $("#delImg"),
-                addImg = $("#addImg"),
-                table = $("#table");
+                addImg = $("#addImg");
 
             var default_img = '__PUBLIC__/Common/images/default.png';
 
@@ -333,29 +369,123 @@
                 });
                 //return
             }
-            var rows = 0;
+            //根据className寻找父元素
+            function findParentByClassName(className, childNode){
+                var p = $(childNode).parent();
+                console.log(p)
+                while(!p.hasClass(className)){
+                    p = p.parent();
+                    console.log(p)
+                }
+                return p;
+            }
+            //根据TagName寻找父元素
+            function findParentByTagName(tagName, childNode){
+                var p = $(childNode).parent();
+                console.log(p)
+                while(p[0].tagName.toLowerCase() != tagName){
+                    p = p.parent();
+                    console.log(p)
+                }
+                return p;
+            }
+            var $newConfig = $('#configTem').html(),
+                $configs = $("#configures");
+            $('#newConfig').click(function(event) {
+                $configs.append($newConfig);
+
+            });
+        });
+
+        /*$(document).ready(function() {
+            //表格操作
+            var rows = 1,
+                controlTd = '<td><button class="btn btn-danger btn-sm delbtn"><i class="fa fa-trash-o"></i></button><button class="btn btn-primary btn-sm resetbtn"><i class="fa fa-repeat"></i></button></td>',
+                delColBtn = '<button class="btn btn-danger btn-sm delcolbtn"><i class="fa fa-trash-o"></i></button>'
+            var table = $("#table"),
+                newCol = $('#newColName'),
+                newData = $('#newDataName'),
+                tbody = table.find('tbody'),
+                thead = table.find('thead'),
+                config = $("#configSelector");
             //配置表格
+
             //新增一行
             $('#addRow').click(function(e){
                 var tr = table.find('tbody > tr');
                 if (tr.length == 0) {
-                    tr = $('<tr>').append($('<th>').text(rows));
+                    tr = $('<tr>').append($('<th>'));
+                    tr.append('<td><input type="text"></td>'+controlTd)
                 }else{
                     tr = tr.last().clone();
                 }
+                tr.find('th').first().text(++rows);
                 table.append(tr);
             })
 
             //新增一列
             $('#addCol').click(function(e){
+                var name = newCol.val(),
+                    //data = newData.val(),
+                    tds = '';
+                if ($.trim(name) == '') {alert('请输入配置名');return;}
+
+                //if ($.trim(data) == '') {alert('请输入数据名');return;}
                 //增加头
-                table.find('thead > tr').append($('<td>').text($('#newColName').val()));
+                //table.find('thead > tr').append($('<td>').text(name));
+                $('<th>').text(name).data('name', name).append(delColBtn).insertBefore(thead.find('th').last())
+
                 //给每一行都增加一列
-                table.find('tbody > tr').each(function(index) {
-                    $(this).append('<td><select name="jjj"'+index+' id=""></select></td>');
+                tbody.find('tr').each(function(index) {
+
+                    //$(this).append('<td><select name=---"jjj"'+index+' id=""><option value="5-2">5-2</option></select></td>');
+                    $('<td><select name="'+data+'" id=""><option value="5-2">5-2</option></select></td>').insertBefore($(this).find('td').last())
                 });
-            })
-        });
+            });
+            //根据TagName寻找父元素
+            function findParentByTagName(tagName, childNode){
+                var p = $(childNode).parent();
+                console.log(p)
+                while(p[0].tagName.toLowerCase() != tagName){
+                    p = p.parent();
+                    console.log(p)
+                }
+                return p;
+            }
+            //重置左边的数字
+            function resetNumber(){
+                table.find('tbody > tr').each(function(index, el) {
+                    $(this).find('th').first().text(index + 1);
+                });
+            }
+            //删除一行
+            table.on('click', '.delbtn', function(event) {
+                event.preventDefault();
+                if (confirm('确认要删除该行吗？')) {
+                    var p = findParentByTagName('tr', this);
+                    p.remove();
+                    resetNumber();
+                    rows--;
+                }
+            });
+            //重置一行
+            table.on('click', '.resetbtn', function(event) {
+                event.preventDefault();
+                var p = findParentByTagName('tr', this);
+                p.find('input').each(function(index, el) {
+                    this.value = '';
+                });
+            });
+            table.on('click', '.delcolbtn', function(event) {
+                event.preventDefault();
+                var ind = $(this).index();
+                thead.find('tr').children().eq(ind+1).remove();
+                //table.find('thead tr').children().eq(ind).remove();
+                tbody.find('tr').each(function(index, el) {
+                    $(this).find('td').eq(ind-1).remove();
+                });
+            });
+        });*/
     </script>
 </div>
 </body>
