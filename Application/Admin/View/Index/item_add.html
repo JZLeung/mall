@@ -67,7 +67,7 @@
                                     <!-- <span class="btn btn-success fileinput-button">
                                         <i class="fa fa-plus"></i>
                                         <span>Add files...</span>
-                                        
+
                                     </span> -->
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
 	                                        <option value="5-2">5-2</option>
 	                                    </select></div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,29 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">套餐/组合</div>
                     <div class="panel-body">
-                        
+                        <div class="form-inline">
+                          增加新的配置：
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="newColName">
+                            <div class="input-group-addon btn btn-success" id="addCol"><i class="fa fa-plus"></i></div>
+                          </div>
+                        </div>
+                        <table class="table table-striped table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -169,7 +191,8 @@
                 picshow = $('#picshow'),
                 piclist = $('#piclist'),
                 delImg = $("#delImg"),
-                addImg = $("#addImg");
+                addImg = $("#addImg"),
+                table = $("#table");
 
             var default_img = '__PUBLIC__/Common/images/default.png';
 
@@ -219,7 +242,7 @@
                 event.preventDefault();
                 var id = $(this).prev().data('pid');
                 var del = piclist.find('img[data-pid='+id+']');
-                    
+
                 if (del.length == 0) {alert('没有可以删除的图片');return;}
                 del.remove();
                 itemData['pic'][id] = null;
@@ -249,7 +272,7 @@
                         //var $da = $(data).find('#info');
                         data = $.parseJSON(data);
                         console.log(data.filename);
-                        //$('#upload').replaceWith('<input type="file" name="myFile" id="upload">'); 
+                        //$('#upload').replaceWith('<input type="file" name="myFile" id="upload">');
                     }
                 });
             });*/
@@ -258,7 +281,7 @@
             $fileupload.fileupload({
                 url: '../Upload/upload',
                 dataType: 'json',
-                done: function (e, data) { 
+                done: function (e, data) {
                     console.log(data.result);
                     var fileinfo = data.result;
                     var filepath = '__ROOT__'+fileinfo['file_path'];
@@ -300,7 +323,7 @@
                     if (name && value) {
                         itemData[name] = value;
                     }
-                    
+
                 });
                 itemData['pic'] = [];
                 piclist.find('img').each(function(index, el) {
@@ -308,8 +331,30 @@
                         title = this.alt;
                     itemData['pic'].push({'src':src, 'title': title});
                 });
-                //return 
+                //return
             }
+            var rows = 0;
+            //配置表格
+            //新增一行
+            $('#addRow').click(function(e){
+                var tr = table.find('tbody > tr');
+                if (tr.length == 0) {
+                    tr = $('<tr>').append($('<th>').text(rows));
+                }else{
+                    tr = tr.last().clone();
+                }
+                table.append(tr);
+            })
+
+            //新增一列
+            $('#addCol').click(function(e){
+                //增加头
+                table.find('thead > tr').append($('<td>').text($('#newColName').val()));
+                //给每一行都增加一列
+                table.find('tbody > tr').each(function(index) {
+                    $(this).append('<td><select name="jjj"'+index+' id=""></select></td>');
+                });
+            })
         });
     </script>
 </div>
