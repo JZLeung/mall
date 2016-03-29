@@ -20,6 +20,8 @@
         .list-group-item{margin-bottom: 5px;}
         td,th{text-align: center;}
         .delcolbtn{margin-left: 10px}
+        .config-items{margin-top: 15px;}
+        .config-items a{margin-right: 5px;}
     </style>
 </head>
 
@@ -132,6 +134,14 @@
                     <div class="panel-heading">套餐/组合</div>
                     <div class="panel-body">
                         <div id="configures"></div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6" >
+                                已选择组合: <span id="selectedCon"></span>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                价格为：<input type="text" class="">
+                            </div>
+                        </div>
                         <div class="row text-center">
                             <button class="btn btn-success" id="newConfig"><i class="fa fa-plus"></i></button>
                         </div>
@@ -139,9 +149,14 @@
                             <div class="well config">
                                 <div class="form-inline">
                                     名字：<input type="text" class="form-control">
-                                    <div class="config-items">
-                                        
+                                    增加新项：
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
                                     </div>
+                                </div>
+                                <div class="config-items">
+                                    <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -372,29 +387,54 @@
             //根据className寻找父元素
             function findParentByClassName(className, childNode){
                 var p = $(childNode).parent();
-                console.log(p)
                 while(!p.hasClass(className)){
                     p = p.parent();
-                    console.log(p)
                 }
                 return p;
             }
             //根据TagName寻找父元素
             function findParentByTagName(tagName, childNode){
                 var p = $(childNode).parent();
-                console.log(p)
                 while(p[0].tagName.toLowerCase() != tagName){
                     p = p.parent();
-                    console.log(p)
                 }
                 return p;
             }
+            //找到已选择的配置项
+            function selectConfigures(){
+                var d = [],i = [];
+                $configs.find('.btn-primary').each(function(index,val) {
+                    d.push($(this).text());
+                    i.push($(this).index());
+                });
+                return [d.join(','), i.join(',')];
+            }
             var $newConfig = $('#configTem').html(),
-                $configs = $("#configures");
+                $configs = $("#configures"),
+                $selectedCon = $('#selectedCon')
             $('#newConfig').click(function(event) {
                 $configs.append($newConfig);
-
             });
+            //新增配置项
+            $configs.on('click', '.addCon', function(event) {
+                var $a = $('<a>').addClass('btn btn-default configbtn'),
+                    p = findParentByClassName('config', this),
+                    v = $(this).prev().val();
+                p.find('.config-items').append($a.text(v));
+            })
+
+            //选择配置项
+            $configs.on('click', '.configbtn', function(event) {
+                $(this).addClass('btn-primary').siblings().removeClass('btn-primary');
+                var sc = selectConfigures();
+                $selectedCon.text(sc[0]);
+                $selectedCon.data('data', sc[1]);
+                console.log(sc);
+            })
+            //删除配置项
+            $configs.on('click', '.delcon', function(event) {
+                $(this).siblings('.btn-primary').remove()
+            })
         });
 
         /*$(document).ready(function() {
