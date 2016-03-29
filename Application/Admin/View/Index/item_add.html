@@ -133,31 +133,58 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">套餐/组合</div>
                     <div class="panel-body">
-                        <div id="configures"></div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6" >
-                                已选择组合: <span id="selectedCon"></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                价格为：<input type="text" class="">
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <button class="btn btn-success" id="newConfig"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <div id="configTem" class="hidden">
-                            <div class="well config">
-                                <div class="form-inline">
-                                    名字：<input type="text" class="form-control">
-                                    增加新项：
-                                    <div class="input-group">
-                                        <input type="text" class="form-control">
-                                        <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                        <div class="col-lg-8">
+                            <div id="configures">
+                                <div class="well config">
+                                    <div class="form-inline">
+                                        名字：<input type="text" class="form-control configname">
+                                        增加新项：
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                                        </div>
+                                        <a class="btn btn-danger delcons"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                    <div class="config-items">
+                                        <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
                                     </div>
                                 </div>
-                                <div class="config-items">
-                                    <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i></a>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6" >
+                                    已选择组合: <span id="selectedCon"></span>
                                 </div>
+                                <div class="col-lg-6 col-md-6 form-inline">
+                                    价格为：
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <div class="input-group-addon btn btn-success" id="addPrice"><i class="fa fa-plus"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center btn btn-success btn-block" id="newConfig" style="margin-top: 10px">
+                                <i class="fa fa-plus"></i>  新增配置
+                            </div>
+                            <div id="configTem" class="hidden">
+                                <div class="well config">
+                                    <div class="form-inline">
+                                        名字：<input type="text" class="form-control configname">
+                                        增加新项：
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                                        </div>
+                                        <a class="btn btn-danger delcons"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                    <div class="config-items">
+                                        <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="well" id="priceData">
+                                <button class="btn btn-info btn-block" id="getData">获取数据</button>
                             </div>
                         </div>
                     </div>
@@ -405,13 +432,23 @@
                 var d = [],i = [];
                 $configs.find('.btn-primary').each(function(index,val) {
                     d.push($(this).text());
-                    i.push($(this).index());
+                    i.push($(this).index()-1);
                 });
                 return [d.join(','), i.join(',')];
             }
+
+
+
+
+            //配置项配置区域
             var $newConfig = $('#configTem').html(),
                 $configs = $("#configures"),
-                $selectedCon = $('#selectedCon')
+                $selectedCon = $('#selectedCon'),
+                $addPrice = $('#addPrice'),
+                $priceData = $("#priceData")
+
+            var configName, configData;
+            //新增配置
             $('#newConfig').click(function(event) {
                 $configs.append($newConfig);
             });
@@ -427,14 +464,48 @@
             $configs.on('click', '.configbtn', function(event) {
                 $(this).addClass('btn-primary').siblings().removeClass('btn-primary');
                 var sc = selectConfigures();
-                $selectedCon.text(sc[0]);
-                $selectedCon.data('data', sc[1]);
+                configName = sc[0];
+                configData = sc[1];
+                $selectedCon.text(configName);
+                $selectedCon.data('data', configData);
                 console.log(sc);
             })
             //删除配置项
             $configs.on('click', '.delcon', function(event) {
                 $(this).siblings('.btn-primary').remove()
             })
+            //添加价格
+            $addPrice.click(function(event) {
+                var value = $(this).prev().val();
+                var child = $priceData.find('div[data-name="'+configData+'"]');
+                if (child.length == 0) {
+                    var pri = $('<div>').text('配置项 '+configName+" 价格为 : "+value);
+                    pri.attr('data-name', configData)
+                    pri.appendTo($priceData);
+                }else{
+                    child.text('配置项 '+configName+" 价格为 : "+value);
+                }
+                
+            });
+
+            $('#getData').click(function(event) {
+                var prices = {},allConfig = {};
+                $priceData.find('div').each(function(index, el) {
+                    var name = $(this).attr('data-name'),
+                        value = $(this).text();
+                    prices[name] = value; 
+                });
+                $configs.find('.config').each(function(index1, el) {
+                    allConfig[index1] = {};
+                    allConfig[index1]['name'] = $(this).find('.configname').val();
+                    allConfig[index1]['value'] = {};
+                    $(this).find('.configbtn').each(function(index2, el) {
+                        allConfig[index1]['value'][index2] = $(this).text();
+                    });
+                });
+                console.log(prices)
+                console.log(allConfig)
+            });
         });
 
         /*$(document).ready(function() {
