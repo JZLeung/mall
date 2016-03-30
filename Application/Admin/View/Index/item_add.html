@@ -60,19 +60,13 @@
                                     <div class="form-group">
                                         <label>描述</label>
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Enter text" data-pid="">
+                                            <input class="form-control" placeholder="Enter text" data-pid="" id="imgdesc">
                                             <div class="input-group-addon btn btn-danger" id="delImg">
                                                 <i class="fa fa-trash-o"></i>
                                             </div>
                                         </div>
                                         <p class="help-block">图片描述</p>
                                     </div>
-                                    <!-- <input type="file" id="uploadfile" name="uploadfile"> -->
-                                    <!-- <span class="btn btn-success fileinput-button">
-                                        <i class="fa fa-plus"></i>
-                                        <span>Add files...</span>
-
-                                    </span> -->
                                 </div>
                             </div>
 
@@ -86,7 +80,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>简介</label>
-                                    <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
+                                    <textarea class="form-control" rows="3" name="subscribe" id="desc"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>价格</label>
@@ -189,6 +183,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">参数信息</div>
+                    <div class="panel-body">
+                        <div class="well params" id="params">
+
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="form-inline">
+                            <label for="">添加参数 </label>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">参数名</span>
+                                <input type="text" class="form-control" placeholder="参数名">
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">参数值</span>
+                                <input type="text" class="form-control" placeholder="参数值">
+                            </div>
+                            <button id="addParam" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
                 <!-- <div class="panel panel-default">
                     <div class="panel-heading">套餐/组合</div>
                     <div class="panel-body">
@@ -238,6 +254,15 @@
                         详细内容
                     </div>
                     <div class="panel-body">
+                        <div class="form-group">
+                            <label>内容宽度</label>
+                            <select name="content" id="">
+                                <option value="s">小（750px）</option>
+                                <option value="m">中（900px）</option>
+                                <option value="l">宽（1150px）</option>
+                            </select>
+                            <p class="help-block">详细信息展示的宽度（影响图片的显示质量）</p>
+                        </div>
                         <!-- 编辑器 -->
                         <textarea id="editor" placeholder="Balabala"></textarea>
                     </div>
@@ -278,6 +303,7 @@
             //提交表单
             btn.on('click', function(event) {
                 event.preventDefault();
+                getAllData();
                 $.post('../Items/index', {data: itemData}, function(data, textStatus, xhr) {
                     console.log(data);
                 });
@@ -286,20 +312,6 @@
                 return false;
             });
 
-            //保存数据
-            /*$('#form').on('change', 'input,textarea', function(event) {
-                event.preventDefault();
-                var name = this.name,
-                    value = this.value;
-                if (name == "pictitle") {
-                    var id = $(this).data('pid');
-                    itemData['pic'] || (itemData['pic'] = {});
-                    itemData['pic'][id] || (itemData['pic'][id] = {});
-                    itemData['pic'][id]['title'] = value;
-                    piclist.find('img[data-pid="'+id+'"]').attr('alt', value);
-                }else
-                    itemData[name] = value;
-            });*/
 
             //选择图片
             function selectImg(img){
@@ -314,6 +326,11 @@
             piclist.on('click', 'img', function(event) {
                 event.preventDefault();
                 selectImg(this)
+            });
+            $('#imgdesc').on('blur', function(event) {
+                event.preventDefault();
+                var img = piclist.find('img[data-pid='+$(this).data('pid')+']')[0];
+                img.alt = this.value;
             });
 
             //删除图片
@@ -333,28 +350,6 @@
                 }
             });
 
-            /*addImg.on('click', function(event) {
-                event.preventDefault();
-                var img = document.createElement('img');
-                img.src = default_img;
-                $(img).data('pid', pid).addClass('img-thumbnail list-group-item').insertBefore($(this));
-                pid++;
-                selectImg(img);
-            });*/
-            /*$('#uploadfile').change(function(event) {
-                $.ajaxFileUpload({
-                    type:'post',
-                    secureuri:false,
-                    url:'../Upload/upload',
-                    fileElementId : 'uploadfile',
-                    success:function(data){
-                        //var $da = $(data).find('#info');
-                        data = $.parseJSON(data);
-                        console.log(data.filename);
-                        //$('#upload').replaceWith('<input type="file" name="myFile" id="upload">');
-                    }
-                });
-            });*/
 
             //异步上传图片
             $fileupload.fileupload({
@@ -364,20 +359,13 @@
                     console.log(data.result);
                     var fileinfo = data.result;
                     var filepath = '__ROOT__'+fileinfo['file_path'];
-                        //id = $fileupload.data('pid');
-
-                    //if (id == undefined) {
-                        var img = document.createElement('img');
-                        img.src = filepath;
-                        var $img = $(img).attr('data-pid', pid).addClass('img-thumbnail list-group-item');
-                        //piclist.append($img);
-                        selectImg(img);
-                        $img.insertBefore(addImg);
-                        pid++;
-                    /*}else{
-                        piclist.find('img').eq(id-1).attr('src', filepath);
-                        picshow.find('img').attr('src', filepath);
-                    }*/
+                    var img = document.createElement('img');
+                    img.src = filepath;
+                    var $img = $(img).attr('data-pid', pid).addClass('img-thumbnail list-group-item');
+                    //piclist.append($img);
+                    selectImg(img);
+                    $img.insertBefore(addImg);
+                    pid++;
                 }
             })
 
@@ -394,23 +382,7 @@
                 },
                 //optional options
             });
-            //获取表单的所有数据
-            function getItemData(){
-                $("#form").find('input,select,textarea').each(function(index, el) {
-                    var name = this.name,
-                        value = this.value;
-                    if (name && value) {
-                        itemData[name] = value;
-                    }
-
-                });
-                itemData['pic'] = [];
-                piclist.find('img').each(function(index, el) {
-                    var src = this.src,
-                        title = this.alt;
-                    itemData['pic'].push({'src':src, 'title': title});
-                });
-            }
+            
             //根据className寻找父元素
             function findParentByClassName(className, childNode){
                 var p = $(childNode).parent();
@@ -452,6 +424,12 @@
             $('#newConfig').click(function(event) {
                 $configs.append($newConfig);
             });
+            //删除配置
+            $configs.on('click', '.delcons', function(event) {
+                event.preventDefault();
+                var p = findParentByClassName('config', this);
+                p.remove();
+            });
             //新增配置项
             $configs.on('click', '.addCon', function(event) {
                 var $a = $('<a>').addClass('btn btn-default configbtn'),
@@ -479,23 +457,48 @@
                 var value = $(this).prev().val();
                 var child = $priceData.find('div[data-name="'+configData+'"]');
                 if (child.length == 0) {
-                    var pri = $('<div>').text('配置项 '+configName+" 价格为 : "+value);
-                    pri.attr('data-name', configData)
+                    var pri = $('<div>').text('配置项 '+configName+" 价格为 : ");
+                    pri.attr('data-name', configData).append($('<span>').text(value));
                     pri.appendTo($priceData);
                 }else{
-                    child.text('配置项 '+configName+" 价格为 : "+value);
+                    child.text('配置项 '+configName+" 价格为 : ");
+                    child.append($('<span>').text(value));
                 }
                 
             });
+            //获取表单的所有数据
+            function getItemData(){
+                $("#form").find('input,select,textarea').each(function(index, el) {
+                    var name = this.name,
+                        value = this.value;
+                    if (name && value) {
+                        itemData[name] = value;
+                    }
 
-            $('#getData').click(function(event) {
-                var prices = {},allConfig = {};
+                });
+            }
+            function getImages(){
+                itemData['pictures'] = [];
+                piclist.find('img').each(function(index, el) {
+                    var src = this.src,
+                        title = this.alt;
+                    itemData['pictures'].push({'src':src, 'title': title});
+                });
+            }
+            var prices = {},allConfig = {};
+            function getPriceData(){
+                prices = {},allConfig = {};
+                var allc = $configs.find('.config');
+                    length = allc.length;
                 $priceData.find('div').each(function(index, el) {
                     var name = $(this).attr('data-name'),
-                        value = $(this).text();
-                    prices[name] = value; 
+                        value = $(this).find('span').text();
+                    if (name.split(',').length == length) {
+                        prices[name] = value; 
+                    }
+                    
                 });
-                $configs.find('.config').each(function(index1, el) {
+                allc.each(function(index1, el) {
                     allConfig[index1] = {};
                     allConfig[index1]['name'] = $(this).find('.configname').val();
                     allConfig[index1]['value'] = {};
@@ -503,9 +506,27 @@
                         allConfig[index1]['value'][index2] = $(this).text();
                     });
                 });
+                itemData['prices'] = prices;
+                itemData['attr'] = allConfig;
                 console.log(prices)
                 console.log(allConfig)
+            }
+            $('#getData').click(function(event) {
+                getPriceData()
             });
+
+            function getAllData(){
+                //获取基本信息
+                getItemData();
+                //获取图片信息
+                getImages();
+                //获取价格信息
+                getPriceData();
+                //获取编辑器信息
+                var v = editor.getValue()
+                itemData['detail'] = v;
+                console.log(itemData);
+            }
         });
 
         /*$(document).ready(function() {

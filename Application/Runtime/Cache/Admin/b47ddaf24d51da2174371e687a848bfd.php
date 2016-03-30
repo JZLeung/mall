@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="/mall/Public/Common/css/jquery.fileupload.css">
     <style>
         .list-group-item{margin-bottom: 5px;}
+        td,th{text-align: center;}
+        .delcolbtn{margin-left: 10px}
+        .config-items{margin-top: 15px;}
+        .config-items a{margin-right: 5px;}
     </style>
 </head>
 
@@ -134,19 +138,13 @@
                                     <div class="form-group">
                                         <label>描述</label>
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Enter text" data-pid="">
+                                            <input class="form-control" placeholder="Enter text" data-pid="" id="imgdesc">
                                             <div class="input-group-addon btn btn-danger" id="delImg">
                                                 <i class="fa fa-trash-o"></i>
                                             </div>
                                         </div>
                                         <p class="help-block">图片描述</p>
                                     </div>
-                                    <!-- <input type="file" id="uploadfile" name="uploadfile"> -->
-                                    <!-- <span class="btn btn-success fileinput-button">
-                                        <i class="fa fa-plus"></i>
-                                        <span>Add files...</span>
-                                        
-                                    </span> -->
                                 </div>
                             </div>
 
@@ -160,7 +158,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>简介</label>
-                                    <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
+                                    <textarea class="form-control" rows="3" name="subscribe" id="desc"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>价格</label>
@@ -198,7 +196,7 @@
 	                                        <option value="5-2">5-2</option>
 	                                    </select></div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -207,14 +205,142 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">套餐/组合</div>
                     <div class="panel-body">
-                        
+                        <div class="col-lg-8">
+                            <div id="configures">
+                                <div class="well config">
+                                    <div class="form-inline">
+                                        名字：<input type="text" class="form-control configname">
+                                        增加新项：
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                                        </div>
+                                        <a class="btn btn-danger delcons"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                    <div class="config-items">
+                                        <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6" >
+                                    已选择组合: <span id="selectedCon"></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 form-inline">
+                                    价格为：
+                                    <div class="input-group">
+                                        <input type="text" class="form-control">
+                                        <div class="input-group-addon btn btn-success" id="addPrice"><i class="fa fa-plus"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center btn btn-success btn-block" id="newConfig" style="margin-top: 10px">
+                                <i class="fa fa-plus"></i>  新增配置
+                            </div>
+                            <div id="configTem" class="hidden">
+                                <div class="well config">
+                                    <div class="form-inline">
+                                        名字：<input type="text" class="form-control configname">
+                                        增加新项：
+                                        <div class="input-group">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                                        </div>
+                                        <a class="btn btn-danger delcons"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                    <div class="config-items">
+                                        <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="well" id="priceData">
+                                <button class="btn btn-info btn-block" id="getData">获取数据</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">参数信息</div>
+                    <div class="panel-body">
+                        <div class="well params" id="params">
+
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="form-inline">
+                            <label for="">添加参数 </label>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">参数名</span>
+                                <input type="text" class="form-control" placeholder="参数名">
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">参数值</span>
+                                <input type="text" class="form-control" placeholder="参数值">
+                            </div>
+                            <button id="addParam" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="panel panel-default">
+                    <div class="panel-heading">套餐/组合</div>
+                    <div class="panel-body">
+                        <div class="form-inline" style="margin-bottom: 10px;">
+
+                            <div class="input-group">
+                                <div class="input-group-addon">增加新的配置</div>
+                                <input type="text" class="form-control" id="newColName">
+                                <div class="input-group-addon btn btn-success" id="addCol"><i class="fa fa-plus"></i></div>
+                            </div>
+                        </div>
+                        <div class="form-inline" style="margin-bottom: 10px;">
+                            给配置
+                            <select id="configSelector">
+                                <option value="">请添加新的配置</option>
+                            </select>
+                            添加新配置项
+                            <input type="text" class="form-control" id="newDataName">
+                            <button class="btn btn-success" id="addData"><i class="fa fa-plus"></i></button>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>价格</th>
+                                    <th>
+                                        操作
+                                        <button class="btn btn-success btn-sm" id="addRow"><i class="fa fa-plus"></i></button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm delbtn"><i class="fa fa-trash-o"></i></button>
+                                        <button class="btn btn-primary btn-sm resetbtn"><i class="fa fa-repeat"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         详细内容
                     </div>
                     <div class="panel-body">
+                        <div class="form-group">
+                            <label>内容宽度</label>
+                            <select name="content" id="">
+                                <option value="s">小（750px）</option>
+                                <option value="m">中（900px）</option>
+                                <option value="l">宽（1150px）</option>
+                            </select>
+                            <p class="help-block">详细信息展示的宽度（影响图片的显示质量）</p>
+                        </div>
                         <!-- 编辑器 -->
                         <textarea id="editor" placeholder="Balabala"></textarea>
                     </div>
@@ -247,13 +373,15 @@
                 picshow = $('#picshow'),
                 piclist = $('#piclist'),
                 delImg = $("#delImg"),
-                addImg = $("#addImg");
+                addImg = $("#addImg"),
+                table = $("#table");
 
             var default_img = '/mall/Public/Common/images/default.png';
 
             //提交表单
             btn.on('click', function(event) {
                 event.preventDefault();
+                getAllData();
                 $.post('../Items/index', {data: itemData}, function(data, textStatus, xhr) {
                     console.log(data);
                 });
@@ -262,20 +390,6 @@
                 return false;
             });
 
-            //保存数据
-            /*$('#form').on('change', 'input,textarea', function(event) {
-                event.preventDefault();
-                var name = this.name,
-                    value = this.value;
-                if (name == "pictitle") {
-                    var id = $(this).data('pid');
-                    itemData['pic'] || (itemData['pic'] = {});
-                    itemData['pic'][id] || (itemData['pic'][id] = {});
-                    itemData['pic'][id]['title'] = value;
-                    piclist.find('img[data-pid="'+id+'"]').attr('alt', value);
-                }else
-                    itemData[name] = value;
-            });*/
 
             //选择图片
             function selectImg(img){
@@ -291,13 +405,18 @@
                 event.preventDefault();
                 selectImg(this)
             });
+            $('#imgdesc').on('blur', function(event) {
+                event.preventDefault();
+                var img = piclist.find('img[data-pid='+$(this).data('pid')+']')[0];
+                img.alt = this.value;
+            });
 
             //删除图片
             delImg.on('click', function(event) {
                 event.preventDefault();
                 var id = $(this).prev().data('pid');
                 var del = piclist.find('img[data-pid='+id+']');
-                    
+
                 if (del.length == 0) {alert('没有可以删除的图片');return;}
                 del.remove();
                 itemData['pic'][id] = null;
@@ -309,51 +428,22 @@
                 }
             });
 
-            /*addImg.on('click', function(event) {
-                event.preventDefault();
-                var img = document.createElement('img');
-                img.src = default_img;
-                $(img).data('pid', pid).addClass('img-thumbnail list-group-item').insertBefore($(this));
-                pid++;
-                selectImg(img);
-            });*/
-            /*$('#uploadfile').change(function(event) {
-                $.ajaxFileUpload({
-                    type:'post',
-                    secureuri:false,
-                    url:'../Upload/upload',
-                    fileElementId : 'uploadfile',
-                    success:function(data){
-                        //var $da = $(data).find('#info');
-                        data = $.parseJSON(data);
-                        console.log(data.filename);
-                        //$('#upload').replaceWith('<input type="file" name="myFile" id="upload">'); 
-                    }
-                });
-            });*/
 
             //异步上传图片
             $fileupload.fileupload({
                 url: '../Upload/upload',
                 dataType: 'json',
-                done: function (e, data) { 
+                done: function (e, data) {
                     console.log(data.result);
                     var fileinfo = data.result;
                     var filepath = '/mall'+fileinfo['file_path'];
-                        //id = $fileupload.data('pid');
-
-                    //if (id == undefined) {
-                        var img = document.createElement('img');
-                        img.src = filepath;
-                        var $img = $(img).attr('data-pid', pid).addClass('img-thumbnail list-group-item');
-                        //piclist.append($img);
-                        selectImg(img);
-                        $img.insertBefore(addImg);
-                        pid++;
-                    /*}else{
-                        piclist.find('img').eq(id-1).attr('src', filepath);
-                        picshow.find('img').attr('src', filepath);
-                    }*/
+                    var img = document.createElement('img');
+                    img.src = filepath;
+                    var $img = $(img).attr('data-pid', pid).addClass('img-thumbnail list-group-item');
+                    //piclist.append($img);
+                    selectImg(img);
+                    $img.insertBefore(addImg);
+                    pid++;
                 }
             })
 
@@ -370,6 +460,90 @@
                 },
                 //optional options
             });
+            
+            //根据className寻找父元素
+            function findParentByClassName(className, childNode){
+                var p = $(childNode).parent();
+                while(!p.hasClass(className)){
+                    p = p.parent();
+                }
+                return p;
+            }
+            //根据TagName寻找父元素
+            function findParentByTagName(tagName, childNode){
+                var p = $(childNode).parent();
+                while(p[0].tagName.toLowerCase() != tagName){
+                    p = p.parent();
+                }
+                return p;
+            }
+            //找到已选择的配置项
+            function selectConfigures(){
+                var d = [],i = [];
+                $configs.find('.btn-primary').each(function(index,val) {
+                    d.push($(this).text());
+                    i.push($(this).index()-1);
+                });
+                return [d.join(','), i.join(',')];
+            }
+
+
+
+
+            //配置项配置区域
+            var $newConfig = $('#configTem').html(),
+                $configs = $("#configures"),
+                $selectedCon = $('#selectedCon'),
+                $addPrice = $('#addPrice'),
+                $priceData = $("#priceData")
+
+            var configName, configData;
+            //新增配置
+            $('#newConfig').click(function(event) {
+                $configs.append($newConfig);
+            });
+            //删除配置
+            $configs.on('click', '.delcons', function(event) {
+                event.preventDefault();
+                var p = findParentByClassName('config', this);
+                p.remove();
+            });
+            //新增配置项
+            $configs.on('click', '.addCon', function(event) {
+                var $a = $('<a>').addClass('btn btn-default configbtn'),
+                    p = findParentByClassName('config', this),
+                    v = $(this).prev().val();
+                p.find('.config-items').append($a.text(v));
+            })
+
+            //选择配置项
+            $configs.on('click', '.configbtn', function(event) {
+                $(this).addClass('btn-primary').siblings().removeClass('btn-primary');
+                var sc = selectConfigures();
+                configName = sc[0];
+                configData = sc[1];
+                $selectedCon.text(configName);
+                $selectedCon.data('data', configData);
+                console.log(sc);
+            })
+            //删除配置项
+            $configs.on('click', '.delcon', function(event) {
+                $(this).siblings('.btn-primary').remove()
+            })
+            //添加价格
+            $addPrice.click(function(event) {
+                var value = $(this).prev().val();
+                var child = $priceData.find('div[data-name="'+configData+'"]');
+                if (child.length == 0) {
+                    var pri = $('<div>').text('配置项 '+configName+" 价格为 : ");
+                    pri.attr('data-name', configData).append($('<span>').text(value));
+                    pri.appendTo($priceData);
+                }else{
+                    child.text('配置项 '+configName+" 价格为 : ");
+                    child.append($('<span>').text(value));
+                }
+                
+            });
             //获取表单的所有数据
             function getItemData(){
                 $("#form").find('input,select,textarea').each(function(index, el) {
@@ -378,17 +552,150 @@
                     if (name && value) {
                         itemData[name] = value;
                     }
-                    
+
                 });
-                itemData['pic'] = [];
+            }
+            function getImages(){
+                itemData['pictures'] = [];
                 piclist.find('img').each(function(index, el) {
                     var src = this.src,
                         title = this.alt;
-                    itemData['pic'].push({'src':src, 'title': title});
+                    itemData['pictures'].push({'src':src, 'title': title});
                 });
-                //return 
+            }
+            var prices = {},allConfig = {};
+            function getPriceData(){
+                prices = {},allConfig = {};
+                var allc = $configs.find('.config');
+                    length = allc.length;
+                $priceData.find('div').each(function(index, el) {
+                    var name = $(this).attr('data-name'),
+                        value = $(this).find('span').text();
+                    if (name.split(',').length == length) {
+                        prices[name] = value; 
+                    }
+                    
+                });
+                allc.each(function(index1, el) {
+                    allConfig[index1] = {};
+                    allConfig[index1]['name'] = $(this).find('.configname').val();
+                    allConfig[index1]['value'] = {};
+                    $(this).find('.configbtn').each(function(index2, el) {
+                        allConfig[index1]['value'][index2] = $(this).text();
+                    });
+                });
+                itemData['prices'] = prices;
+                itemData['attr'] = allConfig;
+                console.log(prices)
+                console.log(allConfig)
+            }
+            $('#getData').click(function(event) {
+                getPriceData()
+            });
+
+            function getAllData(){
+                //获取基本信息
+                getItemData();
+                //获取图片信息
+                getImages();
+                //获取价格信息
+                getPriceData();
+                //获取编辑器信息
+                var v = editor.getValue()
+                itemData['detail'] = v;
+                console.log(itemData);
             }
         });
+
+        /*$(document).ready(function() {
+            //表格操作
+            var rows = 1,
+                controlTd = '<td><button class="btn btn-danger btn-sm delbtn"><i class="fa fa-trash-o"></i></button><button class="btn btn-primary btn-sm resetbtn"><i class="fa fa-repeat"></i></button></td>',
+                delColBtn = '<button class="btn btn-danger btn-sm delcolbtn"><i class="fa fa-trash-o"></i></button>'
+            var table = $("#table"),
+                newCol = $('#newColName'),
+                newData = $('#newDataName'),
+                tbody = table.find('tbody'),
+                thead = table.find('thead'),
+                config = $("#configSelector");
+            //配置表格
+
+            //新增一行
+            $('#addRow').click(function(e){
+                var tr = table.find('tbody > tr');
+                if (tr.length == 0) {
+                    tr = $('<tr>').append($('<th>'));
+                    tr.append('<td><input type="text"></td>'+controlTd)
+                }else{
+                    tr = tr.last().clone();
+                }
+                tr.find('th').first().text(++rows);
+                table.append(tr);
+            })
+
+            //新增一列
+            $('#addCol').click(function(e){
+                var name = newCol.val(),
+                    //data = newData.val(),
+                    tds = '';
+                if ($.trim(name) == '') {alert('请输入配置名');return;}
+
+                //if ($.trim(data) == '') {alert('请输入数据名');return;}
+                //增加头
+                //table.find('thead > tr').append($('<td>').text(name));
+                $('<th>').text(name).data('name', name).append(delColBtn).insertBefore(thead.find('th').last())
+
+                //给每一行都增加一列
+                tbody.find('tr').each(function(index) {
+
+                    //$(this).append('<td><select name=---"jjj"'+index+' id=""><option value="5-2">5-2</option></select></td>');
+                    $('<td><select name="'+data+'" id=""><option value="5-2">5-2</option></select></td>').insertBefore($(this).find('td').last())
+                });
+            });
+            //根据TagName寻找父元素
+            function findParentByTagName(tagName, childNode){
+                var p = $(childNode).parent();
+                console.log(p)
+                while(p[0].tagName.toLowerCase() != tagName){
+                    p = p.parent();
+                    console.log(p)
+                }
+                return p;
+            }
+            //重置左边的数字
+            function resetNumber(){
+                table.find('tbody > tr').each(function(index, el) {
+                    $(this).find('th').first().text(index + 1);
+                });
+            }
+            //删除一行
+            table.on('click', '.delbtn', function(event) {
+                event.preventDefault();
+                if (confirm('确认要删除该行吗？')) {
+                    var p = findParentByTagName('tr', this);
+                    p.remove();
+                    resetNumber();
+                    rows--;
+                }
+            });
+            //重置一行
+            table.on('click', '.resetbtn', function(event) {
+                event.preventDefault();
+                var p = findParentByTagName('tr', this);
+                p.find('input').each(function(index, el) {
+                    this.value = '';
+                });
+            });
+            table.on('click', '.delcolbtn', function(event) {
+                event.preventDefault();
+                var ind = $(this).index();
+                thead.find('tr').children().eq(ind+1).remove();
+                //table.find('thead tr').children().eq(ind).remove();
+                tbody.find('tr').each(function(index, el) {
+                    $(this).find('td').eq(ind-1).remove();
+                });
+            });
+        });*/
     </script>
 </div>
 </body>
