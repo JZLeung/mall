@@ -10,16 +10,23 @@ class ItemsController extends Controller {
             $items = M('items');
             try {
                 $data = $items->where(array('id' => (int)$id))->find();
-                $prices = $this->getPrices((int)$id);
+                if ($data['prices'] == null) {
+                    $prices = $this->getPrices((int)$id);
+                }else {
+                    $prices = $data['prices'];
+                }
+
             } catch (Exception $e) {
                 $data = $e;
             }
         //}
-        
+
         //print_r($data);
         /*foreach($datas as $k => $v){
             $data = $datas[$k];
         }*/
+
+        $data['detail'] = htmlspecialchars_decode($data['detail']);
         $this->assign('data', $data);
         $this->assign('prices', $prices);
         $this->display('test');
@@ -37,7 +44,7 @@ class ItemsController extends Controller {
     public function getPrices($id){
         $sku = M('sku');
         $d = $sku->where(array('id'=>$id))->select();
-        for ($i=0; $i < count($d); $i++) { 
+        for ($i=0; $i < count($d); $i++) {
             $p[$d[$i]['name']]['price'] = $d[$i]['price'];
             $p[$d[$i]['name']]['stock'] = $d[$i]['stock'];
         }

@@ -264,7 +264,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">参数信息</div>
                     <div class="panel-body">
-                        <div class="well params" id="params">
+                        <div class="params" id="params">
 
                         </div>
                     </div>
@@ -273,11 +273,11 @@
                             <label for="">添加参数 </label>
                             <div class="form-group input-group">
                                 <span class="input-group-addon">参数名</span>
-                                <input type="text" class="form-control" placeholder="参数名">
+                                <input type="text" class="form-control" placeholder="参数名" id="paramName">
                             </div>
                             <div class="form-group input-group">
                                 <span class="input-group-addon">参数值</span>
-                                <input type="text" class="form-control" placeholder="参数值">
+                                <input type="text" class="form-control" placeholder="参数值" id="paramValue">
                             </div>
                             <button id="addParam" class="btn btn-success"><i class="fa fa-plus"></i></button>
                         </div>
@@ -460,7 +460,25 @@
                 },
                 //optional options
             });
-            
+
+            //添加参数
+            var $addParam = $('#addParam'),
+                $paramName = $('#paramName'),
+                $paramValue = $('#paramValue'),
+                $params = $('#params');
+            $addParam.click(function(e){
+                var name = $paramName.val(),
+                    value = $paramValue.val();
+                if ($.trim(name) == '' || $.trim(value) == '') {
+                    alert('参数项不能为空');return;
+                }
+                var span1 = $('<span>').text(name),
+                    span2 = $('<span>').text(value),
+                    param = $('<label>').addClass('param well').append(span1).append(':').append(span2);
+                $params.append(param);
+            })
+
+
             //根据className寻找父元素
             function findParentByClassName(className, childNode){
                 var p = $(childNode).parent();
@@ -542,7 +560,7 @@
                     child.text('配置项 '+configName+" 价格为 : ");
                     child.append($('<span>').text(value));
                 }
-                
+
             });
             //获取表单的所有数据
             function getItemData(){
@@ -572,9 +590,9 @@
                     var name = $(this).attr('data-name'),
                         value = $(this).find('span').text();
                     if (name.split(',').length == length) {
-                        prices[name] = value; 
+                        prices[name] = value;
                     }
-                    
+
                 });
                 allc.each(function(index1, el) {
                     allConfig[index1] = {};

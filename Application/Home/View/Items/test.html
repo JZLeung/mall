@@ -44,7 +44,7 @@
 					<ul>
 
 						<foreach name="data.pictures" item="pic">
-							<li><img src="__PUBLIC__/{$pic.src}" alt="{$pic.title}"></li>
+							<li><img src="{$pic.src}" alt="{$pic.title}"></li>
 						</foreach>
 						<!-- <li class="active"><img src="__PUBLIC__/Common/images/items/test/1.jpg" alt=""></li>
 						<li><img src="__PUBLIC__/Common/images/items/test/2.jpg" alt=""></li>
@@ -52,7 +52,7 @@
 					</ul>
 				</div>
 				<div class="pic-big left" id="picShow">
-					<img src="__PUBLIC__/{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
+					<img src="{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
 				</div>
 			</div>
 			<div class="right-docs left">
@@ -147,7 +147,7 @@
 			<div class="content-w">
 				<div class="params-detail clear">
 					<div class="left-img left">
-						<img src="__PUBLIC__/{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
+						<img src="{$data['pictures'][0]['src']}" alt="{$data['pictures'][0]['title']}">
 					</div>
 					<div class="right-params flex">
 						<foreach name="data.params" item="p">

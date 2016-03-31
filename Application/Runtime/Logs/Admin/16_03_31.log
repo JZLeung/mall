@@ -12,3 +12,93 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002265s ]
 INFO: [ app_end ] --END-- [ RunTime:0.002579s ]
 
+[ 2016-03-31T11:55:35+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000788s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001318s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
+[ 2016-03-31T11:55:35+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000692s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001251s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
+
+[ 2016-03-31T11:55:35+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000277s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000484s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
+
+[ 2016-03-31T11:55:36+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000879s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001534s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
+
+[ 2016-03-31T11:55:36+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000940s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
+
+[ 2016-03-31T11:55:36+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000411s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000719s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
+
+[ 2016-03-31T11:55:50+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000950s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001594s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+ERR: Failed to connect to: localhost:27017: ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
+[ 2016-03-31T11:56:06+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+ERR: Failed to connect to: localhost:27017: ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
+[ 2016-03-31T11:56:54+08:00 ] 192.168.1.131 /mall/Admin/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000262s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000499s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php ç¬¬ 17 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php ç¬¬ 18 è¡Œ.
+SQL: tp_mall.getCollection(user) [ RunTime:0.0000s ]
+SQL: tp_mall.user.find({"username":"admin"}).limit(1) [ RunTime:0.0001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000632s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000700s ]
+

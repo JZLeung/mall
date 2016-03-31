@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>添加商品 - 商城后台管理</title>
+    <title>编辑商品 - 商城后台管理</title>
 
     <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
     <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
@@ -24,6 +24,7 @@
         .config-items a{margin-right: 5px;}
 
         .param{margin-right: 10px;text-align: center;}
+        .well.active{color: #fff;background-color: #337ab7 !important;}
     </style>
 </head>
 
@@ -50,6 +51,9 @@
                                 <!-- 上传图片 -->
                                 <div class="col-lg-3">
                                     <div class="list-group" id="piclist">
+                                        <foreach name="data.pictures" item="picture">
+                                            <img class="img-thumbnail list-group-item" src="{$picture.src}" alt="{$picture.title}" data-src="{$picture.src}">
+                                        </foreach>
                                         <div class="fileinput-button img-thumbnail list-group-item text-center" id="addImg" style="display: block;">
                                             <i class="fa fa-plus"></i>
                                             <input id="fileupload" type="file" name="fileupload">
@@ -58,7 +62,7 @@
                                 </div>
                                 <div class="col-lg-8 col-lg-offset-1" id="picshow">
 
-                                    <img src="" alt="" class="img-thumbnail">
+                                    <img src="{$data['pictures'][0]['src']}" alt="{$data.pictures[0].title}" class="img-thumbnail">
                                     <div class="form-group">
                                         <label>描述</label>
                                         <div class="input-group">
@@ -71,24 +75,22 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="col-lg-6">
                                 <!-- 基本信息 -->
                                 <div class="form-group">
                                     <label>标题</label>
-                                    <input class="form-control" placeholder="Enter text" name="title">
+                                    <input class="form-control" placeholder="Enter text" name="title" value="{$data.title}">
                                     <p class="help-block">商品标题</p>
                                 </div>
                                 <div class="form-group">
                                     <label>简介</label>
-                                    <textarea class="form-control" rows="3" name="subscribe" id="desc"></textarea>
+                                    <textarea class="form-control" rows="3" name="subscribe" id="desc">{$data.subscribe}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>价格</label>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input type="text" class="form-control" name="price">
+                                        <input type="text" class="form-control" name="price" value="{$data.price}">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -131,20 +133,25 @@
                     <div class="panel-body">
                         <div class="col-lg-8">
                             <div id="configures">
-                                <div class="well config">
-                                    <div class="form-inline">
-                                        名字：<input type="text" class="form-control configname">
-                                        增加新项：
-                                        <div class="input-group">
-                                            <input type="text" class="form-control">
-                                            <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                                <foreach name="data.attr" item="attr">
+                                    <div class="well config">
+                                        <div class="form-inline">
+                                            名字：<input type="text" class="form-control configname" value="{$attr.name}">
+                                            增加新项：
+                                            <div class="input-group">
+                                                <input type="text" class="form-control">
+                                                <div class="input-group-addon btn btn-success addCon"><i class="fa fa-plus"></i></div>
+                                            </div>
+                                            <a class="btn btn-danger delcons"><i class="fa fa-trash-o"></i></a>
                                         </div>
-                                        <a class="btn btn-danger delcons"><i class="fa fa-trash-o"></i></a>
+                                        <div class="config-items">
+                                            <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
+                                            <foreach name="attr.value" item="attr2" key="kye">
+                                                <a class="btn btn-default configbtn">{$attr2}</a>
+                                            </foreach>
+                                        </div>
                                     </div>
-                                    <div class="config-items">
-                                        <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
-                                    </div>
-                                </div>
+                                </foreach>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6" >
@@ -178,6 +185,11 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="well" id="priceData">
+                                <foreach name="data.prices" item="price" key="key">
+                                    <define name="pricename" value="key" />
+                                    <div data-name="{$key}">配置项 <label for="" class="name"></label> 价格为 : <span>{$price.price}</span>，库存为：<span>{$price.stock}</span></div>
+                                </foreach>
+                                <!-- <button class="btn btn-info btn-block" id="getData">获取数据</button> -->
                             </div>
                         </div>
                     </div>
@@ -186,7 +198,10 @@
                     <div class="panel-heading">参数信息</div>
                     <div class="panel-body">
                         <div class="params" id="params">
-
+                            <define name="index2" value="0" />
+                            <foreach name="data.params" item="param">
+                                <label class="param well" data-id="{++$index2}"><span>{$param.name}</span>:<span>{$param.value}</span></label>
+                            </foreach>
                         </div>
                     </div>
                     <div class="panel-footer">
@@ -205,50 +220,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="panel panel-default">
-                    <div class="panel-heading">套餐/组合</div>
-                    <div class="panel-body">
-                        <div class="form-inline" style="margin-bottom: 10px;">
-
-                            <div class="input-group">
-                                <div class="input-group-addon">增加新的配置</div>
-                                <input type="text" class="form-control" id="newColName">
-                                <div class="input-group-addon btn btn-success" id="addCol"><i class="fa fa-plus"></i></div>
-                            </div>
-                        </div>
-                        <div class="form-inline" style="margin-bottom: 10px;">
-                            给配置
-                            <select id="configSelector">
-                                <option value="">请添加新的配置</option>
-                            </select>
-                            添加新配置项
-                            <input type="text" class="form-control" id="newDataName">
-                            <button class="btn btn-success" id="addData"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <table class="table table-striped table-bordered table-hover" id="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>价格</th>
-                                    <th>
-                                        操作
-                                        <button class="btn btn-success btn-sm" id="addRow"><i class="fa fa-plus"></i></button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm delbtn"><i class="fa fa-trash-o"></i></button>
-                                        <button class="btn btn-primary btn-sm resetbtn"><i class="fa fa-repeat"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div> -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         详细内容
@@ -264,7 +235,7 @@
                             <p class="help-block">详细信息展示的宽度（影响图片的显示质量）</p>
                         </div>
                         <!-- 编辑器 -->
-                        <textarea id="editor" placeholder="Balabala"></textarea>
+                        <textarea id="editor" placeholder="Balabala">{$data.detail}</textarea>
                     </div>
                 </div>
                 <!-- /.panel -->
@@ -289,7 +260,7 @@
             pid = 1,
             $fileupload = $('#fileupload'),
             editor;
-
+        var curPrices = JSON.parse('{$data.prices|json_encode}');
         $(document).ready(function() {
             var btn = $('#submit'),
                 picshow = $('#picshow'),
@@ -304,9 +275,13 @@
             btn.on('click', function(event) {
                 event.preventDefault();
                 getAllData();
-                $.post('../Items/index', {data: itemData}, function(data, textStatus, xhr) {
+                var id = '{$data.id}' || 0;
+                console.log(id)
+                itemData['id'] = id;
+                $.post('../Items/index', {data: itemData,id:id}, function(data, textStatus, xhr) {
                     console.log(data);
                 });
+
                 getItemData();
                 console.log(itemData);
                 return false;
@@ -384,6 +359,8 @@
             });
 
 
+
+
             //添加参数
             var paramIndex = {$data.params|count};
             var $addParam = $('#addParam'),
@@ -391,6 +368,7 @@
                 $paramValue = $('#paramValue'),
                 $params = $('#params'),
                 $delParam = $('#delParam');
+
             $addParam.click(function(e){
                 var name = $paramName.val(),
                     value = $paramValue.val();
@@ -399,7 +377,7 @@
                 }
                 var span1 = $('<span>').text(name),
                     span2 = $('<span>').text(value),
-                    param = $('<label>').addClass('param well').append(span1).append(':').append(span2).data('id', ++paramIndex);
+                    param = $('<label>').addClass('param well').append(span1).append(':').append(span2).attr('data-id', ++paramIndex);
                 $params.append(param);
             });
             $delParam.click(function(e){
@@ -417,17 +395,6 @@
                 $delParam.data('id', $(this).data('id'));
             })
 
-            function getParams() {
-                var params = [];
-                $params.find('.param').each(function(index) {
-                    var spans = $(this).find('span');
-                    var name = spans.eq(0).text(),
-                        value = spans.eq(1).text();
-                    params.push({name:name,value:value});
-                });
-                console.log(params);
-                itemData['params'] = params;
-            }
 
             //根据className寻找父元素
             function findParentByClassName(className, childNode){
@@ -452,6 +419,11 @@
                     d.push($(this).text());
                     i.push($(this).index()-1);
                 });
+                var index2 = i.join(',');
+                if (curPrices && curPrices[index2] != undefined) {
+                    $("#iPrice").val(curPrices[index2]['price']);
+                    $("#iStock").val(curPrices[index2]['stock']);
+                }
                 return [d.join(','), i.join(',')];
             }
 
@@ -492,7 +464,7 @@
                 configData = sc[1];
                 $selectedCon.text(configName);
                 $selectedCon.data('data', configData);
-                //console.log(sc);
+                console.log(sc);
             })
             //删除配置项
             $configs.on('click', '.delcon', function(event) {
@@ -502,13 +474,14 @@
             $addPrice.click(function(event) {
                 var price = $('#iPrice').val(),
                     stock = $('#iStock').val();
-                var child = $priceData.find('div[data-name="'+configData+'"]');
                 if (configData == '') {
                     alert('请选择组合');return;
                 }
                 if ($.trim(price) == '' || $.trim(stock) == '') {
                     alert('请填写价格或者库存');return;
                 }
+
+                var child = $priceData.find('div[data-name="'+configData+'"]');
                 if (child.length == 0) {
                     var pri = $('<div>').html('配置项 <label class="name">'+configName+"</label> 价格为 : ");
                     pri.attr('data-name', configData).append($('<span>').text(price));
@@ -519,21 +492,40 @@
                     child.append($('<span>').text(price)).append('，库存为：');
                     child.append($('<span>').text(stock));
                 }
-                // if (child.length == 0) {
-                //     var pri = $('<div>').text('配置项 '+configName+" 价格为 : ");
-                //     pri.attr('data-name', configData).append($('<span>').text(price));
-                //     pri.append('，库存为：').append($('<span>').text(stock));
-                //     pri.appendTo($priceData);
-                // }else{
-                //     child.text('配置项 '+configName+" 价格为 : ");
-                //     child.append($('<span>').text(price)).append('，库存为：');
-                //     child.append($('<span>').text(stock));
-                // }
 
             });
-
+            //填充数据
+            function resetPrice(){
+                var cAll = [];
+                $configs.find('.config').each(function(index) {
+                    var ccTmp = $(this).find('.configbtn'),
+                        btns = [];
+                    ccTmp.each(function(index) {
+                        btns.push($(this).text());
+                    });
+                    cAll.push(btns);
+                });
+                $priceData.find('div').each(function(index) {
+                    var cName,arrName = [],n = $(this).data('name');
+                    try {
+                        cName = n.split(',')
+                    } catch (e) {
+                        cName = [n];
+                    }
+                    for (var i = 0; i < cName.length; i++) {
+                        var ind = cName[i];
+                        arrName.push(cAll[i][ind]);
+                    }
+                    $(this).find('label').text(arrName.join(','));
+                    //child.text('配置项 '+ arrName.join(',') +" 价格为 : ");
+                    //child.append($('<span>').text(price)).append('，库存为：');
+                    //child.append($('<span>').text(stock));
+                });
+            }
+            resetPrice();
 
             //获取表单的所有数据
+            //获取基本信息
             function getItemData(){
                 $("#form").find('input,select,textarea').each(function(index, el) {
                     var name = this.name,
@@ -544,6 +536,7 @@
 
                 });
             }
+            //获取图片信息
             function getImages(){
                 itemData['pictures'] = [];
                 piclist.find('img').each(function(index, el) {
@@ -553,6 +546,7 @@
                 });
             }
             var prices = {},allConfig = {};
+            //获取价格信息
             function getPriceData(){
                 prices = {},allConfig = {};
                 var allc = $configs.find('.config');
@@ -581,9 +575,19 @@
                 //console.log(prices)
                 //console.log(allConfig)
             }
-            $('#getData').click(function(event) {
-                getPriceData()
-            });
+            //获取参数信息
+            function getParams() {
+                var params = [];
+                $params.find('.param').each(function(index) {
+                    var spans = $(this).find('span');
+                    var name = spans.eq(0).text(),
+                        value = spans.eq(1).text();
+                    params.push({name:name,value:value});
+                });
+                //console.log(params);
+                itemData['params'] = params;
+            }
+
 
             function getAllData(){
                 //获取基本信息
@@ -597,99 +601,9 @@
                 itemData['detail'] = v;
                 //获取参数信息
                 getParams();
-                console.log(itemData);
+                //console.log(itemData);
             }
         });
-
-        /*$(document).ready(function() {
-            //表格操作
-            var rows = 1,
-                controlTd = '<td><button class="btn btn-danger btn-sm delbtn"><i class="fa fa-trash-o"></i></button><button class="btn btn-primary btn-sm resetbtn"><i class="fa fa-repeat"></i></button></td>',
-                delColBtn = '<button class="btn btn-danger btn-sm delcolbtn"><i class="fa fa-trash-o"></i></button>'
-            var table = $("#table"),
-                newCol = $('#newColName'),
-                newData = $('#newDataName'),
-                tbody = table.find('tbody'),
-                thead = table.find('thead'),
-                config = $("#configSelector");
-            //配置表格
-
-            //新增一行
-            $('#addRow').click(function(e){
-                var tr = table.find('tbody > tr');
-                if (tr.length == 0) {
-                    tr = $('<tr>').append($('<th>'));
-                    tr.append('<td><input type="text"></td>'+controlTd)
-                }else{
-                    tr = tr.last().clone();
-                }
-                tr.find('th').first().text(++rows);
-                table.append(tr);
-            })
-
-            //新增一列
-            $('#addCol').click(function(e){
-                var name = newCol.val(),
-                    //data = newData.val(),
-                    tds = '';
-                if ($.trim(name) == '') {alert('请输入配置名');return;}
-
-                //if ($.trim(data) == '') {alert('请输入数据名');return;}
-                //增加头
-                //table.find('thead > tr').append($('<td>').text(name));
-                $('<th>').text(name).data('name', name).append(delColBtn).insertBefore(thead.find('th').last())
-
-                //给每一行都增加一列
-                tbody.find('tr').each(function(index) {
-
-                    //$(this).append('<td><select name=---"jjj"'+index+' id=""><option value="5-2">5-2</option></select></td>');
-                    $('<td><select name="'+data+'" id=""><option value="5-2">5-2</option></select></td>').insertBefore($(this).find('td').last())
-                });
-            });
-            //根据TagName寻找父元素
-            function findParentByTagName(tagName, childNode){
-                var p = $(childNode).parent();
-                console.log(p)
-                while(p[0].tagName.toLowerCase() != tagName){
-                    p = p.parent();
-                    console.log(p)
-                }
-                return p;
-            }
-            //重置左边的数字
-            function resetNumber(){
-                table.find('tbody > tr').each(function(index, el) {
-                    $(this).find('th').first().text(index + 1);
-                });
-            }
-            //删除一行
-            table.on('click', '.delbtn', function(event) {
-                event.preventDefault();
-                if (confirm('确认要删除该行吗？')) {
-                    var p = findParentByTagName('tr', this);
-                    p.remove();
-                    resetNumber();
-                    rows--;
-                }
-            });
-            //重置一行
-            table.on('click', '.resetbtn', function(event) {
-                event.preventDefault();
-                var p = findParentByTagName('tr', this);
-                p.find('input').each(function(index, el) {
-                    this.value = '';
-                });
-            });
-            table.on('click', '.delcolbtn', function(event) {
-                event.preventDefault();
-                var ind = $(this).index();
-                thead.find('tr').children().eq(ind+1).remove();
-                //table.find('thead tr').children().eq(ind).remove();
-                tbody.find('tr').each(function(index, el) {
-                    $(this).find('td').eq(ind-1).remove();
-                });
-            });
-        });*/
     </script>
 </div>
 </body>

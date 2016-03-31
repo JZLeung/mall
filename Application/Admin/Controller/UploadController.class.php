@@ -7,7 +7,7 @@ class UploadController extends Controller {
 	function __construct(){
 		$rootPath = './Uploads/Images/';
 		$this->config = array(
-			'maxSize' => 4096000,
+			'maxSize' => 40960000,
             'rootPath' => $rootPath,
             //'savePath' => 'Image',
             'saveName' => array('uniqid',''),

@@ -6,7 +6,7 @@ class IndexController extends Controller {
         //$system = new sysinfo();
         $admin = cookie('admin');
         if (!$admin) {
-            
+
             $admin = session('?admin') ? session('admin') : null;
             $this->display('Passport/login-page');
         }else{
@@ -20,6 +20,12 @@ class IndexController extends Controller {
     }
 
     public function item_add(){
+        $this->display('item_edit');
+    }
+    public function item_edit($id = 0){
+        $items = M('items');
+        $data = $items->where(array('id'=>(int)$id))->find();
+        $this->assign('data',  $data);
         $this->display();
     }
 }
