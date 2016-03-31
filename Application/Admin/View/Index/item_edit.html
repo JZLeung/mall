@@ -51,8 +51,9 @@
                                 <!-- 上传图片 -->
                                 <div class="col-lg-3">
                                     <div class="list-group" id="piclist">
+                                        <define name="pid" value="0" />
                                         <foreach name="data.pictures" item="picture">
-                                            <img class="img-thumbnail list-group-item" src="{$picture.src}" alt="{$picture.title}" data-src="{$picture.src}">
+                                            <img class="img-thumbnail list-group-item" data-pid="{++$pid}" src="{$picture.src}" alt="{$picture.title}" data-src="{$picture.src}">
                                         </foreach>
                                         <div class="fileinput-button img-thumbnail list-group-item text-center" id="addImg" style="display: block;">
                                             <i class="fa fa-plus"></i>
@@ -264,7 +265,8 @@
         var itemData = {},
             pid = 1,
             $fileupload = $('#fileupload'),
-            editor;
+            editor,
+            returnData;
         var curPrices = JSON.parse('{$data.prices|json_encode}');
         $(document).ready(function() {
             var btn = $('#submit'),
@@ -280,15 +282,20 @@
             btn.on('click', function(event) {
                 event.preventDefault();
                 getAllData();
-                var id = '{$data.id}' || 0;
-                console.log(id)
-                itemData['id'] = id;
-                $.post('../Items/index', {data: itemData,id:id}, function(data, textStatus, xhr) {
+                var id = "{$data['_id']}" || 0;
+                var flag = id != 0 ? true : false;
+                itemData['id'] = "{$data['id']}" || 0;
+                $.post('../Items/index2', {data: itemData,'id':id}, function(data, textStatus, xhr) {
                     console.log(data);
+                    returnData = data;
+                    if (data.ok == 1) {
+                        if (flag) {alert('修改成功');}
+                        else{
+                            alert('增加商品成功，点击确认跳转至详情页');
+                            location.href = '__ROOT__/item/'+data['$id'];
+                        }
+                    }
                 });
-
-                getItemData();
-                console.log(itemData);
                 return false;
             });
 

@@ -2,14 +2,14 @@
 namespace Home\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
-    public function index($id = 0){
+    public function index($id){
         //echo $id;
         /*if (strlen($id) != 24) {
             $data = null;
         }else{*/
             $items = M('items');
             try {
-                $data = $items->where(array('id' => (int)$id))->find();
+                $data = $items->where(array('_id' => $id))->find();
                 if ($data['prices'] == null) {
                     $prices = $this->getPrices((int)$id);
                 }else {

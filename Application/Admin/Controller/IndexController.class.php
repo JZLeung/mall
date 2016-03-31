@@ -24,7 +24,7 @@ class IndexController extends Controller {
     }
     public function item_edit($id = 0){
         $items = M('items');
-        $data = $items->where(array('id'=>(int)$id))->find();
+        $data = $items->where(array('_id'=>$id))->find();
         $this->assign('data',  $data);
         $this->display();
     }
