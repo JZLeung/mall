@@ -19,10 +19,10 @@ class ItemsController extends Controller {
     }
     public function index(){
         $postData = I('post.data');
-        $postData['name'] = $postData['title'];
+        //$postData['name'] = $postData['title'];
         $items = M('items');
         $id = (int)$postData['id'];
-
+        echo "<pre>";
         //echo $id;
         if ($id == 0) {
             $id = findLastId('items', $items);
@@ -30,8 +30,27 @@ class ItemsController extends Controller {
             $res = $items->data($postData)->add();
             $this->ajaxReturn($res);
         }else{
-            $postData['score'] = 'set';print_r($postData);
-            $res = $items->where(array('id'=>(int)$id))->save($postData);
+        	$postData['id'] = $id;
+            
+            $res = $items->where(array('id' => $id))->save($postData);
+            $this->ajaxReturn($res);
+        }
+    }
+    public function index2(){
+        $postData = I('post.data');
+        //$postData['name'] = $postData['title'];
+        $items = M('item_bak');
+        $id = (int)$postData['id'];
+        if ($id == 0) {
+            $id = findLastId('items', $items);
+            $postData['id'] = (int)$id;
+            $res = $items->data($postData)->add();
+            $this->ajaxReturn($res);
+        }else{
+        	$items->create();
+        	$items->id = $id;
+
+            $res = $items->where(array('id'=>$id))->save();
             $this->ajaxReturn($res);
         }
     }
@@ -46,26 +65,26 @@ class ItemsController extends Controller {
 
     public function resetItem(){
         $item = M('items');
-        // $data = $item->where(array('id'=>4))->save($data2);
-        // $ids = [2,3];
-        // echo "<pre>";
-        // for ($i=0; $i < 2; $i++) {
-        //     $id = (int)$ids[$i];
-        //     $data = $item->where(array('id'=>$id))->find();
-        //     $pics = $data['pictures'];
-        //
-        //     for ($j=0; $j  < count($data['pictures']); $j++) {
-        //         $path = '/mall/Public/'.$pics[$j]['src'];
-        //         $pics[$j]['src'] = $path;
-        //     }
-        //     print_r($pics);
-        //     $data2['score'] = 'set';
-        //     $data2['pictures'] = $pics;
-        //     $res = $item->where(array('id'=>$id))->save($data2);
-        //     print_r($res);
-        // }
-        $data = $item->where(array('id'=>5))->save($data2);
-        $prices = $data['prices'];
+        $data = $item->where(array('id'=>4))->save($data2);
+        $ids = [2,3];
+        echo "<pre>";
+        for ($i=0; $i < 2; $i++) {
+            $id = (int)$ids[$i];
+            $data = $item->where(array('id'=>$id))->find();
+            $pics = $data['pictures'];
+        
+            for ($j=0; $j  < count($data['pictures']); $j++) {
+                $path = '/mall/Public/'.$pics[$j]['src'];
+                $pics[$j]['src'] = $path;
+            }
+            print_r($pics);
+            $data2['score'] = 'set';
+            $data2['pictures'] = $pics;
+            $res = $item->where(array('id'=>$id))->save($data2);
+            print_r($res);
+        }
+        //$data = $item->where(array('id'=>5))->save($data2);
+        /*$prices = $data['prices'];
         for ($i=0; $i < count($prices); $i++) {
             $p = $prices[$i];
             $tmp['price'] = $p;
@@ -75,8 +94,11 @@ class ItemsController extends Controller {
         $data2['prices'] = $price;
         print_r($prices);
         $data2['score'] = 'set';
-        //$res = $item->where(array('id'=>5))->save($data2);
-        //print_r($res);
+        $res = $item->where(array('id'=>5))->save($data2);
+        print_r($res);*/
     }
 
+    public function testUpdate(){
+
+    }
 }

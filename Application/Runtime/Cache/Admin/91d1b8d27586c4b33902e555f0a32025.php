@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,11 +11,11 @@
 
     <title>编辑商品 - 商城后台管理</title>
 
-    <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
-    <link href="__PUBLIC__/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Common/css/simditor.css" />
-    <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
+    <link href="/mall/Public/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/mall/Public/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/mall/Public/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/mall/Public/Common/css/simditor.css" />
+    <link rel="stylesheet" href="/mall/Public/Common/css/jquery.fileupload.css">
     <style>
         .list-group-item{margin-bottom: 5px;}
         td,th{text-align: center;}
@@ -30,7 +30,89 @@
 
 <body>
 <div id="wrapper">
-<include file='./Public/Template/Admin/_header_.html' />
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:;">商城后台管理</a>
+      </div>
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+              <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="搜索...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+              <!-- /input-group -->
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-home"></i> 首页</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 商品管理<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="#"><i class="fa fa-th-large"></i> 商品列表</a>
+                </li>
+                <li>
+                  <a href="/mall/Admin/Index/item_add"><i class="fa fa-plus"></i> 添加商品</a>
+                </li>
+                <li>
+                  <a href="/mall/Admin/Index/item_edit?id=9"><i class="fa fa-plus"></i> 编辑商品</a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-list-alt"></i> 广告设置<span class="fa arrow"></span></a>
+                  <ul class="nav nav-third-level">
+                    <li><a href="#"><i class="fa fa-th-list"></i> 轮播广告</a></li>
+                    <li><a href="#"><i class="fa fa-th-list"></i> 精选广告</a></li>
+                    <li><a href="#"><i class="fa fa-th-list"></i> 明星产品</a></li>
+                    <li><a href="#"><i class="fa fa-th-list"></i> 推广产品</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa fa-users"></i> 会员管理<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="#"><i class="fa fa-list-alt"></i> 用户列表</a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-plus"></i> 新增会员</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa fa-tasks"></i> 类目管理<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li><a href="#"><i class="fa fa-th-list"></i> 类目列表</a></li>
+                <li><a href="#"><i class="fa fa-wrench "></i> 类目设置</a></li>
+                <li><a href="#"><i class="fa fa-plus"></i> 新增类目</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<script src="/mall/Public/Admin/sb/js/jquery.min.js"></script>
+  <script src="/mall/Public/Admin/sb/js/bootstrap.min.js"></script>
+  <script src="/mall/Public/Admin/sb/js/metisMenu.min.js"></script>
+  <script src="/mall/Public/Admin/sb/js/sb-admin-2.js"></script>
+
 	<div id="page-wrapper">
 		<div class="row">
             <div class="col-lg-12">
@@ -51,9 +133,7 @@
                                 <!-- 上传图片 -->
                                 <div class="col-lg-3">
                                     <div class="list-group" id="piclist">
-                                        <foreach name="data.pictures" item="picture">
-                                            <img class="img-thumbnail list-group-item" src="{$picture.src}" alt="{$picture.title}" data-src="{$picture.src}">
-                                        </foreach>
+                                        <?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$picture): ?><img class="img-thumbnail list-group-item" src="<?php echo ($picture["src"]); ?>" alt="<?php echo ($picture["title"]); ?>" data-src="<?php echo ($picture["src"]); ?>"><?php endforeach; endif; ?>
                                         <div class="fileinput-button img-thumbnail list-group-item text-center" id="addImg" style="display: block;">
                                             <i class="fa fa-plus"></i>
                                             <input id="fileupload" type="file" name="fileupload">
@@ -62,7 +142,7 @@
                                 </div>
                                 <div class="col-lg-8 col-lg-offset-1" id="picshow">
 
-                                    <img src="{$data['pictures'][0]['src']}" alt="{$data.pictures[0].title}" class="img-thumbnail">
+                                    <img src="<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data["pictures[0]"]["title"]); ?>" class="img-thumbnail">
                                     <div class="form-group">
                                         <label>描述</label>
                                         <div class="input-group">
@@ -79,23 +159,23 @@
                                 <!-- 基本信息 -->
                                 <div class="form-group">
                                     <label>名称</label>
-                                    <input class="form-control" placeholder="Enter text" name="name" value="{$data.name}">
+                                    <input class="form-control" placeholder="Enter text" name="name" value="<?php echo ($data["name"]); ?>">
                                     <p class="help-block">商品名称</p>
                                 </div>
                                 <div class="form-group">
                                     <label>标题</label>
-                                    <input class="form-control" placeholder="Enter text" name="title" value="{$data.title}">
+                                    <input class="form-control" placeholder="Enter text" name="title" value="<?php echo ($data["title"]); ?>">
                                     <p class="help-block">商品标题</p>
                                 </div>
                                 <div class="form-group">
                                     <label>简介</label>
-                                    <textarea class="form-control" rows="3" name="subscribe" id="desc">{$data.subscribe}</textarea>
+                                    <textarea class="form-control" rows="3" name="subscribe" id="desc"><?php echo ($data["subscribe"]); ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>价格</label>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input type="text" class="form-control" name="price" value="{$data.price}">
+                                        <input type="text" class="form-control" name="price" value="<?php echo ($data["price"]); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -138,10 +218,9 @@
                     <div class="panel-body">
                         <div class="col-lg-8">
                             <div id="configures">
-                                <foreach name="data.attr" item="attr">
-                                    <div class="well config">
+                                <?php if(is_array($data["attr"])): foreach($data["attr"] as $key=>$attr): ?><div class="well config">
                                         <div class="form-inline">
-                                            名字：<input type="text" class="form-control configname" value="{$attr.name}">
+                                            名字：<input type="text" class="form-control configname" value="<?php echo ($attr["name"]); ?>">
                                             增加新项：
                                             <div class="input-group">
                                                 <input type="text" class="form-control">
@@ -151,12 +230,9 @@
                                         </div>
                                         <div class="config-items">
                                             <a class="btn btn-danger delcon"><i class="fa fa-trash-o"></i> →</a>
-                                            <foreach name="attr.value" item="attr2" key="kye">
-                                                <a class="btn btn-default configbtn">{$attr2}</a>
-                                            </foreach>
+                                            <?php if(is_array($attr["value"])): foreach($attr["value"] as $kye=>$attr2): ?><a class="btn btn-default configbtn"><?php echo ($attr2); ?></a><?php endforeach; endif; ?>
                                         </div>
-                                    </div>
-                                </foreach>
+                                    </div><?php endforeach; endif; ?>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6" >
@@ -190,10 +266,8 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="well" id="priceData">
-                                <foreach name="data.prices" item="price" key="key">
-                                    <define name="pricename" value="key" />
-                                    <div data-name="{$key}">配置项 <label for="" class="name"></label> 价格为 : <span>{$price.price}</span>，库存为：<span>{$price.stock}</span></div>
-                                </foreach>
+                                <?php if(is_array($data["prices"])): foreach($data["prices"] as $key=>$price): define('pricename', 'key'); ?>
+                                    <div data-name="<?php echo ($key); ?>">配置项 <label for="" class="name"></label> 价格为 : <span><?php echo ($price["price"]); ?></span>，库存为：<span><?php echo ($price["stock"]); ?></span></div><?php endforeach; endif; ?>
                                 <!-- <button class="btn btn-info btn-block" id="getData">获取数据</button> -->
                             </div>
                         </div>
@@ -203,10 +277,8 @@
                     <div class="panel-heading">参数信息</div>
                     <div class="panel-body">
                         <div class="params" id="params">
-                            <define name="index2" value="0" />
-                            <foreach name="data.params" item="param">
-                                <label class="param well" data-id="{++$index2}"><span>{$param.name}</span>:<span>{$param.value}</span></label>
-                            </foreach>
+                            <?php define('index2', '0'); ?>
+                            <?php if(is_array($data["params"])): foreach($data["params"] as $key=>$param): ?><label class="param well" data-id="<?php echo ++$index2;?>"><span><?php echo ($param["name"]); ?></span>:<span><?php echo ($param["value"]); ?></span></label><?php endforeach; endif; ?>
                         </div>
                     </div>
                     <div class="panel-footer">
@@ -240,7 +312,7 @@
                             <p class="help-block">详细信息展示的宽度（影响图片的显示质量）</p>
                         </div>
                         <!-- 编辑器 -->
-                        <textarea id="editor" placeholder="Balabala">{$data.detail}</textarea>
+                        <textarea id="editor" placeholder="Balabala"><?php echo ($data["detail"]); ?></textarea>
                     </div>
                 </div>
                 <!-- /.panel -->
@@ -253,19 +325,19 @@
         </div>
 	</div>
 
-    <script type="text/javascript" src="__PUBLIC__/Common/js/simeditor/module.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Common/js/simeditor/hotkeys.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Common/js/simeditor/uploader.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Common/js/simeditor/simditor.min.js"></script>
-    <script src="__PUBLIC__/Common/js/ajaxfileupload.js"></script>
-    <script src="__PUBLIC__/Common/js/upload/jquery.ui.widget.js"></script>
-    <script src="__PUBLIC__/Common/js/upload/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/module.min.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/hotkeys.min.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/uploader.min.js"></script>
+    <script type="text/javascript" src="/mall/Public/Common/js/simeditor/simditor.min.js"></script>
+    <script src="/mall/Public/Common/js/ajaxfileupload.js"></script>
+    <script src="/mall/Public/Common/js/upload/jquery.ui.widget.js"></script>
+    <script src="/mall/Public/Common/js/upload/jquery.fileupload.js"></script>
     <script>
         var itemData = {},
             pid = 1,
             $fileupload = $('#fileupload'),
             editor;
-        var curPrices = JSON.parse('{$data.prices|json_encode}');
+        var curPrices = JSON.parse('<?php echo (json_encode($data["prices"])); ?>');
         $(document).ready(function() {
             var btn = $('#submit'),
                 picshow = $('#picshow'),
@@ -274,13 +346,13 @@
                 addImg = $("#addImg"),
                 table = $("#table");
 
-            var default_img = '__PUBLIC__/Common/images/default.png';
+            var default_img = '/mall/Public/Common/images/default.png';
 
             //提交表单
             btn.on('click', function(event) {
                 event.preventDefault();
                 getAllData();
-                var id = '{$data.id}' || 0;
+                var id = '<?php echo ($data["id"]); ?>' || 0;
                 console.log(id)
                 itemData['id'] = id;
                 $.post('../Items/index', {data: itemData,id:id}, function(data, textStatus, xhr) {
@@ -338,7 +410,7 @@
                 done: function (e, data) {
                     console.log(data.result);
                     var fileinfo = data.result;
-                    var filepath = '__ROOT__'+fileinfo['file_path'];
+                    var filepath = '/mall'+fileinfo['file_path'];
                     var img = document.createElement('img');
                     img.src = filepath;
                     var $img = $(img).attr({'data-pid': pid,'data-src': filepath}).addClass('img-thumbnail list-group-item');
@@ -352,7 +424,7 @@
             //初始化编辑器
             editor = new Simditor({
                 textarea: $('#editor'),
-                defaultImage: '__PUBLIC__/Common/images/default.png',
+                defaultImage: '/mall/Public/Common/images/default.png',
                 upload: {
                     url: '../Upload/upload',
                     params: {'editor': true},
@@ -367,7 +439,7 @@
 
 
             //添加参数
-            var paramIndex = {$data.params|count};
+            var paramIndex = <?php echo (count($data["params"])); ?>;
             var $addParam = $('#addParam'),
                 $paramName = $('#paramName'),
                 $paramValue = $('#paramValue'),

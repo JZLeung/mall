@@ -60,6 +60,9 @@
                   <a href="Admin/Index/item_add"><i class="fa fa-plus"></i> 添加商品</a>
                 </li>
                 <li>
+                  <a href="Admin/Index/item_edit?id=9"><i class="fa fa-plus"></i> 编辑商品</a>
+                </li>
+                <li>
                   <a href="#"><i class="fa fa-list-alt"></i> 广告设置<span class="fa arrow"></span></a>
                   <ul class="nav nav-third-level">
                     <li><a href="#"><i class="fa fa-th-list"></i> 轮播广告</a></li>
@@ -99,6 +102,7 @@
   <script src="/mall/Public/Admin/sb/js/bootstrap.min.js"></script>
   <script src="/mall/Public/Admin/sb/js/metisMenu.min.js"></script>
   <script src="/mall/Public/Admin/sb/js/sb-admin-2.js"></script>
+
     <!-- begin of the content -->
     <div id="page-wrapper">
       <div class="row">

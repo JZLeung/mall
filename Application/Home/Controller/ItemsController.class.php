@@ -27,6 +27,8 @@ class ItemsController extends Controller {
         }*/
 
         $data['detail'] = htmlspecialchars_decode($data['detail']);
+       /* echo "<pre>";
+        print_r($data);*/
         $this->assign('data', $data);
         $this->assign('prices', $prices);
         $this->display('test');

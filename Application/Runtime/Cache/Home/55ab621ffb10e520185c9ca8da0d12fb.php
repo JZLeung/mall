@@ -102,14 +102,14 @@
 				<div class="pic-list left" id="picList">
 					<ul>
 
-						<?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$pic): ?><li><img src="/mall/Public/<?php echo ($pic["src"]); ?>" alt="<?php echo ($pic["title"]); ?>"></li><?php endforeach; endif; ?>
+						<?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$pic): ?><li><img src="<?php echo ($pic["src"]); ?>" alt="<?php echo ($pic["title"]); ?>"></li><?php endforeach; endif; ?>
 						<!-- <li class="active"><img src="/mall/Public/Common/images/items/test/1.jpg" alt=""></li>
 						<li><img src="/mall/Public/Common/images/items/test/2.jpg" alt=""></li>
 						<li><img src="/mall/Public/Common/images/items/test/3.jpg" alt=""></li> -->
 					</ul>
 				</div>
 				<div class="pic-big left" id="picShow">
-					<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
+					<img src="<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 				</div>
 			</div>
 			<div class="right-docs left">
@@ -196,7 +196,7 @@
 			<div class="content-w">
 				<div class="params-detail clear">
 					<div class="left-img left">
-						<img src="/mall/Public/<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
+						<img src="<?php echo ($data['pictures'][0]['src']); ?>" alt="<?php echo ($data['pictures'][0]['title']); ?>">
 					</div>
 					<div class="right-params flex">
 						<?php if(is_array($data["params"])): foreach($data["params"] as $key=>$p): ?><label for=""><?php echo ($p["name"]); ?>：<?php echo ($p["value"]); ?></label><?php endforeach; endif; ?>
