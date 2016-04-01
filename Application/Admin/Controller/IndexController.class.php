@@ -18,13 +18,18 @@ class IndexController extends Controller {
             $this->show();
         }
     }
-
-    public function item_add(){
-        $this->display('item_edit');
+    public function _empty($name){
+        $this->display($name);
     }
     public function item_edit($id = 0){
         $items = M('items');
         $data = $items->where(array('_id'=>$id))->find();
+        $this->assign('data',  $data);
+        $this->display();
+    }
+    public function item_list(){
+        $items = M('items');
+        $data = $items->select();
         $this->assign('data',  $data);
         $this->display();
     }

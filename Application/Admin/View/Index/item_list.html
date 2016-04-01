@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>商品列表 - 商城后台管理</title>
+
+    <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Common/css/simditor.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
+    <style>
+        .list-group-item{margin-bottom: 5px;}
+        td,th{text-align: center;vertical-align: middle !important;}
+        .delcolbtn{margin-left: 10px}
+        .config-items{margin-top: 15px;}
+        .config-items a{margin-right: 5px;}
+
+        .param{margin-right: 10px;text-align: center;}
+        .well.active{color: #fff;background-color: #337ab7 !important;}
+        td >img{width: 100px;}
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+<include file='./Public/Template/Admin/_header_.html' />
+	<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">商品列表</h1>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>预览</th>
+                                <th>名称</th>
+                                <th>标题</th>
+                                <th>价格</th>
+                                <th>操作</th>
+                                <!-- <th></th>
+                                <th></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <define name="index" value="0" />
+                            <foreach name="data" item="item">
+                                <tr>
+                                    <td>{++$index}</td>
+                                    <td><img src="{$item['pictures'][0]['src']}" alt="{$item['pictures'][0]['title']}" /></td>
+                                    <td>{$item.name}</td>
+                                    <td>{$item.title}</td>
+                                    <td>{$item.price}</td>
+                                    <td>
+                                        <a href="" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></a>
+                                        <a href="" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></a>
+                                    </td>
+                                <hr>
+                                </tr>
+                            </foreach>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
