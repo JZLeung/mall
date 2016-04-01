@@ -7,7 +7,8 @@ class ItemsController extends Controller {
         /*if (strlen($id) != 24) {
             $data = null;
         }else{*/
-            $items = M('items');
+        $items = M('items');
+        if (strlen($id) == 24) {
             try {
                 $data = $items->where(array('_id' => $id))->find();
                 if ($data['prices'] == null) {
@@ -15,10 +16,22 @@ class ItemsController extends Controller {
                 }else {
                     $prices = $data['prices'];
                 }
+            } catch (Exception $e) {
+                $data = null;
+            }
+        }else{
+            try {
+                $data = $items->where(array('id' => (int)$id))->find();
+                if ($data['prices'] == null) {
+                    $prices = $this->getPrices((int)$id);
+                }else {
+                    $prices = $data['prices'];
+                }
 
             } catch (Exception $e) {
-                $data = $e;
+                $data = null;
             }
+        }
         //}
 
         //print_r($data);
@@ -26,11 +39,15 @@ class ItemsController extends Controller {
             $data = $datas[$k];
         }*/
 
-        $data['detail'] = htmlspecialchars_decode($data['detail']);
-       /* echo "<pre>";
-        print_r($data);*/
+        if ($data) {
+            $data['detail'] = htmlspecialchars_decode($data['detail']);
+        }
+        // echo "<pre>";
+        // print_r($data);
+
         $this->assign('data', $data);
         $this->assign('prices', $prices);
+        $this->assign('id', $id);
         $this->display('test');
     }
     public function test(){

@@ -31,6 +31,17 @@ img {
   width: 500px;
 }
 
+.nodata {
+  text-align: center;
+}
+.nodata h1.title {
+  font-size: 20px;
+  line-height: 2em;
+}
+.nodata p.return {
+  font-size: 16px;
+}
+
 .active {
   border-color: #ef5b00 !important;
 }

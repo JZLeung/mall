@@ -2,21 +2,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
-    public function add(){
-        $postData = I('post.data');
-        $postData['name'] = $postData['title'];
-        //echo "<pre>";
 
-        //print_r($postData);
-
-        //$skus = $postData['prices'];
-        $items = M('items');
-        $id = findLastId('items', $items);
-        //echo $id;
-        $postData['id'] = (int)$id;
-        $res = $items->data($postData)->add();
-        $this->ajaxReturn($res);
-    }
     public function index(){
         $postData = I('post.data');
         //$postData['name'] = $postData['title'];
@@ -31,7 +17,7 @@ class ItemsController extends Controller {
             $this->ajaxReturn($res);
         }else{
         	$postData['id'] = $id;
-            
+
             $res = $items->where(array('id' => $id))->save($postData);
             $this->ajaxReturn($res);
         }
@@ -53,7 +39,7 @@ class ItemsController extends Controller {
             $postData['id'] = (int)$id;
             $res = $items->data($postData)->add();
             $this->ajaxReturn($res);
-        	
+
         }
     }
 
@@ -74,7 +60,7 @@ class ItemsController extends Controller {
             $id = (int)$ids[$i];
             $data = $item->where(array('id'=>$id))->find();
             $pics = $data['pictures'];
-        
+
             for ($j=0; $j  < count($data['pictures']); $j++) {
                 $path = '/mall/Public/'.$pics[$j]['src'];
                 $pics[$j]['src'] = $path;

@@ -19,9 +19,10 @@
 </head>
 <body>
 	<include file='./Public/Template/Index/_header_.html' />
-	<if condition="!$data">
-		<div class="nodata">
-			没有该商品
+	<empty name="data">
+		<div class="nodata content-w">
+			<h1 class="title">商品编号：{$id} 不存在</h1>
+			<p class="return"><a href="__ROOT__">返回首页</a></p>
 		</div>
 
 	<else />
@@ -168,7 +169,7 @@
 		</div>
 		<div style="width: 100%;height: 1000px;"></div>
 	</div>
-	</if>
+	</empty>
 	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
 	<script>
 	var prices = JSON.parse('{$prices|json_encode}');

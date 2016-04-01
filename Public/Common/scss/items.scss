@@ -22,12 +22,20 @@ img{width: 100%;}
 		    	border-color: #A0A0A0;
 		    }
 		}
-	    
+
 	}
 	.pic-big {
 	    margin: 20px 30px;
 	    width: 500px;
 	}
+}
+.nodata{
+	text-align: center;
+	h1.title{
+		font-size: 20px;
+		line-height: 2em;
+	}
+	p.return{font-size: 16px;}
 }
 .active{
 	border-color: #ef5b00 !important;
@@ -103,7 +111,7 @@ img{width: 100%;}
 		    text-align: center;
 		}
 	}
-	
+
 }
 .classify-w{
 	border-top: 1px solid #B7B3B3;
