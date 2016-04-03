@@ -67,16 +67,20 @@
                             </foreach>
                         </tbody>
                     </table>
-                    {$page}
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript" src="__PUBLIC__/Common/js/admin.base.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Common/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Common/js/dataTables.bootstrap.min.js"></script>
 <script>
+
     $(document).ready(function() {
         var form = $('#itemlist');
+        $('#itemlist').DataTable();
         function resetForm(){
             form.find('tbody tr').each(function(index, el) {
                 $(this).find('td').eq(0).text(index+1);
