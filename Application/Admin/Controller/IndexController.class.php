@@ -29,7 +29,12 @@ class IndexController extends Controller {
     }
     public function item_list(){
         $items = M('items');
-        $data = $items->select();
+        $count = $items->count();// 查询满足要求的总记录数
+        $Page = new \Think\Page($count,5);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+        $show = $Page->show();// 分页显示输出
+        $data = $items->limit($Page->firstRow.','.$Page->listRows)->select();
+        //$data = $items->select();
+        $this->assign('page',  $show);
         $this->assign('data',  $data);
         $this->display();
     }
