@@ -22,6 +22,8 @@
         .delcolbtn{margin-left: 10px}
         .config-items{margin-top: 15px;}
         .config-items a{margin-right: 5px;}
+
+        .param{margin-right: 10px;text-align: center;}
     </style>
 </head>
 
@@ -61,10 +63,13 @@
               <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 商品管理<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
                 <li>
-                  <a href="#"><i class="fa fa-th-large"></i> 商品列表</a>
+                  <a href="/mall/Admin/Index/item_list"><i class="fa fa-th-large"></i> 商品列表</a>
                 </li>
                 <li>
-                  <a href="Admin/Index/item_add"><i class="fa fa-plus"></i> 添加商品</a>
+                  <a href="/mall/Admin/Index/item_add"><i class="fa fa-plus"></i> 添加商品</a>
+                </li>
+                <li>
+                  <a href="/mall/Admin/Index/item_edit?id=9"><i class="fa fa-plus"></i> 编辑商品</a>
                 </li>
                 <li>
                   <a href="#"><i class="fa fa-list-alt"></i> 广告设置<span class="fa arrow"></span></a>
@@ -106,6 +111,7 @@
   <script src="/mall/Public/Admin/sb/js/bootstrap.min.js"></script>
   <script src="/mall/Public/Admin/sb/js/metisMenu.min.js"></script>
   <script src="/mall/Public/Admin/sb/js/sb-admin-2.js"></script>
+
 	<div id="page-wrapper">
 		<div class="row">
             <div class="col-lg-12">
@@ -226,12 +232,10 @@
                                 <div class="col-lg-6 col-md-6" >
                                     已选择组合: <span id="selectedCon"></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 form-inline">
-                                    价格为：
-                                    <div class="input-group">
-                                        <input type="text" class="form-control">
-                                        <div class="input-group-addon btn btn-success" id="addPrice"><i class="fa fa-plus"></i></div>
-                                    </div>
+                                <div class="col-lg-12 col-md-6 form-inline">
+                                    价格为：<input type="text" class="form-control" id="iPrice">
+                                    库存为：<input type="text" class="form-control" id="iStock">
+                                    <button class="btn btn-success btn-sm" id="addPrice"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="text-center btn btn-success btn-block" id="newConfig" style="margin-top: 10px">
@@ -256,7 +260,6 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="well" id="priceData">
-                                <button class="btn btn-info btn-block" id="getData">获取数据</button>
                             </div>
                         </div>
                     </div>
@@ -280,6 +283,7 @@
                                 <input type="text" class="form-control" placeholder="参数值" id="paramValue">
                             </div>
                             <button id="addParam" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                            <button id="delParam" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                         </div>
                     </div>
                 </div>
@@ -439,7 +443,7 @@
                     var filepath = '/mall'+fileinfo['file_path'];
                     var img = document.createElement('img');
                     img.src = filepath;
-                    var $img = $(img).attr('data-pid', pid).addClass('img-thumbnail list-group-item');
+                    var $img = $(img).attr({'data-pid': pid,'data-src': filepath}).addClass('img-thumbnail list-group-item');
                     //piclist.append($img);
                     selectImg(img);
                     $img.insertBefore(addImg);
@@ -461,11 +465,14 @@
                 //optional options
             });
 
+
             //添加参数
+            var paramIndex = <?php echo (count($data["params"])); ?>;
             var $addParam = $('#addParam'),
                 $paramName = $('#paramName'),
                 $paramValue = $('#paramValue'),
-                $params = $('#params');
+                $params = $('#params'),
+                $delParam = $('#delParam');
             $addParam.click(function(e){
                 var name = $paramName.val(),
                     value = $paramValue.val();
@@ -474,10 +481,35 @@
                 }
                 var span1 = $('<span>').text(name),
                     span2 = $('<span>').text(value),
-                    param = $('<label>').addClass('param well').append(span1).append(':').append(span2);
+                    param = $('<label>').addClass('param well').append(span1).append(':').append(span2).data('id', ++paramIndex);
                 $params.append(param);
+            });
+            $delParam.click(function(e){
+                var id = $(this).data('id');
+                console.log(id)
+                $params.find('label[data-id='+id+']').remove();
+            })
+            $params.on('click', '.param', function(event) {
+                var spans = $(this).find('span');
+                var name = spans.eq(0).text(),
+                    value = spans.eq(1).text();
+                $(this).addClass('active').siblings().removeClass('active')
+                $paramName.val(name);
+                $paramValue.val(value);
+                $delParam.data('id', $(this).data('id'));
             })
 
+            function getParams() {
+                var params = [];
+                $params.find('.param').each(function(index) {
+                    var spans = $(this).find('span');
+                    var name = spans.eq(0).text(),
+                        value = spans.eq(1).text();
+                    params.push({name:name,value:value});
+                });
+                console.log(params);
+                itemData['params'] = params;
+            }
 
             //根据className寻找父元素
             function findParentByClassName(className, childNode){
@@ -515,7 +547,7 @@
                 $addPrice = $('#addPrice'),
                 $priceData = $("#priceData")
 
-            var configName, configData;
+            var configName = '', configData = '';
             //新增配置
             $('#newConfig').click(function(event) {
                 $configs.append($newConfig);
@@ -542,7 +574,7 @@
                 configData = sc[1];
                 $selectedCon.text(configName);
                 $selectedCon.data('data', configData);
-                console.log(sc);
+                //console.log(sc);
             })
             //删除配置项
             $configs.on('click', '.delcon', function(event) {
@@ -550,18 +582,39 @@
             })
             //添加价格
             $addPrice.click(function(event) {
-                var value = $(this).prev().val();
+                var price = $('#iPrice').val(),
+                    stock = $('#iStock').val();
                 var child = $priceData.find('div[data-name="'+configData+'"]');
+                if (configData == '') {
+                    alert('请选择组合');return;
+                }
+                if ($.trim(price) == '' || $.trim(stock) == '') {
+                    alert('请填写价格或者库存');return;
+                }
                 if (child.length == 0) {
-                    var pri = $('<div>').text('配置项 '+configName+" 价格为 : ");
-                    pri.attr('data-name', configData).append($('<span>').text(value));
+                    var pri = $('<div>').html('配置项 <label class="name">'+configName+"</label> 价格为 : ");
+                    pri.attr('data-name', configData).append($('<span>').text(price));
+                    pri.append('，库存为：').append($('<span>').text(stock));
                     pri.appendTo($priceData);
                 }else{
-                    child.text('配置项 '+configName+" 价格为 : ");
-                    child.append($('<span>').text(value));
+                    child.html('配置项 <label class="name">'+configName+"</label> 价格为 : ");
+                    child.append($('<span>').text(price)).append('，库存为：');
+                    child.append($('<span>').text(stock));
                 }
+                // if (child.length == 0) {
+                //     var pri = $('<div>').text('配置项 '+configName+" 价格为 : ");
+                //     pri.attr('data-name', configData).append($('<span>').text(price));
+                //     pri.append('，库存为：').append($('<span>').text(stock));
+                //     pri.appendTo($priceData);
+                // }else{
+                //     child.text('配置项 '+configName+" 价格为 : ");
+                //     child.append($('<span>').text(price)).append('，库存为：');
+                //     child.append($('<span>').text(stock));
+                // }
 
             });
+
+
             //获取表单的所有数据
             function getItemData(){
                 $("#form").find('input,select,textarea').each(function(index, el) {
@@ -576,7 +629,7 @@
             function getImages(){
                 itemData['pictures'] = [];
                 piclist.find('img').each(function(index, el) {
-                    var src = this.src,
+                    var src = $(this).data('src'),
                         title = this.alt;
                     itemData['pictures'].push({'src':src, 'title': title});
                 });
@@ -588,9 +641,12 @@
                     length = allc.length;
                 $priceData.find('div').each(function(index, el) {
                     var name = $(this).attr('data-name'),
-                        value = $(this).find('span').text();
+                        spans = $(this).find('span');
                     if (name.split(',').length == length) {
-                        prices[name] = value;
+                        var pp = {};
+                        pp['price'] = spans.eq(0).text();
+                        pp['stock'] = spans.eq(1).text();
+                        prices[name] = pp;
                     }
 
                 });
@@ -604,8 +660,8 @@
                 });
                 itemData['prices'] = prices;
                 itemData['attr'] = allConfig;
-                console.log(prices)
-                console.log(allConfig)
+                //console.log(prices)
+                //console.log(allConfig)
             }
             $('#getData').click(function(event) {
                 getPriceData()
@@ -621,6 +677,8 @@
                 //获取编辑器信息
                 var v = editor.getValue()
                 itemData['detail'] = v;
+                //获取参数信息
+                getParams();
                 console.log(itemData);
             }
         });

@@ -79,8 +79,9 @@
 	</div>
 </div>
 
-	<?php if(!$data): ?><div class="nodata">
-			没有该商品
+	<?php if(empty($data)): ?><div class="nodata content-w">
+			<h1 class="title">商品编号：<?php echo ($id); ?> 不存在</h1>
+			<p class="return"><a href="/mall">返回首页</a></p>
 		</div>
 
 	<?php else: ?>

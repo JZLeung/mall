@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">商品列表</h1>
-                    <table class="table table-striped table-bordered table-hover">
+                    <table class="table table-striped table-bordered table-hover" id="itemlist">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -53,17 +53,16 @@
                         <tbody>
                             <define name="index" value="0" />
                             <foreach name="data" item="item">
-                                <tr>
+                                <tr data-id="{$item['_id']}">
                                     <td>{++$index}</td>
                                     <td><img src="{$item['pictures'][0]['src']}" alt="{$item['pictures'][0]['title']}" /></td>
                                     <td>{$item.name}</td>
                                     <td>{$item.title}</td>
                                     <td>{$item.price}</td>
                                     <td>
-                                        <a href="" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></a>
-                                        <a href="" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></a>
+                                        <a href="javascript:;" class="btn btn-info btn-circle btn-edit"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:;" class="btn btn-danger btn-circle btn-del"><i class="fa fa-trash-o"></i></a>
                                     </td>
-                                <hr>
                                 </tr>
                             </foreach>
                         </tbody>
@@ -74,4 +73,35 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="__PUBLIC__/Common/js/admin.base.js"></script>
+<script>
+    $(document).ready(function() {
+        var form = $('#itemlist');
+        function resetForm(){
+            form.find('tbody tr').each(function(index, el) {
+                $(this).find('td').eq(0).text(index+1);
+            });
+        }
+        $('#itemlist').on('click', '.btn-edit', function(event) {
+            event.preventDefault();
+            var id = findParentByTagName('tr',this).data('id');
+            location.href = '__ROOT__/Admin/Index/item_edit?id='+id;
+        }).on('click', '.btn-del', function(event) {
+            event.preventDefault();
+            var p = findParentByTagName('tr',this);
+            var id = p.data('id'),
+                name = p.find('td').eq(2).text();
+            if (confirm('确认要删除商品【'+name+'】吗？')) {
+                $.post('__ROOT__/Admin/Items/delItem', {id: id}, function(data) {
+                    console.log(data);
+                    if (data['ok'] == 1) {
+                        alert('删除成功');
+                        p.remove();
+                        resetForm()
+                    }
+                });
+            }
+        });
+    });
+</script>
 </body>

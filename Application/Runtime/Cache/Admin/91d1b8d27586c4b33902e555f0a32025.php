@@ -64,7 +64,7 @@
               <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 商品管理<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
                 <li>
-                  <a href="#"><i class="fa fa-th-large"></i> 商品列表</a>
+                  <a href="/mall/Admin/Index/item_list"><i class="fa fa-th-large"></i> 商品列表</a>
                 </li>
                 <li>
                   <a href="/mall/Admin/Index/item_add"><i class="fa fa-plus"></i> 添加商品</a>
@@ -120,7 +120,7 @@
             </div>
         <!-- /.col-lg-12 -->
         </div>
-        <div class="row">
+        <div class="row" style="padding-bottom: 50px;">
             <div class="col-lg-12">
             <form role="form" action="../Items/index" id="form" method="post" onsubmit="return false;">
                 <div class="panel panel-default">
@@ -133,7 +133,8 @@
                                 <!-- 上传图片 -->
                                 <div class="col-lg-3">
                                     <div class="list-group" id="piclist">
-                                        <?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$picture): ?><img class="img-thumbnail list-group-item" src="<?php echo ($picture["src"]); ?>" alt="<?php echo ($picture["title"]); ?>" data-src="<?php echo ($picture["src"]); ?>"><?php endforeach; endif; ?>
+                                        <?php define('pid', '0'); ?>
+                                        <?php if(is_array($data["pictures"])): foreach($data["pictures"] as $key=>$picture): ?><img class="img-thumbnail list-group-item" data-pid="<?php echo ++$pid;?>" src="<?php echo ($picture["src"]); ?>" alt="<?php echo ($picture["title"]); ?>" data-src="<?php echo ($picture["src"]); ?>"><?php endforeach; endif; ?>
                                         <div class="fileinput-button img-thumbnail list-group-item text-center" id="addImg" style="display: block;">
                                             <i class="fa fa-plus"></i>
                                             <input id="fileupload" type="file" name="fileupload">
@@ -317,12 +318,20 @@
                 </div>
                 <!-- /.panel -->
                 <div class="row">
-                    <button type="submit" id="submit" class="btn btn-default">Submit Button</button>
-                    <button type="reset" class="btn btn-default">Reset Button</button>
+
                 </div>
             </form>
             </div>
         </div>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+          <div class="container" style="padding: 7px;">
+              <div class="text-right">
+                  <button type="submit" id="submit" class="btn btn-default">提交</button>
+                  <button type="reset" class="btn btn-default">重置</button>
+                  <button class="btn btn-info btn-circle" id="toUp"><i class="fa fa-arrow-circle-o-up"></i></button>
+              </div>
+          </div>
+        </nav>
 	</div>
 
     <script type="text/javascript" src="/mall/Public/Common/js/simeditor/module.min.js"></script>
@@ -336,7 +345,8 @@
         var itemData = {},
             pid = 1,
             $fileupload = $('#fileupload'),
-            editor;
+            editor,
+            returnData;
         var curPrices = JSON.parse('<?php echo (json_encode($data["prices"])); ?>');
         $(document).ready(function() {
             var btn = $('#submit'),
@@ -347,20 +357,37 @@
                 table = $("#table");
 
             var default_img = '/mall/Public/Common/images/default.png';
-
+            //返回顶部
+            $('#toUp').click(function(e){
+                $('body').animate({'scrollTop': 0}, 500)
+            })
             //提交表单
             btn.on('click', function(event) {
                 event.preventDefault();
                 getAllData();
-                var id = '<?php echo ($data["id"]); ?>' || 0;
-                console.log(id)
-                itemData['id'] = id;
-                $.post('../Items/index', {data: itemData,id:id}, function(data, textStatus, xhr) {
+                var id = "<?php echo ($data['_id']); ?>" || 0;
+                var flag = id != 0 ? true : false;
+                itemData['id'] = "<?php echo ($data['id']); ?>" || 0;
+                $.post('../Items/index2', {data: itemData,'id':id}, function(data, textStatus, xhr) {
                     console.log(data);
-                });
+                    returnData = data;
+                    if (flag) {
+                        if (data.ok == 1) {
+                            alert('修改成功');
+                        }
+                        else{
+                            alert('修改失败，原因：'+data.errmsg)
+                        }
+                    }else{
+                        if (data['$id']) {
+                            alert('增加商品成功，点击确认跳转至详情页');
+                            location.href = '/mall/item/'+data['$id'];
+                        }else{
+                            alert('增加商品失败');
+                        }
+                    }
 
-                getItemData();
-                console.log(itemData);
+                });
                 return false;
             });
 
@@ -372,7 +399,7 @@
                 picshow.find('input').each(function(index, el) {
                     $(this).data('pid', $(me).data('pid')).val(me.alt);
                 });
-                console.log("You've selected the Image . PID is "+$(me).data('pid'));
+                //console.log("You've selected the Image . PID is "+$(me).data('pid'));
             }
             //点击选择图片
             piclist.on('click', 'img', function(event) {
@@ -541,7 +568,7 @@
                 configData = sc[1];
                 $selectedCon.text(configName);
                 $selectedCon.data('data', configData);
-                console.log(sc);
+                //console.log(sc);
             })
             //删除配置项
             $configs.on('click', '.delcon', function(event) {
