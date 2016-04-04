@@ -87,15 +87,19 @@ img{width: 100%;}
 		font-size: 1.2em;
 		/* &:nth-child(1){margin-left: 0} */
 	}
+	.selection{
+		flex-wrap:wrap;
+	}
 	.other-item {
-	    width: 60px;
+	    min-width: 60px;
 	    display: inline-block;
 	    border: 2px solid #5F5A5A;
 	    border-bottom-width: 6px;
 	    margin-right: 10px;
 	    padding: 15px;
 	    text-align: center;
-	    flex: 1;
+	    margin-bottom: 10px;
+	    //flex: 1;
 	    &.active{
 			border-color: #ef5b00;
 	    }

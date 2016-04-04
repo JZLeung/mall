@@ -52,7 +52,7 @@
 			$('#login-box').find('#submit').click(function(event) {
 				event.preventDefault();
 				$.ajax({
-					url: 'Admin/Passport/login',
+					url: 'Passport/login',
 					type: 'post',
 					dataType: 'json',
 					data: $('#form').serialize(),

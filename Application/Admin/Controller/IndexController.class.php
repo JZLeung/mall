@@ -2,11 +2,27 @@
 namespace Admin\Controller;
 use Think\Controller;
 class IndexController extends Controller {
-    public function index(){
-        //$system = new sysinfo();
+    public function _initialize(){
         $admin = cookie('admin');
         if (!$admin) {
-
+            $admin = session('?admin') ? session('admin') : null;
+            session('admin', $admin);
+            //$this->display('Passport/login-page');
+        }else{
+            //$systeminfo = getSystemInfo();
+            //$this->assign('info', $systeminfo);
+            
+            session('admin', $admin);
+            //cookie('admin', $admin, 600);
+            //$this->show();
+        }
+        //$this->show('_initialize');
+        $this->assign('admin', $admin);
+    }
+    public function index(){
+        //$system = new sysinfo();
+        /*$admin = cookie('admin');
+        if (!$admin) {
             $admin = session('?admin') ? session('admin') : null;
             $this->display('Passport/login-page');
         }else{
@@ -16,7 +32,8 @@ class IndexController extends Controller {
             session('admin', $admin);
             cookie('admin', $admin, 600);
             $this->show();
-        }
+        }*/
+        $this->show();
     }
     public function _empty($name){
         $this->display($name);
@@ -24,7 +41,10 @@ class IndexController extends Controller {
     public function item_edit($id = 0){
         $items = M('items');
         $data = $items->where(array('_id'=>$id))->find();
+        $data['detail'] = str_replace('data-lazyload', 'src', $data['detail']);
         $this->assign('data',  $data);
+        //echo "<pre>";
+        //print_r($data);
         $this->display();
     }
     public function item_list(){
