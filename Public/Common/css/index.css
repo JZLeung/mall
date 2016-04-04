@@ -90,6 +90,8 @@ a > img {
     padding: 15px 25px;
     background: #fafafa;
     text-align: center;
+    width: 160px;
+    margin-bottom: 10px;
 }
 .star-list .item:nth-child(2){
     margin-left: 0;
@@ -99,6 +101,8 @@ a > img {
     line-height: 1.2em;
     margin-top: 5px;
     margin-bottom: 10px;
+    overflow: hidden;
+    height: 1.2em;
 }
 .star-list .item .desc{
     margin-bottom: 10px;
@@ -106,4 +110,7 @@ a > img {
 }
 .star-list .item .price{
     color: #ff6709;
+}
+.star-list .item img.image {
+    width: 100%;
 }

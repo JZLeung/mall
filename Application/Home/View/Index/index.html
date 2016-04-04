@@ -43,7 +43,15 @@
 	<div class="star-list clear">
 		<div class="content-w">
 			<h1 class="header-2">明星产品</h1>
-			<div class="left item">
+			<foreach name="data" item="item" key="key">
+				<a class="left item" {$key%5==0?'style="margin-left:0"':''} href="item/{$item['_id']}">
+					<img src="{$item['pictures'][0]['src']}" alt="{$item['pictures'][0]['title']}" class="image">
+					<h4 class="title">{$item.name}</h4>
+					<p class="desc">{$data.subscribe}</p>
+					<p class="price">{$item.price}元</p>
+				</a>
+			</foreach>
+			<!-- <div class="left item">
 				<img src="__PUBLIC__/Common/images/4c.jpg" alt="" class="image">
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
@@ -72,7 +80,7 @@
 				<h4 class="title">小米4c</h4>
 				<p class="desc">高通骁龙808，发烧专用</p>
 				<p class="price">998元</p>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	
