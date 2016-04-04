@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 .cursor-w .nextbtn{
-    left: 200px;
+    left: 0;
     background: url(../images/icon-slides.png) no-repeat -84px 50%;
 }
 .cursor-w .nextbtn:hover{

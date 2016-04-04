@@ -55,9 +55,24 @@
 				</li>
 			</ul>
 		</div>
-		<div class="nav-search right">
-				<input type="text" class="search left">
+		<form action="__ROOT__/search" onsubmit="search.value = search.value.replace(/(^\s*)|(\s*$)/g, '')">
+		<div class="nav-search right" id="searchBox">
+				<input type="text" class="search left" name="search" value="{$Think.get.search}" id="search">
 				<input type="submit" class="submit">
 		</div>
+		</form>
 	</div>
 </div>
+<script>
+	var search = document.getElementById('search'),
+		box = document.getElementById('searchBox'),
+		oName = box.className;
+	if (search.value != '') {
+		box.className = oName + ' active';
+	}
+	search.addEventListener('blur', function(e){
+		if (this.value == '') {
+			box.className = oName;
+		}
+	})
+</script>

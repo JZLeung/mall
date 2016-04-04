@@ -13,9 +13,10 @@ return array(
 
     'URL_ROUTER_ON' => true,
     'URL_ROUTE_RULES' => array(
-        'login' => 'Home/Passport/toLogin',
-        'regist' => 'Home/Passport/toRegist',
-        '/^item\/(\w+)$/' => 'Home/Items/index?id=:1'
+        'login' => 'Home/Passport/toLogin',             //登陆
+        'regist' => 'Home/Passport/toRegist',           //注册
+        'search' => 'Home/Search/index',                //搜索
+        '/^item\/(\w+)$/' => 'Home/Items/index?id=:1'   //商品详情页
     ),
     //'配置项'=>'配置值'
     'DB_TYPE' => 'mongo', // 数据库类型

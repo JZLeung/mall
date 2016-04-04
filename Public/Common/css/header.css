@@ -47,7 +47,8 @@
     border: 1px solid #b0b0b0;
     height: 18px;
 }
-.nav-search .search:focus,.nav-search .search:focus + .submit{
+.nav-search .search:focus,.nav-search .search:focus + .submit, 
+.nav-search.active .search,.nav-search.active .submit{
   border-color: #ff6700;
 }
 .nav-search .submit {
