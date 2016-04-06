@@ -27,6 +27,7 @@ body {
 .login-box li {
   margin: 20px 0;
   text-align: center;
+  text-align: left;
 }
 .login-box input {
   padding: 15px;

@@ -15,6 +15,7 @@ return array(
     'URL_ROUTE_RULES' => array(
         'login' => 'Home/Passport/toLogin',             //登陆
         'regist' => 'Home/Passport/toRegist',           //注册
+        'logout' => 'Home/Passport/logout',             //退出登录
         'search' => 'Home/Search/index',                //搜索
         '/^item\/(\w+)$/' => 'Home/Items/index?id=:1'   //商品详情页
     ),

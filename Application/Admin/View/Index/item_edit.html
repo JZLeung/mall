@@ -293,27 +293,27 @@
             btn.on('click', function(event) {
                 event.preventDefault();
                 getAllData();
-                var id = "{$data['_id']}" || 0;
-                var flag = id != 0 ? true : false;
-                itemData['id'] = "{$data['id']}" || 0;
-                $.post('../Items/index2', {data: itemData,'id':id}, function(data, textStatus, xhr) {
+                var id = "{$data['_id']}";
+                //var flag = id != 0 ? true : false;
+                itemData['id'] = "{$data['id']}";
+                $.post('../Items/edit', {data: itemData,'id':id}, function(data, textStatus, xhr) {
                     console.log(data);
                     returnData = data;
-                    if (flag) {
+                    //if (flag) {
                         if (data.ok == 1) {
                             alert('修改成功');
                         }
                         else{
                             alert('修改失败，原因：'+data.errmsg)
                         }
-                    }else{
-                        if (data['$id']) {
-                            alert('增加商品成功，点击确认跳转至详情页');
-                            location.href = '__ROOT__/item/'+data['$id'];
-                        }else{
-                            alert('增加商品失败');
-                        }
-                    }
+                    // }else{
+                    //     if (data['$id']) {
+                    //         alert('增加商品成功，点击确认跳转至详情页');
+                    //         location.href = '__ROOT__/item/'+data['$id'];
+                    //     }else{
+                    //         alert('增加商品失败');
+                    //     }
+                    // }
 
                 });
                 return false;

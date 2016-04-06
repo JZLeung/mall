@@ -55,6 +55,14 @@ class PassportController extends Controller {
       cookie('user', $user, 360);
       echo json_encode($msg);
     }
+
+    public function logout(){
+        session('user' , null);
+        cookie('user', null);
+        $msg['code'] = 1;
+        $msg['msg'] = '退出成功';
+        $this->ajaxReturn($msg);
+    }
     private function findUserByName($username){
       $u = D('User');
       //var_dump($this->$u);
