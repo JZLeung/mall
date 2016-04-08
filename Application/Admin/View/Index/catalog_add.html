@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>添加商品 - 商城后台管理</title>
+
+    <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Common/css/simditor.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
+    <style>
+        .list-group-item{margin-bottom: 5px;}
+        td,th{text-align: center;}
+        .delcolbtn{margin-left: 10px}
+        .config-items{margin-top: 15px;}
+        .config-items a{margin-right: 5px;}
+
+        .param{margin-right: 10px;text-align: center;}
+        .well.active{color: #fff;background-color: #337ab7 !important;}
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+<include file='./Public/Template/Admin/_header_.html' />
+	<div id="page-wrapper">
+		<div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">添加目录</h1>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 50px;">
+            <div class="col-lg-12">
+                <h3 class="page-header">添加一级目录</h3>
+                
+            </div>
+
+        </div>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+          <div class="container" style="padding: 7px;">
+              <div class="text-right">
+                  <button type="submit" id="submit" class="btn btn-default">提交</button>
+                  <button type="reset" class="btn btn-default">重置</button>
+                  <button class="btn btn-info btn-circle" id="toUp"><i class="fa fa-arrow-circle-o-up"></i></button>
+              </div>
+          </div>
+        </nav>
+	</div>
+
+
+    <script src="__PUBLIC__/Common/js/ajaxfileupload.js"></script>
+    <script>
+    </script>
+</div>
+</body>
+</html>
