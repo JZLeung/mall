@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>添加商品 - 商城后台管理</title>
+    <title>编辑目录 - 商城后台管理</title>
 
     <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
     <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
@@ -28,13 +28,13 @@
 	<div id="page-wrapper">
 		<div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">添加目录</h1>
+                <h1 class="page-header">编辑目录</h1>
             </div>
         </div>
         <div class="row" style="padding-bottom: 50px;">
             <div class="col-lg-12">
                 <div class="form-inline">
-                    名字：<input type="text" class="form-control" id="caatalogName">
+                    名字：<input type="text" class="form-control" id="caatalogName" value="{$catalog.name}">
                     增加新子目录：
                     <div class="input-group">
                         <input type="text" class="form-control" id="childName">
@@ -42,7 +42,9 @@
                     </div>
                 </div>
                 <div id="catalogChild" class="catalog">
-                    
+                    <foreach name="catalog.children" item="child">
+                        <label for="" class="well">{$child}</label>
+                    </foreach>
                 </div>
             </div>
             
@@ -71,17 +73,35 @@
             $childName = $('#childName');
         //$(".catalog").disableSelection();
         //添加子目录
+
+        function getCatalog(){
+            var child = [];
+            $child.find('label').each(function(index, el) {
+                child.push($(this).text())
+            });
+            return {
+                name: $caatalogName.val(),
+                children: child
+            };
+        }
+
         $addChild.click(function(event) {
             var name = $childName.val();
             $child.append(`<label class="well">${name}</label>`);
         });
 
-        $("#submit").click(function(event) {
-            var catalog = getCatalog();
-            console.log(catalog);
-        });
+        $('#submit').click(function(event) {
+            var catalog = getCatalog(),
+                id = {$catalog.id};
+            console.log()
+            $.post('../Catalog/edit', {data: catalog,id:id}, function(data, textStatus, xhr) {
+                console.log(data)
+                if (data.ok == 1) {
+                    alert('修改成功');
+                }
+            });
 
-        
+        });
     });
     </script>
 </div>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>目录列表 - 商城后台管理</title>
+
+    <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Common/css/simditor.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
+    <style>
+        label.well{display: inline-block;margin-right: 10px;float: left;}
+        .catalog{margin-top: 10px;}
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+<include file='./Public/Template/Admin/_header_.html' />
+	<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h2>目录列表</h2></div>
+                        <div class="panel-body" id="catalogs">
+                            <foreach name="catalogs" item="catalog">
+                            <div class="row">
+                                <div class="col-lg-12 parent">
+                                    <h3>
+                                        {$catalog.name}
+                                        <small style="float: right;">
+                                            编辑该类目
+                                            <a href="catalog_edit?id={$catalog.id}" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                        </small>
+                                    </h3>
+                                    <div class="catalog">
+                                        <foreach name="catalog.children" item="child">
+                                        <label class="well">
+                                            {$child}
+                                        </label>
+                                        </foreach>
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        </div>
+                        <div class="panel-footer text-center">
+                            增加新类目
+                            <a href="catalog_add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Common/js/admin.base.js"></script>
+
+<!-- <script type="text/javascript" src="__PUBLIC__/Common/js/dataTables.bootstrap.min.js"></script> -->
+<script>
+    $(document).ready(function() {
+    });
+</script>
+</body>

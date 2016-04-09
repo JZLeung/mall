@@ -18,30 +18,43 @@ class IndexController extends Controller {
     public function _empty($name){
         $this->display($name);
     }
+
+    /*商品类*/
+    //编辑商品
     public function item_edit($id = 0){
-        $items = M('items');
-        $data = $items->where(array('_id'=>$id))->find();
-        $data['detail'] = str_replace('data-lazyload', 'src', $data['detail']);
-        $this->assign('data',  $data);
-        //echo "<pre>";
-        //print_r($data);
+        $items = A('Items');
+        $this->assign('data',  $items->getItem($id));
         $this->display();
     }
+    //查看所有商品
     public function item_list(){
-        $items = M('items');
-        $data = $items->select();
-        $this->assign('data',  $data);
+        $items = A('Items');
+        $this->assign('data', $items->getAllItem());
         $this->display();
     }
 
-    public function catalog_list(){
 
+    /*目录类*/
+    //查看所有目录
+    public function catalog_list(){
+        $catalogs = A('Catalog');
+        $this->assign('catalogs',  $catalogs->getAllCatalogs());
+        $this->display();
+    }
+    //编辑目录
+    public function catalog_edit(){
+        $id = I('get.id');
+        $catalog = A('catalog');
+        //echo "<pre>";
+        //print_r($catalog->getCatalog($id));
+        $this->assign('catalog',  $catalog->getCatalog($id));
+        $this->display();
     }
 
+    /*用户类*/
     public function user_list(){
-        $users = M('user');
-        $userList = $users->select();
-        $this->assign('users',  $userList);
+        $users = A('user');
+        $this->assign('users',  $users->getAllUsers());
         $this->display();
     }
 }
