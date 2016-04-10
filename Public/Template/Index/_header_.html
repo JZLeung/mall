@@ -38,8 +38,22 @@
 		</div>
 		<div class="nav-bar left">
 			<ul class="horizon-list clear">
-				<li class="list-item">
+				<foreach name="catalogs" item="catalog">
+					<li class="list-item">
+						<a href="__ROOT__/catalog/{$catalog.id}">{$catalog.name}</a>
+						<div class="sub-items">
+							<define name="index" value="0" />
+							<foreach name="catalog.children" item="child" key="key">
+								<a href="__ROOT__/catalog/{$catalog.id}/{$key}">{$child}</a>
+							</foreach>
+						</div>
+					</li>
+				</foreach>	
+				<!-- <li class="list-item">
 					<a href="javascipt:;">分类1</a>
+					<div class="sub-items">
+						
+					</div>
 				</li>
 				<li class="list-item">
 					<a href="javascipt:;">分类2</a>
@@ -52,7 +66,7 @@
 				</li>
 				<li class="list-item">
 					<a href="javascipt:;">分类5</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<form action="__ROOT__/search" onsubmit="search.value = search.value.replace(/(^\s*)|(\s*$)/g, '')">

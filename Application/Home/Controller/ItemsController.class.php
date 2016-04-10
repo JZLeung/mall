@@ -2,7 +2,14 @@
 namespace Home\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
-
+    function _initialize(){
+        $catalogs = session('?catalogs') ? session('catalogs') : null;
+        if (!$catalogs) {
+            $catalogs = A('Catalog')->getAllCatalog();
+            session('catalogs', $catalogs);
+        }
+        $this->assign('catalogs', $catalogs);
+    }
     //商品详情页
     public function index($id){
         $items = M('items');
