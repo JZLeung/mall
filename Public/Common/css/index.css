@@ -114,3 +114,23 @@ a > img {
 .star-list .item img.image {
     width: 100%;
 }
+
+/*分页*/
+.page {
+    padding: 15px;
+    text-align: center;
+}
+
+.page a {
+    padding: 5px 10px;
+    font-size: 15px;
+    border: 1px solid #555;
+    margin: 5px;
+}
+.page .current{
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 15px;
+    border: 1px solid #ff6709;
+    background: #ff6709;
+}

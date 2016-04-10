@@ -17,7 +17,9 @@ return array(
         'regist' => 'Home/Passport/toRegist',           //注册
         'logout' => 'Home/Passport/logout',             //退出登录
         'search' => 'Home/Search/index',                //搜索
-        '/^item\/(\w+)$/' => 'Home/Items/index?id=:1'   //商品详情页
+        '/^item\/(\w+)$/' => 'Home/Items/index?id=:1',  //商品详情页
+        '/^catalog\/(\w+)\/(\w+)/' => 'Home/Items/getItemsByCatalog?lm1=:1&lm2:2',
+        '/^catalog\/(\w+)$/' => 'Home/Items/getItemsByCatalog?lm1=:1&lm2=-1'
     ),
     //'配置项'=>'配置值'
     'DB_TYPE' => 'mongo', // 数据库类型

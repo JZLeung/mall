@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜索结果 —— 商城</title>
+	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
+</head>
+<body>
+	<include file='./Public/Template/Index/_header_.html' />
+	<div class="star-list ">
+		
+		<div class="content-w">
+			<div class="head-nav">
+				<div class="content-w">
+					<a href="__ROOT__">首页</a>
+					<span class="nav-sub">/</span>
+					<a href="javascript:;">{$catalog[0]}</a>
+					<span class="nav-sub">/</span>
+					<a href="javascript:;">{$catalog[1]}</a>
+				</div>
+			</div>
+			<div class="item-list clear">
+			<foreach name="data" item="item" key="key">
+				<a class="left item" {$key%5==0?'style="margin-left:0"':''} href="__ROOT__/item/{$item['_id']}">
+					<img src="{$item['pictures'][0]['src']}" alt="{$item['pictures'][0]['title']}" class="image">
+					<h4 class="title">{$item.name}</h4>
+					<p class="desc">{$data.subscribe}</p>
+					<p class="price">{$item.price}元</p>
+				</a>
+			</foreach>
+			</div>
+			<div class="page">
+				{$page}
+			</div>
+		</div>
+	</div>
+
+</body>

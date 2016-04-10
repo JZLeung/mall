@@ -8,7 +8,9 @@ class CatalogController extends Controller {
     public function getItemCatalog($lm1, $lm2){
         $catalog = $this->getCatalog($lm1);
         $data[] = $catalog['name'];
-        $data[] = $catalog['children'][$lm2];
+        if ($lm2 != -1) {
+            $data[] = $catalog['children'][$lm2];
+        }
         return $data;
     }
 
@@ -21,4 +23,6 @@ class CatalogController extends Controller {
         $catalogs = M('catalog');
         return $catalogs->where(array('id' => (int)$id))->find();
     }
+
+    
 }
