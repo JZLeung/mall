@@ -33,12 +33,13 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h2>目录列表</h2></div>
                         <div class="panel-body" id="catalogs">
+                            <define name="index" value="0" />
                             <foreach name="catalogs" item="catalog">
-                            <div class="row parent well" data-id="{$catalog['_id']}">
+                            <div class="row parent well" data-id="{$catalog['_id']}" data-position="{++$index}">
                                 <div class="col-lg-12">
                                     <h3><span>{$catalog.name}</span><small style="float: right;">
-                                            编辑该类目
-                                            <a href="catalog_edit?id={$catalog.id}" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                            <a href="catalog_edit?id={$catalog.id}" alt="编辑该类目" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                            <a href="" alt="编辑该类目" class="btn btn-danger btn-sm del"><i class="fa fa-trash-o"></i></a>
                                         </small>
                                     </h3>
                                     <div class="catalog">
@@ -56,9 +57,9 @@
                             增加新类目
                             <a href="catalog_add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></a>
 
-                            <div style="float: left;">
+                            <!-- <div style="float: left;">
                                 保存顺序<a href="" class="btn btn-success btn-sm" id="save"><i class="fa fa-plus"></i></a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -71,42 +72,46 @@
 <!-- <script type="text/javascript" src="__PUBLIC__/Common/js/dataTables.bootstrap.min.js"></script> -->
 <script>
     $(document).ready(function() {
-        $("#catalogs").sortable();
-        $("#catalogs").disableSelection();
+        //$("#catalogs").sortable();
+        //$("#catalogs").disableSelection();
 
         
             
-
+        //保存排序
         $('#save').click(function(event) {
             var $catalog = $('.parent'),
                 catalogs = [];
             event.preventDefault();
             $catalog.each(function(index, el) {
-                /*var name = $.trim($(this).find('h3 span').text()),
-                    $child = $(this).find('label'),
-                    children = [];
-                $child.each(function(index2, el2) {
-                    children.push($.trim($(this).text()));
-                });
-                catalogs.push({
-                    name: name,
-                    children: children,
-                    id: index
-                });*/
                 var id = $(this).data('id');
                 catalogs.push({
                     _id: id,
-                    id: index
+                    position: index
                 });
             });
             console.log(catalogs);
             $.post('../Catalog/sort', {data:catalogs}, function(data, textStatus, xhr) {
-                if (!data.join('').indexOf(0) == -1) {
+                //console.log(data.join('').indexOf(0))
+                if (data.join('').indexOf(0) == -1) {
                     alert('保存排序成功');
                 }
             });
         });
-
+        //删除父目录
+        $('#catalogs').on('click', '.del', function(event) {
+            event.preventDefault();
+            if (confirm('要删除该目录吗？')) {
+                var p = findParentByClassName('parent', this);
+                var id = p.data('id');
+                $.post('../Catalog/delete', {id:id}, function(data) {
+                    console.log(data)
+                    if (data['ok'] == 1) {
+                        alert('删除成功');
+                        p.remove();
+                    }
+                });
+            }
+        });
     }); 
 </script>
 </body>

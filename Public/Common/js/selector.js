@@ -17,12 +17,13 @@
 		this.init()
 		return {
 			getValue: this.getValue,
+			setValue: this.setValue,
 			doms: this.doms,
 			opts: this.opt
 		};
 	}
-	
-	
+
+
 	selector.prototype = {
 		init:function(){
 			this.setOptions(1,'0');
@@ -38,7 +39,7 @@
 					if(dom){
 						selects.push(dom);
 					}
-						
+
 				}
 			}
 			return selects;
@@ -49,7 +50,7 @@
 				value.push(this.doms[i].selectedIndex);
 			}
 			this.setOptions(index+1, value.join('_'));
-			
+
 		},
 		setOptions: function(index, dataname){
 			if(index > this.doms.length){return}
@@ -68,6 +69,15 @@
 				value.push(s[i].options[s[i].selectedIndex].text);
 			}
 			return value;
+		},
+		setValue:function(value){
+			//console.log(selector);
+			if (value instanceof Array || value instanceof Object) {
+				for (var i = 0; i < value.length; i++) {
+					this.doms[i].selectedIndex = value[i];
+					this.doms[i].onchange();
+				}
+			}
 		}
 	};
 	window.selector = selector;

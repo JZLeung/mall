@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>添加商品 - 商城后台管理</title>
+    <title>添加目录 - 商城后台管理</title>
 
     <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
     <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
@@ -17,7 +17,8 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Common/css/simditor.css" />
     <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
     <style>
-        label.well{display: inline-block;margin-right: 10px;float: left;}
+        .label.well{display: inline-block;margin-right: 10px;float: left;color: black;position: relative;}
+        .label .del{position: absolute;right: 2px;top: 2px;font-size: 15px;color: red;}
         .catalog{margin-top: 10px;}
     </style>
 </head>
@@ -25,8 +26,8 @@
 <body>
 <div id="wrapper">
 <include file='./Public/Template/Admin/_header_.html' />
-	<div id="page-wrapper">
-		<div class="row">
+    <div id="page-wrapper">
+        <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">添加目录</h1>
             </div>
@@ -42,7 +43,6 @@
                     </div>
                 </div>
                 <div id="catalogChild" class="catalog">
-                    
                 </div>
             </div>
             
@@ -56,7 +56,7 @@
               </div>
           </div>
         </nav>
-	</div>
+    </div>
 
 
     <script src="__PUBLIC__/Common/js/ajaxfileupload.js"></script>
@@ -71,17 +71,43 @@
             $childName = $('#childName');
         //$(".catalog").disableSelection();
         //添加子目录
+
+        function getCatalog(){
+            var child = [];
+            $child.find('.label').each(function(index, el) {
+                child.push($.trim($(this).text()))
+            });
+            return {
+                name: $caatalogName.val(),
+                children: child
+            };
+        }
+
         $addChild.click(function(event) {
             var name = $childName.val();
-            $child.append(`<label class="well">${name}</label>`);
+            $child.append(`<div class="well label">
+                            ${name} <a href="" class="del"><i class="fa fa-trash-o"></i></a>
+                        </div>`);
         });
 
-        $("#submit").click(function(event) {
+        $child.on('click', '.del', function(event) {
+            event.preventDefault();
+            if (confirm('确认要删除该子目录？')) {
+                $(this).parent().remove();
+            }
+        });
+
+        $('#submit').click(function(event) {
             var catalog = getCatalog();
-            console.log(catalog);
-        });
+            console.log(catalog)
+            $.post('../Catalog/add', {data: catalog}, function(data, textStatus, xhr) {
+                console.log(data)
+                if (data.ok == 1) {
+                    alert('添加成功');
+                }
+            });
 
-        
+        });
     });
     </script>
 </div>

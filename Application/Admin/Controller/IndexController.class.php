@@ -45,8 +45,6 @@ class IndexController extends Controller {
     public function catalog_edit(){
         $id = I('get.id');
         $catalog = A('catalog');
-        //echo "<pre>";
-        //print_r($catalog->getCatalog($id));
         $this->assign('catalog',  $catalog->getCatalog($id));
         $this->display();
     }

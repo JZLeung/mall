@@ -278,8 +278,9 @@
                     selecotor:['s1', 's2'],
                     data:data
                 })
-                document.getElementById('s1').selectedIndex = '{$data.lm1}' || 0;
-                document.getElementById('s2').selectedIndex = '{$data.lm2}' || 0;
+                selectors.setValue(['{$data.lm1}' || 0 , '{$data.lm2}' || 0])
+                //document.getElementById('s1').selectedIndex = '{$data.lm1}' || 0;
+                //document.getElementById('s2').selectedIndex = '{$data.lm2}' || 0;
             });
 
 

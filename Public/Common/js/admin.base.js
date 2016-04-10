@@ -1,8 +1,10 @@
 //根据className寻找父元素
 function findParentByClassName(className, childNode){
     var p = $(childNode).parent();
-    while(!p.hasClass(className)  && p[0] != window){
+    var i = 0;
+    while(!p.hasClass(className)  && p[0] != window && i < 20){
         p = p.parent();
+        i++;
     }
     return p;
 }
