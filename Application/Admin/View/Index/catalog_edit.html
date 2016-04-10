@@ -17,7 +17,8 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Common/css/simditor.css" />
     <link rel="stylesheet" href="__PUBLIC__/Common/css/jquery.fileupload.css">
     <style>
-        label.well{display: inline-block;margin-right: 10px;float: left;}
+        .label.well{display: inline-block;margin-right: 10px;float: left;color: black;position: relative;}
+        .label .del{position: absolute;right: 2px;top: 2px;font-size: 15px;color: red;}
         .catalog{margin-top: 10px;}
     </style>
 </head>
@@ -43,7 +44,9 @@
                 </div>
                 <div id="catalogChild" class="catalog">
                     <foreach name="catalog.children" item="child">
-                        <label for="" class="well">{$child}</label>
+                        <div class="well label">
+                            {$child} <a href="" class="del"><i class="fa fa-trash-o"></i></a>
+                        </div>
                     </foreach>
                 </div>
             </div>
@@ -76,8 +79,8 @@
 
         function getCatalog(){
             var child = [];
-            $child.find('label').each(function(index, el) {
-                child.push($(this).text())
+            $child.find('.label').each(function(index, el) {
+                child.push($.trim($(this).text()))
             });
             return {
                 name: $caatalogName.val(),
@@ -87,7 +90,16 @@
 
         $addChild.click(function(event) {
             var name = $childName.val();
-            $child.append(`<label class="well">${name}</label>`);
+            $child.append(`<div class="well label">
+                            ${name} <a href="" class="del"><i class="fa fa-trash-o"></i></a>
+                        </div>`);
+        });
+
+        $child.on('click', '.del', function(event) {
+            event.preventDefault();
+            if (confirm('确认要删除该子目录？')) {
+                $(this).parent().remove();
+            }
         });
 
         $('#submit').click(function(event) {

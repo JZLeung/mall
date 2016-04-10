@@ -3,10 +3,6 @@ namespace Home\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
     public function index($id){
-        //echo $id;
-        /*if (strlen($id) != 24) {
-            $data = null;
-        }else{*/
         $items = M('items');
         if (strlen($id) == 24) {
             try {
@@ -32,21 +28,16 @@ class ItemsController extends Controller {
                 $data = null;
             }
         }
-        //}
-
-        //print_r($data);
-        /*foreach($datas as $k => $v){
-            $data = $datas[$k];
-        }*/
 
         if ($data) {
             $data['detail'] = htmlspecialchars_decode($data['detail']);
         }
-        // echo "<pre>";
-        // print_r($data);
+
+        $catalog = A('Catalog')->getItemCatalog($data['lm1'],$data['lm2']);
 
         $this->assign('data', $data);
         $this->assign('prices', $prices);
+        $this->assign('catalog', $catalog);
         $this->assign('id', $id);
         $this->display('test');
     }
