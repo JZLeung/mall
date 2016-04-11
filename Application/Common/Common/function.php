@@ -4,7 +4,7 @@
 */
 function sendMail($to, $title, $content) {
 
-	Vendor('PHPMailer.PHPMailerAutoload');     
+	Vendor('PHPMailer.PHPMailerAutoload');
 	$mail = new PHPMailer(); //实例化
 	$mail->IsSMTP(); // 启用SMTP
 	$mail->Host=C('MAIL_HOST'); //smtp服务器的名称（这里以QQ邮箱为例）
@@ -38,4 +38,15 @@ function findLastId($name, $db){
     );
     $id = $db->command($command);
     return $id['value']['id'];
+}
+
+function array2string($array){
+	foreach ($array as $key => $value) {
+		if (is_array($value)) {
+			$data[] = "[$key] => " . array2string($value);
+		}else {
+			$data[] = "[$key] => " . $value;
+		}
+	}
+	return 'Array( '.implode($data, ",").' )';
 }

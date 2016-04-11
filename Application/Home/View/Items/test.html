@@ -31,9 +31,9 @@
 		<div class="content-w">
 			<a href="javascript:;">首页</a>
 			<span class="nav-sub">/</span>
-			<a href="javascript:;">{$catalog[0]}</a>
+			<a href="__ROOT__/catalogs/{$c[0]['id']}">{$c[0]['name']}</a>
 			<span class="nav-sub">/</span>
-			<a href="javascript:;">{$catalog[1]}</a>
+			<a href="__ROOT__/catalogs/{$c[0]['id']}/{$c[1]['id']}">{$c[1]['name']}</a>
 			<span class="nav-sub">/</span>
 			<a href="javascript:;">{$data.name}</a>
 		</div>

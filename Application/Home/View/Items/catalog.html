@@ -12,18 +12,19 @@
 <body>
 	<include file='./Public/Template/Index/_header_.html' />
 	<div class="star-list ">
-		
+
 		<div class="content-w">
-			<div class="head-nav">
-				<div class="content-w">
-					<a href="__ROOT__">首页</a>
-					<span class="nav-sub">/</span>
-					<a href="javascript:;">{$catalog[0]}</a>
-					<span class="nav-sub">/</span>
-					<a href="javascript:;">{$catalog[1]}</a>
-				</div>
-			</div>
+
 			<div class="item-list clear">
+				<div class="head-nav">
+					<div class="content-w">
+						<a href="__ROOT__">首页</a>
+						<span class="nav-sub">/</span>
+						<a href="javascript:;">{$c[0]['name']}</a>
+						<span class="nav-sub">/</span>
+						<a href="javascript:;">{$c[1]['name']}</a>
+					</div>
+				</div>
 			<foreach name="data" item="item" key="key">
 				<a class="left item" {$key%5==0?'style="margin-left:0"':''} href="__ROOT__/item/{$item['_id']}">
 					<img src="{$item['pictures'][0]['src']}" alt="{$item['pictures'][0]['title']}" class="image">

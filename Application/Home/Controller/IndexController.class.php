@@ -4,11 +4,16 @@ use Think\Controller;
 class IndexController extends Controller {
 
     function _initialize(){
-        $catalogs = session('?catalogs') ? session('catalogs') : null;
-        if (!$catalogs) {
+        // $catalogs = session('?catalogs') ? session('catalogs') : null;
+        // if (!$catalogs) {
             $catalogs = A('Catalog')->getAllCatalog();
-            session('catalogs', $catalogs);
-        }
+            //session('catalogs', $catalogs);
+        // }
+        // for ($i=0; $i < count($catalogs); $i++) {
+        //     if (is_array($catalogs[$i]['id'])) {
+        //         $catalogs[$i]['id'] = $catalogs[$i]['id']['$numberLong'];
+        //     }
+        // }
         $this->assign('catalogs', $catalogs);
     }
 
@@ -26,6 +31,6 @@ class IndexController extends Controller {
         $data = $items->select();
         $this->assign('data', $data);
     	$this->display();
-        
+
     }
 }

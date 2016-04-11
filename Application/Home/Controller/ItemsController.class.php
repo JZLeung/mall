@@ -3,11 +3,16 @@ namespace Home\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
     function _initialize(){
-        $catalogs = session('?catalogs') ? session('catalogs') : null;
-        if (!$catalogs) {
+        // $catalogs = session('?catalogs') ? session('catalogs') : null;
+        // if (!$catalogs) {
             $catalogs = A('Catalog')->getAllCatalog();
-            session('catalogs', $catalogs);
-        }
+            //session('catalogs', $catalogs);
+        // }
+        // for ($i=0; $i < count($catalogs); $i++) {
+        //     if (is_array($catalogs[$i]['id'])) {
+        //         $catalogs[$i]['id'] = $catalogs[$i]['id']['$numberLong'];
+        //     }
+        // }
         $this->assign('catalogs', $catalogs);
     }
     //商品详情页
@@ -46,7 +51,7 @@ class ItemsController extends Controller {
 
         $this->assign('data', $data);
         $this->assign('prices', $prices);
-        $this->assign('catalog', $catalog);
+        $this->assign('c', $catalog);
         $this->assign('id', $id);
         $this->display('test');
     }
@@ -81,12 +86,13 @@ class ItemsController extends Controller {
             $where = array('lm1' => $lm1);
         }
         //print_r($where);
-        
+
         $items = M('items');
-        
+
         //获取目录导航
         $catalog = A('Catalog')->getItemCatalog($lm1, $lm2);
-        $this->assign('catalog', $catalog);
+        //print_r($catalog);
+        $this->assign('c', $catalog);
         //获取分页
         $Page = new \Think\Page($items->where($where)->count(),15);// 实例化分页类 传入总记录数和每页显示的记录数
         $show = $Page->show();// 分页显示输出
