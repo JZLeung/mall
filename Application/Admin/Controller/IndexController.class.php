@@ -27,9 +27,10 @@ class IndexController extends Controller {
         $this->display();
     }
     //查看所有商品
-    public function item_list(){
+    public function item_list($lm1=-1, $lm2=-1){
         $items = A('Items');
-        $this->assign('data', $items->getAllItem());
+        $data = $items->getItems($lm1, $lm2);
+        $this->assign('data', $data);
         $this->display();
     }
 

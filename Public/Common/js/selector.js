@@ -4,6 +4,7 @@
 	var selector = function (options){
 		this.opt = options;
 		this.data = options.data;
+		this.default = options.default;
 		this.doms = this.getSelectors();
 		this.value = [];
 		var me = this;
@@ -47,7 +48,8 @@
 		changeFunc: function(index){
 			var value = [0];
 			for(var i = 0 ; i < index ; i ++){
-				value.push(this.doms[i].selectedIndex);
+				var s = this.doms[i];
+				value.push(s.options[s.selectedIndex].value);
 			}
 			this.setOptions(index+1, value.join('_'));
 
@@ -57,9 +59,17 @@
 			var s = this.doms[index-1],
 				data = this.data[dataname] || [];
 			s.options.length = 0;
-			for (var i = 0 ; i < data.length ; i++) {
-				s.options[i] = new Option(data[i], i);
+			if (this.default) {
+				s.options[0] = new Option(this.default[index-1], -1);
+				for (var i = 0 ; i < data.length ; i++) {
+					s.options[i+1] = new Option(data[i], i);
+				}
+			}else{
+				for (var i = 0 ; i < data.length ; i++) {
+					s.options[i] = new Option(data[i], i);
+				}
 			}
+
 			this.setOptions(index+1, dataname+'_0');
 		},
 		getValue:function(){
@@ -70,13 +80,27 @@
 			}
 			return value;
 		},
-		setValue:function(value){
-			//console.log(selector);
+		setValue:function(value, selectValue){
 			if (value instanceof Array || value instanceof Object) {
-				for (var i = 0; i < value.length; i++) {
-					this.doms[i].selectedIndex = value[i];
-					this.doms[i].onchange();
+				if (selectValue) {
+					var selects = this.doms;
+					for (var i = 0; i < value.length; i++) {
+						var s = selects[i];
+						for (var j = 0; j < s.options.length; j++) {
+							if (s.options[j].value == value[i]) {
+								s.selectedIndex = j;
+								s.onchange();
+								break;
+							}
+						}
+					}
+				}else{
+					for (var i = 0; i < value.length; i++) {
+						this.doms[i].selectedIndex = value[i];
+						this.doms[i].onchange();
+					}
 				}
+
 			}
 		}
 	};

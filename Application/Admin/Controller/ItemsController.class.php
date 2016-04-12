@@ -35,6 +35,20 @@ class ItemsController extends Controller {
         return $data;
     }
 
+    public function getItems($lm1, $lm2){
+        if ($lm1 == -1) {
+            return self::getAllItem();
+        }else{
+            $items = M('items');
+            if ($lm2 == -1) {
+                $where = array('lm1' => $lm1);
+            }else{
+                $where = array('lm1' => $lm1, 'lm2' => $lm2);
+            }
+            return $items->where($where)->select();
+        }
+    }
+
     public function getAllItem(){
         $items = M('items');
         return $items->select();

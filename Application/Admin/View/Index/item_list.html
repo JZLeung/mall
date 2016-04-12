@@ -37,6 +37,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">商品列表</h1>
+                    <div class="row" style="margin-bottom: 10px">
+                    <form action="" method="get">
+                        <div class="form-inline">
+                            根据类目分类搜索：类目1：
+                            <select class="form-control" name="lm1" id="s1">
+                            </select>
+                            类目2：
+                            <select class="form-control" name="lm2" id="s2">
+                            </select>
+                            <input type="submit" class="btn btn-info" value="搜索">
+                        </div>
+                    </form>
+                    </div>
                     <table class="table table-striped table-bordered table-hover" id="itemlist">
                         <thead>
                             <tr>
@@ -77,11 +90,28 @@
 <script type="text/javascript" src="__PUBLIC__/Common/js/admin.base.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Common/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Common/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Common/js/selector.js"></script>
 <script>
-
+    var selectors, catalogData;
     $(document).ready(function() {
         var form = $('#itemlist');
+            
         $('#itemlist').DataTable();
+
+        $.get('../Catalog/getAllCatalogsFront', function(data) {
+            catalogData = data;
+            selectors = new selector({
+                //selecotor:['#s1', '#s2', '#s3']
+                selecotor:['s1', 's2'],
+                data:data,
+                default: ['全部', '全部']
+            })
+            selectors.setValue([-1], true);
+            //selectors.setValue(['{$data.lm1}' || 0 , '{$data.lm2}' || 0])
+            //document.getElementById('s1').selectedIndex = '{$data.lm1}' || 0;
+            //document.getElementById('s2').selectedIndex = '{$data.lm2}' || 0;
+        });
+
         function resetForm(){
             form.find('tbody tr').each(function(index, el) {
                 $(this).find('td').eq(0).text(index+1);
