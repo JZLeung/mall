@@ -7,6 +7,8 @@ class UserController extends Controller {
         $this->assign('catalogs', $catalogs);
     }
 	public function index(){
-		$this->show();
+		$user = session('user');
+		$this->assign('user', $user);
+		$this->display();
 	}
 }

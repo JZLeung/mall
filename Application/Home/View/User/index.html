@@ -8,9 +8,62 @@
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
 </head>
-<body>
+<body style="background: #f5f5f5">
 	<include file='./Public/Template/Index/_header_.html' />
-	
+	<div class="content-w clear">
+		<nav class="nav">
+			<a href="__ROOT__">首页</a>
+			<span class="gt"></span>
+			<a href="">用户中心</a>
+		</nav>
+		<include file='./Public/Template/User/_sidebar_.html' />
+		<div class="user-center ">
+			<div class="portrait left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+			<div class="main-info clear">
+				<div class="userinfo panel left">
+					<h3 class="username">{$user.username}</h3>
+					<p style="margin-bottom: 10px;">晚上好</p>
+					<p><a href="" class="active">修改个人信息 ></a></p>
+				</div>
+				<div class="userinfo panel left">
+					<p>绑定邮箱：{$user.eamil}</p>
+					<p>绑定手机：{$user.phone}</p>
+				</div>
+			</div>
+			<div class="other-info clear">
+				<div class="panel left">
+					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="desc">
+						<h3>待支付的订单：</h3>
+						<p>查看待支付的订单 ></p>
+					</div>
+				</div>
+				<div class="panel left">
+					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="desc">
+						<h3>待支付的订单：</h3>
+						<p>查看待支付的订单 ></p>
+					</div>
+				</div>
+				<div class="panel left">
+					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="desc">
+						<h3>待支付的订单：</h3>
+						<p>查看待支付的订单 ></p>
+					</div>
+				</div>
+				<div class="panel left">
+					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="desc">
+						<h3>待支付的订单：</h3>
+						<p>查看待支付的订单 ></p>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 </body>
 </html>

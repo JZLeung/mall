@@ -1,0 +1,86 @@
+.sidebar {
+  width: 160px;
+  background: #fff;
+  padding-left: 50px;
+  padding-top: 40px;
+}
+.sidebar .action-list {
+  width: 100%;
+  margin: 10px 0 20px;
+}
+.sidebar .action {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 14px;
+  display: block;
+}
+.sidebar .action.action-head {
+  font-weight: bold;
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.sidebar .action.active {
+  color: #ff6700;
+}
+
+img {
+  width: 100%;
+}
+
+.user-center {
+  width: 880px;
+  margin-left: 220px;
+  min-height: 10px;
+  background: #fff;
+  padding: 50px 0 20px;
+  position: relative;
+}
+.user-center .portrait {
+  width: 150px;
+  overflow: hidden;
+  border-radius: 9999px;
+  position: absolute;
+  top: 50px;
+  left: 25px;
+}
+.user-center .userinfo {
+  padding-top: 40px;
+  font-size: 14px;
+}
+.user-center h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+.user-center p {
+  padding: 10px 0;
+}
+.user-center .panel {
+  width: 50%;
+}
+.user-center .panel .img {
+  width: 100px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.user-center .panel .desc {
+  margin-top: 20px;
+  margin-left: 110px;
+}
+.user-center .active {
+  color: #ff6700;
+}
+.user-center .main-info {
+  border-bottom: 1px solid #EFEFEF;
+  padding-left: 200px;
+  width: 630px;
+  margin: auto;
+  height: 190px;
+}
+.user-center .other-info {
+  margin-left: 25px;
+  margin-top: 50px;
+}
+.user-center .other-info .panel {
+  margin-bottom: 40px;
+}
