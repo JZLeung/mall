@@ -18,8 +18,9 @@ return array(
         'logout' => 'Home/Passport/logout',             //退出登录
         'search' => 'Home/Search/index',                //搜索
         '/^item\/(\w+)$/' => 'Home/Items/index?id=:1',  //商品详情页
-        'catalogs/:lm1/:lm2' => 'Home/Items/getItemsByCatalog',
-        '/^catalogs\/(\d+)$/' => 'Home/Items/getItemsByCatalog?lm1=:1&lm2=-1'
+        'catalogs/:lm1/:lm2' => 'Home/Items/getItemsByCatalog', //根据目录搜索商品
+        '/^catalogs\/(\d+)$/' => 'Home/Items/getItemsByCatalog?lm1=:1&lm2=-1',
+        'user' => 'Home/User/Index'
     ),
     //'配置项'=>'配置值'
     'DB_TYPE' => 'mongo', // 数据库类型

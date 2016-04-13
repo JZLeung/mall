@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>TestUser</title>
+	<title>首页</title>
+	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
 </head>
 <body>
-<form action="login" method="post">
-	<input type="text" name="username"><br>
-	<input type="password" name="password"><br>
-	<input type="submit" value="check">
-</form>
-<form action="__URL__/add" method="post" enctype="multipart/form-data">
-    邮箱：<input  type="text" id="mail" name="mail"/>
-    标题：<input  type="text" id="title" name="title"/>
-    内容<input  type="text" id="content" name="content"/>
-    <input class="button" type="submit" value="发送" style="margin: 0 auto;display: block;"/>
-</form>
+	<include file='./Public/Template/Index/_header_.html' />
+	
 </body>
 </html>
