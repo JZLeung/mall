@@ -16,11 +16,11 @@
 		<nav class="nav">
 			<a href="__ROOT__">首页</a>
 			<span class="gt"></span>
-			<a href="">用户中心</a>
+			<a href="__ROOT__/UserCenter">用户中心</a>
 		</nav>
 		<include file='./Public/Template/User/_sidebar_.html' />
 		<div class="user-center ">
-			<div class="portrait left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+			<div class="portrait left"><img src="__PUBLIC__/Common/images/default.jpg" alt=""></div>
 			<div class="main-info clear">
 				<div class="userinfo panel left">
 					<h3 class="username">{$user.username}</h3>
@@ -34,28 +34,28 @@
 			</div>
 			<div class="other-info clear">
 				<div class="panel left">
-					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="img left"><img src="__PUBLIC__/Common/images/portal-icon-1.png" alt=""></div>
 					<div class="desc">
 						<h3>待支付的订单：</h3>
 						<p>查看待支付的订单 ></p>
 					</div>
 				</div>
 				<div class="panel left">
-					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="img left"><img src="__PUBLIC__/Common/images/portal-icon-2.png" alt=""></div>
 					<div class="desc">
 						<h3>待支付的订单：</h3>
 						<p>查看待支付的订单 ></p>
 					</div>
 				</div>
 				<div class="panel left">
-					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="img left"><img src="__PUBLIC__/Common/images/portal-icon-3.png" alt=""></div>
 					<div class="desc">
 						<h3>待支付的订单：</h3>
 						<p>查看待支付的订单 ></p>
 					</div>
 				</div>
 				<div class="panel left">
-					<div class="img left"><img src="__PUBLIC__/Common/images/portrait.jpg" alt=""></div>
+					<div class="img left"><img src="__PUBLIC__/Common/images/portal-icon-4.png" alt=""></div>
 					<div class="desc">
 						<h3>待支付的订单：</h3>
 						<p>查看待支付的订单 ></p>
@@ -65,5 +65,10 @@
 			</div>
 		</div>
 	</div>
+		<script>
+		$(document).ready(function() {
+			$('#action-list').find('a').eq(0).addClass('active');
+		});
+	</script>
 </body>
 </html>

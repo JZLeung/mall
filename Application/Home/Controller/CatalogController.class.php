@@ -3,8 +3,8 @@ namespace Home\Controller;
 use Think\Controller;
 class CatalogController extends Controller {
     public function index(){
-        echo "<pre>";
-        print_r($this->getAllCatalog());
+        //echo "<pre>";
+        //print_r($this->getAllCatalog());
     }
 
     public function getItemCatalog($lm1, $lm2){

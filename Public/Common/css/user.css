@@ -42,10 +42,10 @@ img {
   border-radius: 9999px;
   position: absolute;
   top: 50px;
-  left: 25px;
+  left: 50px;
 }
 .user-center .userinfo {
-  padding-top: 40px;
+  padding-top: 25px;
   font-size: 14px;
 }
 .user-center h3 {
@@ -72,15 +72,29 @@ img {
 }
 .user-center .main-info {
   border-bottom: 1px solid #EFEFEF;
-  padding-left: 200px;
+  padding-left: 250px;
   width: 630px;
   margin: auto;
   height: 190px;
 }
 .user-center .other-info {
-  margin-left: 25px;
+  margin-left: 50px;
   margin-top: 50px;
 }
 .user-center .other-info .panel {
   margin-bottom: 40px;
+}
+.user-center table {
+  margin-left: 50px;
+}
+.user-center .info-line {
+  border-bottom: 2px solid #e6e6e6;
+  padding: 10px;
+  width: 90%;
+  font-size: 14px;
+}
+.user-center span.name::after {
+  display: inline-block;
+  content: ':';
+  padding: 0 5px;
 }
