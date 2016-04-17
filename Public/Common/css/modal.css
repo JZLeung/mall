@@ -1,0 +1,53 @@
+
+.mask{
+	visibility: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.modal-show ~ .mask,.modal-show.modal{
+	visibility: visible;
+}
+
+.modal{
+	visibility: hidden;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 450px;
+	z-index: 1000;
+}
+
+.modal .modal-content{
+	background: #fff;
+	transform: scale(0.5);
+	opacity: 0;
+	padding: 15px;
+	transition: all 0.5s;
+}
+.modal-content .modal-head{
+	padding: 5px 10px;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+.modal-content .modal-body{
+	padding: 10px;
+	
+}
+
+.modal.modal-show .modal-content{
+	transform: scale(1);
+	opacity: 1;
+}
+
+p.form-line{
+	padding: 10px 0;
+}
+
+

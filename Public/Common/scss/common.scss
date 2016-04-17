@@ -1,5 +1,12 @@
 $baseColor: #ff6700;
 /*button*/
+.btn{
+	border: 1px solid #555;
+	padding: 15px 25px;
+	color: #555;
+	cursor: pointer;
+	background-color: transparent;
+}
 .btn-submit,.btn-confirm{
 	border: none;
 	background-color: $baseColor;
@@ -9,4 +16,7 @@ $baseColor: #ff6700;
     border: none;
     background-color: #b0b0b0;
     color: #fff;
+}
+.btn-sm{
+	padding: 10px 20px;
 }

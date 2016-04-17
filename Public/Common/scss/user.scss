@@ -89,15 +89,29 @@ img{
 	table{
 		margin-left: 50px;
 	}
-	.info-line{
-		border-bottom: 2px solid #e6e6e6;
-		padding: 10px;
-		width: 90%;
-		font-size: 14px;
+	.edit-btn{
+		position: absolute;
+		top: 60px;
+		right: 50px;
 	}
-	span.name::after {
-	    display: inline-block;
-	    content: ':';
-	    padding: 0 5px;
+}
+span.name::after {
+    display: inline-block;
+    content: ':';
+    padding: 0 5px;
+}
+
+p.info-line{
+	border-bottom: 2px solid #e6e6e6;
+	padding: 15px 0;
+	width: 90%;
+	font-size: 14px;
+	input{
+		border: 1px solid #e2e2e2;
+    	padding: 10px;
+    	width: 250px;
 	}
+}
+.modal .info-line{
+	border: none;
 }

@@ -19,17 +19,28 @@ class UserController extends Controller {
 
     //用户中心
 	public function index(){
-		
-		$user = session('user');
-		$this->assign('user', $user);
+		//$user = session('user');
+		$this->assign('user', $this->$user);
 		$this->display();
 	}
 
 	//个人信息
 	public function user_info(){
-
-		//print_r($this->user);
 		$this->assign('user', $this->user);
 		$this->display();
+	}
+
+	//修改个人信息
+	public function edit(){
+		//print_r(I('post.'));
+		$postData = I('post.data');
+		$id = I('post.id');
+		$user2 = M('user');
+
+		$res = $user2->where(array('_id' => $id))->save($postData);
+		$user =$user2->where(array('_id' => $id))->find();
+		cookie('user', $user);
+		session('user', $$user);
+		$this->ajaxReturn($res);
 	}
 }

@@ -9,6 +9,26 @@
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
+	<style>
+		select{padding: 5px 10px;margin-right: 10px}
+		label.radio {
+		    display: inline-block;
+		    padding: 5px 25px;
+		    margin-right: 10px;
+		    border: 1px solid #e2e2e2;
+		}
+
+		label.radio.checked {
+		    border-color:#F57923;
+		}
+		.mustfill:before{
+			display: inline-block;
+			content: '*';
+			color: red;
+			vertical-align: middle;
+		}
+	</style>
 </head>
 <body style="background: #f5f5f5">
 	<include file='./Public/Template/Index/_header_.html' />
@@ -24,7 +44,6 @@
 		<div class="user-center">
 			<div class="portrait left">
 				<img src="__PUBLIC__/Common/images/default.jpg" alt="">
-
 			</div>
 			<p class="portrait" style="top: 200px;text-align: center;"><a href="" class="">设置头像 ></a></p>
 			<div class="main-info clear" style="height: auto;padding-bottom: 20px;">
@@ -35,50 +54,156 @@
 				</p>
 				<p class="info-line">
 					<span class="name">生日</span>
-					<span class="value">{$user.birth}</span>
+					<span class="value">{$user.year}/{$user.month}/{$user.day}</span>
 				</p>
 				<p class="info-line">
 					<span class="name">性别</span>
 					<span class="value">{$user.gender}</span>
 				</p>
 				<br>
-				<h3>基本信息</h3>
+				<h3>联系信息</h3>
 				<p class="info-line">
-					<span class="name">姓名</span>
-					<span class="value">{$user.username}</span>
+					<span class="name">手机</span>
+					<span class="value">{$user.phone}</span>
 				</p>
 				<p class="info-line">
-					<span class="name">生日</span>
-					<span class="value">{$user.birth}</span>
-				</p>
-				<p class="info-line">
-					<span class="name">性别</span>
-					<span class="value">{$user.gender}</span>
+					<span class="name">邮箱</span>
+					<span class="value">{$user.email}</span>
 				</p>
 			</div>
-			<!-- <table style="width: 750px">
-				<tr>
-					<td style="width: 150px;padding: 10px;">
-						<img src="__PUBLIC__/Common/images/default.jpg" alt="" style="border-radius: 9999px;">
-						<p><a href="javascript:;" id="portrait">设置头像</a></p>
-					</td>
-					<td style="padding-left: 50px">
-						<div class="user-infos">
-							<div>
-								<h3>基本信息</h3>
-								<p class="info-line">姓名</p>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</table> -->
-			
+			<a href="javascript:;" class="edit-btn" id="edit">编辑个人信息</a>
 		</div>
 
 	</div>
+	<div class="modal" id="modal">
+		<div class="modal-content">
+			<form action="" id="info-form">
+			<div class="modal-head">编辑基础资料</div>
+			<div class="modal-body">
+				<p class="info-line">
+					<span class="name mustfill">姓名</span>
+					<span class="value"><input type="text" name="name" /></span>
+				</p>
+				<p class="info-line">
+					<span class="name mustfill">生日</span>
+					<span class="value">
+						<select name="year" id="s1"></select>年
+					</span>
+					<span class="value">
+						<select name="month" id="s2"></select>月
+					</span>
+					<span class="value">
+						<select name="day" id="s3"></select>日
+					</span>
+				</p>
+				<p class="info-line">
+					<span class="name mustfill">性别</span>
+					<label for="male" class="radio checked">
+						男
+						<input type="radio" hidden name="gender" value="男" id="male" checked="true">
+					</label>
+					<label for="female" class="radio">
+						女
+						<input type="radio" hidden name="gender" value="女" id="female">
+					</label>
+				</p>
+				<hr>
+				<p class="info-line">
+					<span class="name">手机</span>
+					<span class="value"><input type="text" name="phone" /></span>
+				</p>
+				<p class="info-line">
+					<span class="name">邮箱</span>
+					<span class="value"><input type="text" name="email" /></span>
+				</p>
+			</div>
+			<div class="modal-foot">
+				<a href="javascript:;" class="btn btn-sm btn-submit">提交</a>
+				<a href="javascript:;" class="btn btn-sm btn-cancel">取消</a>
+			</div>
+			</form>
+		</div>
+	</div>
+	<div class="mask" id="mask"></div>
 	<script>
+		function isLeapYear(year) {  return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);  }
 		$(document).ready(function() {
 			$('#action-list').find('a').eq(1).addClass('active');
+			var modal = $('#modal'),
+				mask = $('#mask');
+
+			$('#edit').click(function(event) {
+				event.preventDefault();
+				modal.toggleClass('modal-show');
+			});
+			mask.click(function(event) {
+				modal.toggleClass('modal-show');
+			});
+
+			//日历
+			var s1 = document.getElementById('s1'),
+				s2 = document.getElementById('s2'),
+				s3 = document.getElementById('s3'),
+				days = [31,28,31,30,31,30,31,31,30,31,30,31];
+			//年
+			for (var i = 0; i < 116; i++) {
+				s1.options[i] = new Option(1900+i, 1900+i);
+			}
+			s1.selectedIndex = 94;
+			//月
+			for (var i = 0; i < 12; i++) {
+				s2.options[i] = new Option(i+1, i+1);
+			}
+			s2.selectedIndex = 5;
+			//日
+			function selectDay(){
+				s3.options.length = 0;
+				var year = s1.selectedIndex+1900,
+					month = s2.selectedIndex;
+				if (month == 1 && isLeapYear(year)) {
+					for (var i = 0; i < 29; i++) {
+						s3.options[i] = new Option(i+1, i+1);
+					}
+				}else{
+					for (var i = 0; i < days[month]; i++) {
+						s3.options[i] = new Option(i+1, i+1);
+					}
+				}
+			}
+
+			s1.addEventListener('change',selectDay);
+			s2.addEventListener('change',selectDay);
+			selectDay();
+
+			//性别选择
+			modal.on('click', '.radio', function(event) {
+				event.preventDefault();
+				$(this).addClass('checked').find('input').prop('checked', true);
+				$(this).siblings().removeClass('checked').find('input').prop('checked', false);
+			});
+			//取消
+			modal.on('click', '.btn-cancel', function(event) {
+				event.preventDefault();
+				modal.toggleClass('modal-show');
+			});
+			//提交
+			modal.on('click', '.btn-submit', function(event) {
+				event.preventDefault();
+				var data = {};
+				var tmpData = $('#info-form').serializeArray();
+				for (var i = 0; i < tmpData.length; i++) {
+					data[tmpData[i]['name']] = tmpData[i]['value'];
+				}
+				$.post('edit', {data: data,id: '{$user["_id"]}'}, function(data, textStatus, xhr) {
+					console.log(data);
+					if (data.ok == 1) {
+						alert('修改个人信息成功');
+						location.reload();
+					}else{
+						alert('修改个人信息失败，请重试')
+					}
+				});
+			});
 		});
 	</script>
 </body>
