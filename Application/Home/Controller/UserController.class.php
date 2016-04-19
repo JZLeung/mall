@@ -43,4 +43,10 @@ class UserController extends Controller {
 		session('user', $$user);
 		$this->ajaxReturn($res);
 	}
+
+	//地址信息
+	public function user_address(){
+		$this->assign('user', $this->user);
+		$this->display();
+	}
 }

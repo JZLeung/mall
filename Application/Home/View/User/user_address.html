@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
+	<style>
+		select{padding: 5px 10px;margin-right: 10px}
+		label.radio {
+		    display: inline-block;
+		    padding: 5px 25px;
+		    margin-right: 10px;
+		    border: 1px solid #e2e2e2;
+		}
+
+		label.radio.checked {
+		    border-color:#F57923;
+		}
+		.mustfill:before{
+			display: inline-block;
+			content: '*';
+			color: red;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body style="background: #f5f5f5">
+	<include file='./Public/Template/Index/_header_.html' />
+	<div class="content-w clear">
+		<nav class="nav">
+			<a href="__ROOT__">首页</a>
+			<span class="gt"></span>
+			<a href="__ROOT__/UserCenter">用户中心</a>
+			<span class="gt"></span>
+			<a href="javascript:;">个人信息</a>
+		</nav>
+		<include file='./Public/Template/User/_sidebar_.html' />
+		<div class="user-center" style="padding-left: 40px;">
+			<h3>收货地址</h3>
+			<div class="addresses clear">
+				<div class="address">
+					<p id="addNew" style="margin-top: 60px;margin-left: 88px;">添加新地址</p>
+				</div>
+				<div class="address">
+					<p class="username">测试人员</p>
+					<div class="more">
+						<p class="phone">13800138000</p>
+						<p class="detail">
+							北京市 北京市 朝阳区<br>
+							北三环东路15号
+						</p>
+					</div>
+					<div class="action">
+						<a href="#" class="del">删除</a>
+						<a href="#" class="edit">编辑</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#action-list').find('a').eq(2).addClass('active');
+	</script>
+</body>

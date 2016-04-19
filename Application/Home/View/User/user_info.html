@@ -82,7 +82,7 @@
 			<div class="modal-body">
 				<p class="info-line">
 					<span class="name mustfill">姓名</span>
-					<span class="value"><input type="text" name="name" /></span>
+					<span class="value"><input type="text" name="name" value="{$user.name}" /></span>
 				</p>
 				<p class="info-line">
 					<span class="name mustfill">生日</span>
@@ -98,9 +98,9 @@
 				</p>
 				<p class="info-line">
 					<span class="name mustfill">性别</span>
-					<label for="male" class="radio checked">
+					<label for="male" class="radio">
 						男
-						<input type="radio" hidden name="gender" value="男" id="male" checked="true">
+						<input type="radio" hidden name="gender" value="男" id="male">
 					</label>
 					<label for="female" class="radio">
 						女
@@ -110,11 +110,11 @@
 				<hr>
 				<p class="info-line">
 					<span class="name">手机</span>
-					<span class="value"><input type="text" name="phone" /></span>
+					<span class="value"><input type="text" name="phone" value="{$user.phone}" data-validate="required:必须的;tel:请输入正确的手机号码" /></span>
 				</p>
 				<p class="info-line">
 					<span class="name">邮箱</span>
-					<span class="value"><input type="text" name="email" /></span>
+					<span class="value"><input type="text" name="email" value="{$user.email}" data-validate="required:必须的;email:请输入正确的邮箱地址" /></span>
 				</p>
 			</div>
 			<div class="modal-foot">
@@ -131,6 +131,15 @@
 			$('#action-list').find('a').eq(1).addClass('active');
 			var modal = $('#modal'),
 				mask = $('#mask');
+
+			var gender = '{$user.gender}' || '男';
+
+			if (gender == '男') {
+				$('#male').prop('checked', true).parent().addClass('checked')
+			}else{
+				$('#female').prop('checked', true).parent().addClass('checked')
+				
+			}
 
 			$('#edit').click(function(event) {
 				event.preventDefault();
@@ -149,12 +158,12 @@
 			for (var i = 0; i < 116; i++) {
 				s1.options[i] = new Option(1900+i, 1900+i);
 			}
-			s1.selectedIndex = 94;
+			s1.selectedIndex = ('{$user.year}' || 0) * 1 - 1900;
 			//月
 			for (var i = 0; i < 12; i++) {
 				s2.options[i] = new Option(i+1, i+1);
 			}
-			s2.selectedIndex = 5;
+			s2.selectedIndex = ('{$user.month}' || 1) * 1 - 1;
 			//日
 			function selectDay(){
 				s3.options.length = 0;
@@ -174,7 +183,7 @@
 			s1.addEventListener('change',selectDay);
 			s2.addEventListener('change',selectDay);
 			selectDay();
-
+			s3.selectedIndex = ('{$user.day}' || 1) * 1 - 1;
 			//性别选择
 			modal.on('click', '.radio', function(event) {
 				event.preventDefault();
@@ -194,6 +203,8 @@
 				for (var i = 0; i < tmpData.length; i++) {
 					data[tmpData[i]['name']] = tmpData[i]['value'];
 				}
+				if (data['name'] == '') {alert('姓名不能为空');return;}
+				if (data['gender'] == '' || data['gender'] == undefined) {alert('请选择性别');return;}
 				$.post('edit', {data: data,id: '{$user["_id"]}'}, function(data, textStatus, xhr) {
 					console.log(data);
 					if (data.ok == 1) {

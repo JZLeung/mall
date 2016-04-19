@@ -114,3 +114,49 @@ p.info-line input {
 .modal .info-line {
   border: none;
 }
+
+.addresses {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.address {
+  padding: 20px 30px 50px;
+  border: 1px solid #e0e0e0;
+  float: left;
+  margin-right: 10px;
+  width: 250px;
+  position: relative;
+  transition: all 0.5s;
+  cursor: pointer;
+  height: 120px;
+}
+.address:hover {
+  border-color: #b0b0b0;
+}
+.address:hover .action {
+  display: block;
+}
+.address p {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.3em;
+}
+.address p.username {
+  font-size: 17px;
+  color: black;
+  margin-bottom: 10px;
+}
+.address .action a {
+  color: inherit;
+  margin-right: 15px;
+}
+.address .action {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: #ef5b00;
+  display: none;
+}
