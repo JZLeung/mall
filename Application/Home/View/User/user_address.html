@@ -28,6 +28,7 @@
 			color: red;
 			vertical-align: middle;
 		}
+		span.name{width: 6em;text-align: right;display: inline-block;}
 	</style>
 </head>
 <body style="background: #f5f5f5">
@@ -44,8 +45,8 @@
 		<div class="user-center" style="padding-left: 40px;">
 			<h3>收货地址</h3>
 			<div class="addresses clear">
-				<div class="address">
-					<p id="addNew" style="margin-top: 60px;margin-left: 88px;">添加新地址</p>
+				<div class="address" id="addNew">
+					<p  style="margin-top: 60px;margin-left: 60px;">添加新地址</p>
 				</div>
 				<div class="address">
 					<p class="username">测试人员</p>
@@ -63,8 +64,83 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal" id="modal">
+			<div class="modal-content">
+				<form action="" id="form">
+				<div class="modal-head">编辑基础资料</div>
+				<div class="modal-body">
+					<p class="info-line">
+						<span class="name mustfill">联系人</span>
+						<span class="value"><input type="text" name="name" /></span>
+					</p>
+					<p class="info-line">
+						<span class="name mustfill">联系方式</span>
+						<span class="value"><input type="text" name="phone" data-validate="required:必须的;tel:请输入正确的手机号码" /></span>
+					</p>
+					<p class="info-line">
+						<span class="name mustfill">收货地址</span>
+						<span class="value">
+							<select name="province" id="s1" style="width: 129px"></select>
+						</span>
+						<span class="value">
+							<select name="city" id="s2" style="width: 129px;margin-right: 0;"></select>
+						</span>
+						<span class="value">
+							<select name="area" id="s3" style="margin-left: 88px;margin-top: 5px;width: 273px;"></select>
+						</span>
+					</p>
+					<p class="info-line">
+						<span class="name mustfill">具体地址</span>
+						<span class="value"><input type="text" name="detail" /></span>
+					</p>
+				</div>
+				<div class="modal-foot">
+					<a href="javascript:;" class="btn btn-sm btn-submit">提交</a>
+					<a href="javascript:;" class="btn btn-sm btn-cancel">取消</a>
+				</div>
+				</form>
+			</div>
+		</div>
+		<div class="mask" id="mask"></div>
 	</div>
+	<script src="__PUBLIC__/Common/js/city.js"></script>
 	<script>
-		$('#action-list').find('a').eq(2).addClass('active');
+		$(document).ready(function() {
+			$('#action-list').find('a').eq(2).addClass('active');
+
+			var form = $('#form'),
+				modal = $('#modal');
+
+			$('#addNew').click(function(event) {
+				modal.toggleClass('modal-show');
+			});
+			$('#mask').click(function(event) {
+				modal.toggleClass('modal-show');
+				getCityInfo()
+			});
+			setup();
+			var selectors = [$('#s1'),$('#s2'),$('#s3')];
+			function getCityInfo(){
+				var data = []
+				for (var i = 0; i < 3; i++) {
+					data.push(selectors[i].val());
+				}
+				console.log(data.join(','))
+			}
+
+			modal.on('click', '.btn-submit', function(event) {
+				event.preventDefault();
+				var data = {};
+				var tmpData = $('#form').serializeArray();
+				for (var i = 0; i < tmpData.length; i++) {
+					data[tmpData[i]['name']] = tmpData[i]['value'];
+				}
+				console.log(data);
+				
+			}).on('click', '.btn-cancel', function(event) {
+				event.preventDefault();
+				modal.toggleClass('modal-show');
+			});
+		});
 	</script>
 </body>
