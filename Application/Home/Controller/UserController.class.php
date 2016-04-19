@@ -47,6 +47,19 @@ class UserController extends Controller {
 	//地址信息
 	public function user_address(){
 		$this->assign('user', $this->user);
+		$address = M('address');
+		$addresses = $address->where(array('userid' => $this->user['_id']))->select();
+		$this->assign('addresses', $addresses);
 		$this->display();
+	}
+
+	//新增地址
+	public function addAddress(){
+		$addressData = I('post.address');
+		$userId = I('post.id');
+		$addressData['userid'] = $userId;
+		$address = M('address');
+		$result = $address->add($addressData);
+		$this->ajaxReturn($result);
 	}
 }
