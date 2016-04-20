@@ -62,4 +62,26 @@ class UserController extends Controller {
 		$result = $address->add($addressData);
 		$this->ajaxReturn($result);
 	}
+
+	//编辑地址
+	public function editAddress(){
+		$addressData = I('post.address');
+		//$userId = I('post.id');
+		$addressId = I('post.aid');
+
+		//$addressData['userid'] = $userId;
+
+		$address = M('address');
+		$result = $address->where(array('_id' => $addressId))->save($addressData);
+		$this->ajaxReturn($result);
+	}
+
+	//删除地址
+	public function delAddress(){
+		$addressId = I('post.aid');
+
+		$address = M('address');
+		$result = $address->where(array('_id' => $addressId))->delete();
+		$this->ajaxReturn($result);
+	}
 }

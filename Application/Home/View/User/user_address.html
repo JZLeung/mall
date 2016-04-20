@@ -44,37 +44,25 @@
 		<include file='./Public/Template/User/_sidebar_.html' />
 		<div class="user-center" style="padding-left: 40px;">
 			<h3>收货地址</h3>
-			<div class="addresses clear">
+			<div class="addresses clear" id="addresses">
 				<div class="address" id="addNew">
 					<p  style="margin-top: 60px;margin-left: 60px;">添加新地址</p>
 				</div>
-				<div class="address">
-					<p class="username">测试人员</p>
-					<div class="more">
-						<p class="phone">13800138000</p>
-						<p class="detail">
-							北京市 北京市 朝阳区<br>
-							北三环东路15号
-						</p>
-					</div>
-					<div class="action">
-						<a href="#" class="del">删除</a>
-						<a href="#" class="edit">编辑</a>
-					</div>
-				</div>
 				<foreach name="addresses" item="address">
 				<div class="address">
-					<p class="username">{$address.name}</p>
+					<p class="name"><span data-name="name">{$address.name}</span></p>
 					<div class="more">
-						<p class="phone">{$address.phone}</p>
+						<p class="phone"><span data-name="phone">{$address.phone}</span></p>
 						<p class="detail">
-							{$address.province} {$address.city} {$address.area}<br>
-							{$address.detail}
+							<span data-name="province">{$address.province}</span> 
+							<span data-name="city">{$address.city}</span> 
+							<span data-name="area">{$address.area}</span>,<br>
+							<span data-name="detail">{$address.detail}</span>
 						</p>
 					</div>
 					<div class="action">
 						<a href="#" class="del" data-aid="{$address['_id']}">删除</a>
-						<a href="#" class="edit">编辑</a>
+						<a href="#" class="edit" data-aid="{$address['_id']}" >编辑</a>
 					</div>
 				</div>
 				</foreach>
@@ -123,19 +111,24 @@
 	<script>
 		$(document).ready(function() {
 			$('#action-list').find('a').eq(2).addClass('active');
-
+			//初始化城市下拉框
+			setup();
 			var form = $('#form'),
 				modal = $('#modal'),
 				uid = '{$user["_id"]}';
 
+			//打开模态框
 			$('#addNew').click(function(event) {
-				modal.toggleClass('modal-show');
+				modal.data({'action': 'add','aid': 0}).toggleClass('modal-show');
 			});
+
+			//关闭模态框
 			$('#mask').click(function(event) {
 				modal.toggleClass('modal-show');
 				getCityInfo()
 			});
-			setup();
+			
+			//过去城市地址
 			var selectors = [$('#s1'),$('#s2'),$('#s3')];
 			function getCityInfo(){
 				var data = []
@@ -144,19 +137,90 @@
 				}
 				console.log(data.join(','))
 			}
+			function changeCityInfo(citys){
+				for (var i = 0; i < citys.length; i++) {
+					var s = selectors[i];
+					s.val(citys[i]).change();
+				}
+			}
 
+			//编辑
+			$('#addresses').on('click', '.edit', function(event) {
+				event.preventDefault();
+				modal.data({'action': 'edit','aid': $(this).data('aid')}).toggleClass('modal-show');
+				var parent = $(this).parent().parent(),
+				 	tmpData = {};
+				parent.find('span').each(function(index, el) {
+					tmpData[$(this).data('name')] = $(this).text();
+				});
+				console.log(tmpData);
+				for(var i in tmpData){
+					modal.find('input[name="'+i+'"]').val(tmpData[i]);
+				}
+				changeCityInfo([tmpData['province'],tmpData['city'],tmpData['area']])
+			})//删除地址
+			.on('click', '.del', function(event) {
+				event.preventDefault();
+				if (confirm('确认要删除该地址吗？')) {
+					var _this = $(this),
+					aid = _this.data('aid')
+					$.post('delAddress', {aid: aid}, function(data, textStatus, xhr) {
+						console.log(data);
+						if (data.ok == 1) {
+							alert('删除地址成功');
+							_this.parent().parent().remove();
+						}
+					});
+				}
+			});
+
+			var mustFill = {
+				'name' : '姓名不能为空',
+				'phone' : '联系方式不能为空',
+				'province' : '请选择所在省',
+				'city' : '请选择所在市',
+				'area' : '请选择所在地区',
+				'detail' : '具体地址不能为空',
+			}
+			//提交
 			modal.on('click', '.btn-submit', function(event) {
 				event.preventDefault();
 				var data = {};
-				var tmpData = $('#form').serializeArray();
+				var tmpData = $('#form').serializeArray(),
+					action = modal.data('action');
 				for (var i = 0; i < tmpData.length; i++) {
 					data[tmpData[i]['name']] = tmpData[i]['value'];
 				}
-				console.log(data);
-				$.post('addAddress', {address: data,id:uid}, function(data, textStatus, xhr) {
-					console.log(data);
-				});
-			}).on('click', '.btn-cancel', function(event) {
+				for(var i in data){
+					if (mustFill[i] != undefined) {
+						console.log(`${i} : ${data[i]}`)
+						if (i == 'province' || i == 'city' || i == 'area') {
+							if (data[i] == '请选择') {alert(mustFill[i]);return;}
+						}else{
+							if (data[i] == '') {alert(mustFill[i]);return;}
+						}
+					}
+				}
+				if (action == 'add') {
+					$.post('addAddress', {address: data,id:uid}, function(data, textStatus, xhr) {
+						console.log(data);
+						if (data['$id'] != undefined || data['$id'] != '') {
+							alert('增加地址成功');
+							location.reload();
+						}
+					});
+				}else{
+					var aid = modal.data('aid');
+					$.post('editAddress', {address: data,aid: aid}, function(data, textStatus, xhr) {
+						console.log(data);
+						if (data.ok == 1) {
+							alert('更新地址成功');
+							location.reload();
+						}
+					});
+				}
+			})//取消。关闭模态框
+			.on('click', '.btn-cancel', function(event) {
 				event.preventDefault();
 				modal.toggleClass('modal-show');
 			});
