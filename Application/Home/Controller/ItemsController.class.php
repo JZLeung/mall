@@ -3,17 +3,17 @@ namespace Home\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
     function _initialize(){
-        // $catalogs = session('?catalogs') ? session('catalogs') : null;
-        // if (!$catalogs) {
-            $catalogs = A('Catalog')->getAllCatalog();
-            //session('catalogs', $catalogs);
-        // }
-        // for ($i=0; $i < count($catalogs); $i++) {
-        //     if (is_array($catalogs[$i]['id'])) {
-        //         $catalogs[$i]['id'] = $catalogs[$i]['id']['$numberLong'];
-        //     }
-        // }
+        $catalogs = A('Catalog')->getAllCatalog();
         $this->assign('catalogs', $catalogs);
+
+        $user = cookie('user');
+        if (!$user) {
+            $user = session('?user') ? session('user') : null;
+        }else{
+            session('user', $user);
+        }
+        $this->user = $user;
+        $this->assign('username', $user['username']);
     }
     //商品详情页
     public function index($id){

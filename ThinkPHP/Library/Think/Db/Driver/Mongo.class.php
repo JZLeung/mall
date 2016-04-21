@@ -595,7 +595,7 @@ class Mongo extends Driver {
                     case 'unset':
                     case 'push':
                     case 'pushall':
-                    case 'addtoset':
+                    case 'addToSet':
                     case 'pop':
                     case 'pull':
                     case 'pullall':

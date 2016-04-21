@@ -108,7 +108,7 @@
 				</div> -->
 				<div class="item-buttons">
 					<button class="btn btn-buy btn-confirm">加入购物车</button>
-					<button class="btn btn-like btn-cancel">喜欢</button>
+					<button class="btn btn-like btn-cancel" id="addCollection">喜欢</button>
 				</div>
 				<div class="item-options flex">
 					<a href="javascript:;">评论(888)</a>
@@ -249,6 +249,22 @@
 				event.preventDefault();
 				$(this).addClass('active').siblings().removeClass('active');
 				setNowOption()
+			});
+
+			$('#addCollection').click(function(event) {
+				event.preventDefault();
+				$.post('__ROOT__/Home/Collection/add', {id: '{$data['_id']}'}, function(data, textStatus, xhr) {
+					console.log(data);
+					if (data.code == 'ok') {
+						if (data.msg == 1) {
+							alert('收藏成功')
+						}else{
+							alert('你已经收藏过了')
+						}
+					}else{
+						alert(data.msg);
+					}
+				});
 			});
 
 		});
