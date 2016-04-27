@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
+	<style>
+		select{padding: 5px 10px;margin-right: 10px}
+		label.radio {
+		    display: inline-block;
+		    padding: 5px 25px;
+		    margin-right: 10px;
+		    border: 1px solid #e2e2e2;
+		}
+
+		label.radio.checked {
+		    border-color:#F57923;
+		}
+		.mustfill:before{
+			display: inline-block;
+			content: '*';
+			color: red;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body style="background: #f5f5f5">
+	<include file='./Public/Template/Index/_header_.html' />
+	<div class="content-w clear">
+		<nav class="nav">
+			<a href="__ROOT__">首页</a>
+			<span class="gt"></span>
+			<a href="__ROOT__/UserCenter">用户中心</a>
+			<span class="gt"></span>
+			<a href="javascript:;">我的收藏</a>
+		</nav>
+		<include file='./Public/Template/User/_sidebar_.html' />
+		<div class="user-center">
+			<foreach name="collections" item="collection">
+				<p><a href="__ROOT__/item/{$collection['_id']}">{$collection.title}</a></p>
+			</foreach>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('#action-list').find('a').eq(3).addClass('active');
+		});
+	</script>
+</body>

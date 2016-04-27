@@ -47,41 +47,24 @@ class UserController extends Controller {
 	//地址信息
 	public function user_address(){
 		$this->assign('user', $this->user);
-		$address = M('address');
-		$addresses = $address->where(array('userid' => $this->user['_id']))->select();
-		$this->assign('addresses', $addresses);
+		$this->assign('addresses', A('Address')->getAllAddress($this->user['_id']));
 		$this->display();
 	}
 
-	//新增地址
-	public function addAddress(){
-		$addressData = I('post.address');
-		$userId = I('post.id');
-		$addressData['userid'] = $userId;
-		$address = M('address');
-		$result = $address->add($addressData);
-		$this->ajaxReturn($result);
+	//收藏信息
+	public function user_collect(){
+		$this->assign('user', $this->user);
+		$myCollectionsId = A('Collection')->getAllCollections($this->user['_id']);
+		$myCollections = A('Items')->getItemsByCollection($myCollectionsId);
+		$this->assign('collections', $myCollections);
+		$this->display();
 	}
 
-	//编辑地址
-	public function editAddress(){
-		$addressData = I('post.address');
-		//$userId = I('post.id');
-		$addressId = I('post.aid');
-
-		//$addressData['userid'] = $userId;
-
-		$address = M('address');
-		$result = $address->where(array('_id' => $addressId))->save($addressData);
-		$this->ajaxReturn($result);
+	//购物车信息
+	public function user_cart(){
+		$this->assign('user', $this->user);
+		//$this->assign('addresses', A('Address')->getAllAddress($this->user['_id']));
+		$this->display();
 	}
 
-	//删除地址
-	public function delAddress(){
-		$addressId = I('post.aid');
-
-		$address = M('address');
-		$result = $address->where(array('_id' => $addressId))->delete();
-		$this->ajaxReturn($result);
-	}
 }

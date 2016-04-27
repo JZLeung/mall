@@ -49,6 +49,14 @@ class ItemsController extends Controller {
 
         $catalog = A('Catalog')->getItemCatalog($data['lm1'],$data['lm2']);
 
+        $this->user = M('user')->where(array('_id' => $this->user['_id']))->find();
+        //echo "$id";
+        $collects = $this->user['collect'];
+        //print_r($collects);
+        $isCollect = in_array($id, $collects);
+        //var_dump($isCollect);
+
+        $this->assign('isCollect', $isCollect);
         $this->assign('data', $data);
         $this->assign('prices', $prices);
         $this->assign('c', $catalog);
@@ -104,5 +112,14 @@ class ItemsController extends Controller {
 
         $this->display('catalog');
         //print_r(count($data));
+    }
+
+    //根据收藏查找所有商品
+    public function getItemsByCollection($collections){
+        $item = M('items');
+        for ($i=0, $length = count($collections); $i < $length; $i++) { 
+            $items[] = $item->where(array('_id' => $collections[$i]))->find();
+        }
+        return $items;
     }
 }
