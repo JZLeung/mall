@@ -15,16 +15,18 @@ class CartController extends Controller {
 
             $isExite = self::checkIsInCart($cartData, $userCart);
             if ($isExite) {
+                $cart['cart'] = array('addToSet', $isExite);
+                $isExite['num'] += 1; 
+                $res = M('user')->where(array('_id' => $uid))->save($cart);
+
                 $msg['code'] = 'ok';
                 $msg['msg'] = '增加一件相同的';
-                $isExite['num'] += 1; 
-                $cart['cart'] = array('addToSet', $isExite);
-                $res = M('user')->where(array('_id' => $uid))->save($cart);
             }else{
                 $cart['cart'] = array('addToSet', $cartData);
                 $res = M('user')->where(array('_id' => $uid))->save($cart);
+
                 $msg['code'] = 'ok';
-                $msg['msg'] = $res;
+                $msg['msg'] = '已加入购物车';
             }
     		
     	}else{

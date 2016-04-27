@@ -7,26 +7,48 @@
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
 	<style>
-		select{padding: 5px 10px;margin-right: 10px}
-		label.radio {
-		    display: inline-block;
-		    padding: 5px 25px;
-		    margin-right: 10px;
-		    border: 1px solid #e2e2e2;
+		.collections{
+			margin-top: 25px;
+			padding-top: 15px;
+			border-top: 1px solid #eeeeee;
 		}
-
-		label.radio.checked {
-		    border-color:#F57923;
-		}
-		.mustfill:before{
+		.collection{
 			display: inline-block;
-			content: '*';
+			padding: 20px;
+			padding-bottom: 10px;
+			border: 1px solid #eeeeee;
+			margin-right: 10px;
+			margin-top: 10px;
+			transition: border 0.5s;
+		}
+		.collection:hover{
+			border-color: #555;
+			background: #F9F9F9;
+		}
+		.collection .image{
+			width: 150px;
+		}
+		.collection .image img{
+			width: 100%;
+			display: block;
+		}
+		.collection p{
+		    -webkit-line-clamp: 2;
+		    display: -webkit-box;
+		    width: 150px;
+		    -webkit-box-orient: vertical;
+		    overflow: hidden;
+		    padding: 0;
+		    margin-top: 10px;
+		}
+		.collection .price{
+			text-align: center;
 			color: red;
-			vertical-align: middle;
+			font-size: 1.5em;
+			font-weight: bold;
 		}
 	</style>
 </head>
@@ -41,10 +63,19 @@
 			<a href="javascript:;">我的收藏</a>
 		</nav>
 		<include file='./Public/Template/User/_sidebar_.html' />
-		<div class="user-center">
-			<foreach name="collections" item="collection">
-				<p><a href="__ROOT__/item/{$collection['_id']}">{$collection.title}</a></p>
-			</foreach>
+		<div class="user-center" style="padding-left: 40px;">
+			<h3>我的收藏</h3>
+			<div class="collections">
+				<foreach name="collections" item="collection">
+				<a href="__ROOT__/item/{$collection['_id']}" target="_blank">
+				<div class="collection">
+					<div class="image"><img src="{$collection.pic[0]['src']}" alt="{$collection.title}"></div>
+					<p>{$collection.title}</p>
+					<p class="price">￥{$collection.price}</p>
+				</div></a>
+				</foreach>
+				
+			</div>
 		</div>
 	</div>
 	<script>

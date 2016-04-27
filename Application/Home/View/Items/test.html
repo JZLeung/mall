@@ -294,6 +294,9 @@
 				data['num'] = 1;
 				$.post('__ROOT__/Home/Cart/add', {data:data}, function(data, textStatus, xhr) {
 					console.log(data);
+					//if (data.code == 'ok') {
+						alert(data.msg);
+					//}
 				});
 			});
 		});
