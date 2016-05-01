@@ -17,6 +17,8 @@ img {
   border: 0;
   vertical-align: middle;
   outline: none;
+  display: block;
+  width: 100%;
 }
 
 input, textarea, select {

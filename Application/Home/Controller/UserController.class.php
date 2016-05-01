@@ -63,7 +63,10 @@ class UserController extends Controller {
 	//购物车信息
 	public function user_cart(){
 		$this->assign('user', $this->user);
-		//$this->assign('addresses', A('Address')->getAllAddress($this->user['_id']));
+		$u = M('user')->where(array('_id'=> $this->user['_id']))->find();
+		//echo "<pre>";
+		//print_r(A('items')->getItemsByCart($u['cart']));
+		$this->assign('mycart', A('items')->getItemsByCart($u['cart']));
 		$this->display();
 	}
 

@@ -6,48 +6,136 @@
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/cart.css?v=sd">
 	<style>
-		select{padding: 5px 10px;margin-right: 10px}
-		label.radio {
-		    display: inline-block;
-		    padding: 5px 25px;
-		    margin-right: 10px;
-		    border: 1px solid #e2e2e2;
-		}
-
-		label.radio.checked {
-		    border-color:#F57923;
-		}
-		.mustfill:before{
-			display: inline-block;
-			content: '*';
-			color: red;
-			vertical-align: middle;
-		}
+		
 	</style>
 </head>
-<body style="background: #f5f5f5">
-	<include file='./Public/Template/Index/_header_.html' />
-	<div class="content-w clear">
-		<nav class="nav">
-			<a href="__ROOT__">首页</a>
-			<span class="gt"></span>
-			<a href="__ROOT__/UserCenter">用户中心</a>
-			<span class="gt"></span>
-			<a href="javascript:;">购物车</a>
-		</nav>
-		<include file='./Public/Template/User/_sidebar_.html' />
-		<div class="user-center">
-
+<body onselectstart="return false;" style="-moz-user-select:none;">
+	<div class="header">
+		<div class="content-w">
+			<div class="right">
+				<a href="">{$user.username}</a>
+				<span class="sub">|</span>
+				<a href="">我的订单</a>
+			</div>
+			<h3>我的购物车</h3>
 		</div>
 	</div>
+	<div class="content-w">
+		<div class="cart">
+			<div class="cart-head">
+				<div class="cart-select"></div>
+				<div class="cart-img"></div>
+				<div class="cart-name">名称</div>
+				<div class="cart-opt">配置</div>
+				<div class="cart-num">数量</div>
+				<div class="cart-price">单价</div>
+				<div class="cart-amount">总价</div>
+			</div>
+			<div class="cart-body" id="cart">
+				<foreach name="mycart" item="cart">
+				<div class="cart-item" data-index="{++$index}">
+					<div class="cart-select">
+						<span class="checkbox"></span>
+					</div>
+					<div class="cart-img"><img src="{$cart.item.pictures.0.src}" alt=""></div>
+					<div class="cart-name">{$cart.item.name}</div>
+					<div class="cart-opt">{$cart['optname']}</div>
+					<div class="cart-num">
+						<div class="btn-group">
+							<div class="left-btn btn reduce">-</div>
+							<input type="text" value="{$cart.num}">
+							<div class="right-btn btn add">+</div>
+						</div>
+					</div>
+					<div class="cart-price">{$cart.price}</div>
+					<div class="cart-amount">{$cart['price']*$cart['num']}</div>
+					<div class="cart-action" >
+						<a href="" class="remove">+</a>
+					</div>
+				</div>
+				</foreach>
+			</div>
+			<div class="cart-foot clear cart-fixed">
+				<p class="right">
+					总价： <span class="sum" id="amount"></span>
+					<a href="" class="submit-btn">立即结算</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
 	<script>
+		var $amount = $('#cart .cart-amount'),
+			amount = $('#amount');
 		$(document).ready(function() {
-			$('#action-list').find('a').eq(4).addClass('active');
+			//计算价格
+			function adjustPrice(obj){
+				var price = obj.parentElement.parentElement.nextElementSibling,
+					amount = price.nextElementSibling,
+					num = obj.value *1;
+				//console.log(price.innerText*1,amount.innerText*1,num);
+				amount.innerText = (price.innerText *1 ) * num;
+				adjustAmount()
+			}
+			//计算总价
+			function adjustAmount(){
+				var sum = 0;
+				$amount.each(function(index, el) {
+					if ($(this).siblings('.cart-select').find('.checked').length > 0) {
+						sum += this.innerText*1;
+					}
+				});
+				amount.text(sum+'元');
+			}
+			//发送请求并修改
+			function ajustNum(curIndex, reduce){
+				return new Promise(function(resolve, reject){
+					var action = reduce || 'add';
+					$.ajax({
+						url: '__ROOT__/Home/Cart/'+action,
+						type: 'post',
+						data: {index: curIndex},
+						success: function(data){
+							resolve(data);
+						},
+						error: function(err){
+							reject(err);
+						}
+					})
+				}).catch(function(err){console.log("Error:",err)});
+			}
+			$('#cart').on('click', '.reduce', function(event) {
+				event.preventDefault();
+				var value = this.nextElementSibling.value;
+				if (value > 0) {
+					var obj = this;
+					ajustNum($(obj).parent().parent().parent().data('index')-1, 'reduce')
+						.then(function(data){
+							console.log(data);
+							obj.nextElementSibling.value = value - 1;
+							adjustPrice(obj.nextElementSibling)
+						});
+					console.log('reduce');
+				}
+			}).on('click', '.add', function(event) {
+				event.preventDefault();
+				var obj = this;
+				ajustNum($(obj).parent().parent().parent().data('index')-1)
+					.then(function(data){
+						console.log(data);
+						obj.previousElementSibling.value ++;
+						adjustPrice(obj.previousElementSibling)
+					});
+				console.log('add');
+			}).on('click', '.checkbox', function(event) {
+				event.preventDefault();
+				$(this).toggleClass('checked');
+				adjustAmount()
+			});
+			adjustAmount()
+
 		});
 	</script>
 </body>
