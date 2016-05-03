@@ -69,7 +69,7 @@
 				<foreach name="collections" item="collection">
 				<a href="__ROOT__/item/{$collection['_id']}" target="_blank">
 				<div class="collection">
-					<div class="image"><img src="{$collection.pic[0]['src']}" alt="{$collection.title}"></div>
+					<div class="image"><img src="{$collection.pictures.0.src}" alt="{$collection.title}"></div>
 					<p>{$collection.title}</p>
 					<p class="price">￥{$collection.price}</p>
 				</div></a>

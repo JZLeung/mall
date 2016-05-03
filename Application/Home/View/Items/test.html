@@ -261,7 +261,7 @@
 					$.post('__ROOT__/Home/Collection/add', {id: '{$data['_id']}'}, function(data, textStatus, xhr) {
 						console.log(data);
 						if (data.code == 'ok') {
-							if (data.msg == 1) {
+							if (data.msg.nModified == 1) {
 								alert('收藏成功')
 							}else{
 								alert('你已经收藏过了')
@@ -274,7 +274,7 @@
 					$.post('__ROOT__/Home/Collection/remove', {id: '{$data['_id']}'}, function(data, textStatus, xhr) {
 						console.log(data);
 						if (data.code == 'ok') {
-							if (data.msg == 1) {
+							if (data.msg.nModified == 1) {
 								alert('取消收藏成功')
 							}else{
 								alert('你没有收藏该商品')

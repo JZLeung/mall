@@ -31,7 +31,7 @@ class CollectionController extends Controller {
 			$id = $user['_id'];
 			$db = M('user');
 			$res = $db->where(array('_id'=>$id))->save(array('collect'=>array('addToSet',$itemID)));
-			$add = $res['nModified'];
+			$add = $res;
 			$msg = array('code' => 'ok', 'msg' => $add);
 		}else{
 			$msg = array('code' => 'error', 'msg' => '请先登录后再收藏');
@@ -46,7 +46,7 @@ class CollectionController extends Controller {
 			$id = $user['_id'];
 			$db = M('user');
 			$res = $db->where(array('_id'=>$id))->save(array('collect'=>array('pop',$itemID)));
-			$add = $res['nModified'];
+			$add = $res;
 			$msg = array('code' => 'ok', 'msg' => $add);
 		}else{
 			$msg = array('code' => 'error', 'msg' => '请先登录后再收藏');

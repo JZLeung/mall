@@ -4,7 +4,7 @@ use Think\Controller;
 class CartController extends Controller {
     public function index(){
     }
-
+    //增加一个
     public function add(){
         $user = session('?user') ? session('user') : null ;
         if ($user) {
@@ -16,7 +16,7 @@ class CartController extends Controller {
         }
         $this->ajaxReturn($msg);
     }
-
+    //减少一个
     public function reduce(){
     	$user = session('?user') ? session('user') : null ;
     	if ($user) {
@@ -28,16 +28,19 @@ class CartController extends Controller {
     	}
         $this->ajaxReturn($msg);
     }
-
+    //移除
     public function remove(){
         $user = session('?user') ? session('user') : null ;
         if ($user) {
             $where = array('_id' => $user['_id']);
             $user = M('user')->where($where)->find();
-            $good = self::findCart(I('post.data'), $user['cart']);
+            $index = I('post.index', -1);
+            $good = $index == -1 ? self::findCart(I('post.data'), $user['cart']) : $user['cart'][$index];
+            $msg = $good;
             if ($good) {
                 $cart['cart'] = array('pull', $good);
-                $res = M('Cart')->where($where)->save($cart);
+                $tmp = M('User');
+                $res = $tmp->where($where)->save($cart);
                 if ($res['ok'] == 1) {
                     $msg['code'] = 'ok';
                     $msg['msg'] = '删除成功';
@@ -103,4 +106,5 @@ class CartController extends Controller {
         $msg['index'] = $index;
         return $msg;
     }
+
 }

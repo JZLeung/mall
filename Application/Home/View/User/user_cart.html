@@ -14,6 +14,12 @@
 <body onselectstart="return false;" style="-moz-user-select:none;">
 	<div class="header">
 		<div class="content-w">
+			<a href="__ROOT__" class="left header-logo">
+				<div class="">
+					<span class="logo"></span>
+					<span class="home"></span>
+				</div>
+			</a>
 			<div class="right">
 				<a href="">{$user.username}</a>
 				<span class="sub">|</span>
@@ -90,7 +96,7 @@
 				amount.text(sum+'元');
 			}
 			//发送请求并修改
-			function ajustNum(curIndex, reduce){
+			function adjustNum(curIndex, reduce){
 				return new Promise(function(resolve, reject){
 					var action = reduce || 'add';
 					$.ajax({
@@ -111,7 +117,7 @@
 				var value = this.nextElementSibling.value;
 				if (value > 0) {
 					var obj = this;
-					ajustNum($(obj).parent().parent().parent().data('index')-1, 'reduce')
+					adjustNum($(obj).parent().parent().parent().data('index')-1, 'reduce')
 						.then(function(data){
 							console.log(data);
 							obj.nextElementSibling.value = value - 1;
@@ -122,7 +128,7 @@
 			}).on('click', '.add', function(event) {
 				event.preventDefault();
 				var obj = this;
-				ajustNum($(obj).parent().parent().parent().data('index')-1)
+				adjustNum($(obj).parent().parent().parent().data('index')-1)
 					.then(function(data){
 						console.log(data);
 						obj.previousElementSibling.value ++;
@@ -133,7 +139,19 @@
 				event.preventDefault();
 				$(this).toggleClass('checked');
 				adjustAmount()
-			});
+			}).on('click', '.remove', function(event) {
+				event.preventDefault();
+				if (confirm('确认要将该商品移出购物车吗？')) {
+					var parent = $(this).parent().parent();
+					adjustNum(parent.data('index')-1, 'remove')
+						.then(function(data){
+							console.log(data);
+							if (data.code == 'ok') {
+								parent.remove();
+							}
+						})
+				}
+			})
 			adjustAmount()
 
 		});
