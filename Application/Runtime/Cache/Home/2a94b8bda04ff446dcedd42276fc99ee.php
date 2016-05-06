@@ -30,6 +30,10 @@
 		<div class="right">
 			<?php if($username): ?><a href="/mall/UserCenter"><?php echo ($username); ?></a>
 				<span class="dev">|</span>
+				<a href="/mall/myCart">我的购物车</a>
+				<span class="dev">|</span>
+				<a href="/mall/Home/User/user_collect">我的收藏</a>
+				<span class="dev">|</span>
 				<a href="javascript:void(0)" id="logout">退出</a>
 			<?php else: ?>
 				<a href="/mall/login">登陆</a>

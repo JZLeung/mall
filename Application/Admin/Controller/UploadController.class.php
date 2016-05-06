@@ -9,7 +9,6 @@ class UploadController extends Controller {
 		$this->config = array(
 			'maxSize' => 40960000,
             'rootPath' => $rootPath,
-            //'savePath' => 'Image',
             'saveName' => array('uniqid',''),
             'exts' => array('jpg', 'gif', 'png', 'jpeg'),
             'autoSub' => true,
@@ -19,23 +18,15 @@ class UploadController extends Controller {
 
 	public function upload(){
 		$upload = new \Think\Upload($this->config);// 实例化上传类
-		//echo "<pre>";
-		//print_r($upload);
-
 		$info = $upload->upload();
 		$isEditor = I('post.editor', false);
-		//echo $isEditor;
 		if(!$info) {// 上传错误提示错误信息
-			//$this->error($upload->getError());
-			//echo $upload->getError();
 			$data['msg'] = $upload->getError();
 			$data['success'] = false;
 			$this->ajaxReturn($data);
 		}else{// 上传成功
-			//print_r($info);
-			//$i = 0;
-			//$data['path'] = '/Uploads/Images/';
-			$root = '/Uploads/Images/';
+			//$root = '/Uploads/Images/';
+			$root = substr($this->config['rootPath'], 1);
 			if ($isEditor == true) {
 				$root = '/mall'.$root;
 			}
@@ -49,4 +40,8 @@ class UploadController extends Controller {
 		}
 	}
 
+	public function uploadAD(){
+		$this->config['rootPath'] = './Uploads/Advertise/';
+		$this->upload();
+	}
 }

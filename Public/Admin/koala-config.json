@@ -1,0 +1,39 @@
+// Default project settings, you can edit it and set custom settings.
+{
+	// The mappings of source directory and output directory
+	"mappings": [
+		{	
+			"src": "./scss/",
+			"dest": "./"
+		}
+	],
+
+	// Add the ignore rules that Koala will not search them.
+	// e.g. ["*.json", "*.txt", "test", "path/libs"]
+	"ignores": ["*.css","images/","*.js"],
+
+	// Options of Compilers.
+	"options": {
+
+		// Output style. Can be nested (default), compact, compressed, or expanded.
+		"outputStyle": "expanded",
+
+		// Emit comments in the generated CSS indicating the corresponding source line.
+		"lineComments": false,
+
+		// Emit extra information in the generated CSS that can be used by the FireSass Firebug plugin.
+		"debugInfo": false,
+
+		// Create sourcemap files next to the generated CSS files
+		"sourceMap": false,
+
+		// Use Unix-style newlines in written files.
+		"unixNewlines": false,
+
+        // auto add vendor prefixes to rules
+        "autoprefix": false
+	},
+
+	// An array of filesystem paths which should be searched for js/LESS/Sass templates imported with the @import/@append/@prepend directive.
+	"includePaths": []
+}

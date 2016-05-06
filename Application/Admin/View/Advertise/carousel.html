@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>商城后台管理</title>
+
+  <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css"></head>
+  <link href="__PUBLIC__/Admin/ad.css" rel="stylesheet" type="text/css"></head>
+  
+<body>
+  <div id="wrapper">
+    <include file='./Public/Template/Admin/_header_.html' />
+    <!-- begin of the content -->
+    <pre style="display: none;">{$advertise|json_decode}</pre>
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">轮播广告设置</h1>
+        </div>
+        <div class="col-lg-12">
+          <div class="carousel" id="carousel">
+            <div class="carousel-container" id="carousel-body">
+            <foreach name="advertise" item="ad">
+              <div class="carousel-item">
+                <img src="__ROOT__/{$ad.picurl}" alt="">
+                <div class="carousel-panel">
+                  <h3 class="carousel-title">{$ad.title}</h3>
+                  <div class="carousel-content">{$ad.content}</div>
+                </div>
+              </div>
+            </foreach>
+            </div>
+            <div class="carousel-btns" id="carousel-btns">
+              <div class="prevbtn clickbtn"><span></span></div>
+              <div class="nextbtn clickbtn"><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12" style="margin-top: 20px;">
+          <button class="btn btn-primary" id="edit">编辑该广告</button>
+          <button class="btn btn-danger" id="delete">删除该广告</button>
+          <a class="btn btn-success" href="../Advertise/toAdd?type=carousel">添加新广告</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-mask" id="mask">
+    
+  </div>
+  <script src="__PUBLIC__/Common/js/upload/jquery.upload.min.js"></script>
+  <script src="__PUBLIC__/Common/js/selector.js"></script>
+  <script>
+    $(function(){
+      var carousel = document.getElementById('carousel'),
+          carouselBody = document.getElementById('carousel-body'),
+          carouselBtn = document.getElementById('carousel-btns');
+      var carouselItems,//carouselBody.querySelectorAll('.carousel-item'),
+          count,
+          step;
+      var adtitle = $('#title'),
+          adcontent = $('#content'),
+          form = $('#form');
+
+      function init(){
+        carouselItems = $('.carousel-item');
+        count = carouselItems.length;
+        carouselBody.style.width = count*100+'%';
+        step = 1/count *100;
+        for (var i = carouselItems.length - 1; i >= 0; i--) {
+          carouselItems[i].style.width = step + '%';
+        }
+      }
+      init();
+      
+      var index = 0;
+      //上下页动作
+      $(carouselBtn).on('click', '.prevbtn', function(event) {
+        event.preventDefault();
+        index -= 1;
+        if (index < 0) {index = count - 1;}
+        carouselBody.style.transform = 'translateX(-'+(index*step)+'%)';
+      }).on('click', '.nextbtn', function(event) {
+        event.preventDefault();
+        index += 1;
+        if (index == count) {index = 0;}
+        carouselBody.style.transform = 'translateX(-'+(index*step)+'%)';
+      });
+
+      $('#edit').click(function(event) {
+        location.href = '__ROOT__/Admin/Advertise/toEdit?type=carousel&index='+index;
+      });
+      $('#delete').click(function(event) {
+        event.preventDefault();
+        if (confirm('确认要删除该广告吗？')) {
+          $.get('../Advertise/delete?type=carousel&index='+index, function(data) {
+              console.log(data);
+          });
+        }
+        //location.href = '__ROOT__/Admin/Advertise/toEdit?type=carousel&index='+index;
+      });
+    });
+  </script>
+</body>

@@ -8,12 +8,30 @@
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
+	<link href="__PUBLIC__/Admin/ad.css" rel="stylesheet" type="text/css"></head>
 </head>
 <body>
 	<include file='./Public/Template/Index/_header_.html' />
 	<div class="top-list">
 		<div class="content-w clear">
-			<div class="cursor-w">
+		<div class="carousel" id="carousel">
+            <div class="carousel-container" id="carousel-body">
+            <foreach name="advertise.carousel" item="ad">
+            	<div class="carousel-item">
+					<img src="__ROOT__/{$ad.picurl}" alt="">
+					<div class="carousel-panel">
+						<h3 class="carousel-title">{$ad.title}</h3>
+						<div class="carousel-content">{$ad.content}</div>
+					</div>
+				</div>
+            </foreach>
+        	</div>
+			<div class="carousel-btns" id="carousel-btns">
+				<div class="prevbtn clickbtn"><span></span></div>
+				<div class="nextbtn clickbtn"><span></span></div>
+            </div>
+    	</div>
+			<!-- <div class="cursor-w">
 				<ul class="horizon-list list">
 					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
 					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
@@ -23,7 +41,7 @@
 				</ul>
 				<span class="nextbtn"></span>
 				<span class="prevbtn"></span>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<!-- <div class="sale-list ">
@@ -77,6 +95,38 @@
 			</div> -->
 		</div>
 	</div>
-	
+	<script>
+	(function(){
+		var carousel = document.getElementById('carousel'),
+			carouselBody = document.getElementById('carousel-body'),
+			carouselBtn = document.getElementById('carousel-btns');
+		var carouselItems,//carouselBody.querySelectorAll('.carousel-item'),
+			count,
+			step,
+			index = 0;
+		function init(){
+			carouselItems = $('.carousel-item');
+			count = carouselItems.length;
+			carouselBody.style.width = count*100+'%';
+			step = 1/count *100;
+			for (var i = carouselItems.length - 1; i >= 0; i--) {
+				carouselItems[i].style.width = step + '%';
+			}
+		}
+		init();
+		carouselBtn.addEventListener('click', function(e){
+			e = e || window.event;
+			var target = e.target || e.srcElement,
+				parent = target.tagName.toLowerCase() == 'div' ? target : target.parentElement;
+			if (parent.classList.contains('prevbtn')) {
+				index = index - 1 < 0 ? count -1 : index -1;
+			}else{
+				index = index + 1 == count ? 0 : index +1;
+			}
+			carouselBody.style.transform = 'translate(-'+ (index*step) +'%)';
+		})
+    	
+	})();
+	</script>
 </body>
 </html>

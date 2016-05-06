@@ -3,6 +3,7 @@ namespace Admin\Controller;
 use Think\Controller;
 class ItemsController extends Controller {
 
+    //添加新商品
     public function add(){
         $postData = I('post.data');
         $items = M('items');
@@ -11,6 +12,7 @@ class ItemsController extends Controller {
         $res = $items->data($postData)->add();
         $this->ajaxReturn($res);
     }
+    //编辑商品
     public function edit(){
         $postData = I('post.data');
         $items = M('items');
@@ -19,14 +21,14 @@ class ItemsController extends Controller {
         $res = $items->where(array('_id' => $id))->save($postData);
         $this->ajaxReturn($res);
     }
-
+    //删除商品
     public function delItem(){
         $id = I('post.id');
         $item = M('items');
         $res = $item->where(array('_id' =>$id))->delete();
         $this->ajaxReturn($res);
     }
-
+    //获取商品信息
     public function getItem($id){
         $items = M('items');
         $data = $items->where(array('_id'=>$id))->find();
@@ -34,7 +36,7 @@ class ItemsController extends Controller {
         //$this->assign('data',  $data);
         return $data;
     }
-
+    //根据目录获取商品
     public function getItems($lm1, $lm2){
         if ($lm1 == -1) {
             return self::getAllItem();
@@ -48,9 +50,17 @@ class ItemsController extends Controller {
             return $items->where($where)->select();
         }
     }
-
+    //获取所有商品
     public function getAllItem(){
         $items = M('items');
         return $items->select();
     }
+
+    public function getItemsFront(){
+        $lm1 = I('post.lm1');
+        $lm2 = I('post.lm2');
+        $all = self::getItems($lm1, $lm2);
+        $this->ajaxReturn($all);
+    }
+    
 }

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>商城后台管理</title>
+
+  <link href="__PUBLIC__/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css"></head>
+  <link href="__PUBLIC__/Admin/ad.css" rel="stylesheet" type="text/css"></head>
+  <style>
+    .carousel-item{
+      min-height: 100px;
+      width: 100%;
+    }
+  </style>
+<body>
+  <div id="wrapper">
+    <include file='./Public/Template/Admin/_header_.html' />
+    <!-- begin of the content -->
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">轮播广告设置</h1>
+        </div>
+        <div class="col-lg-12">
+          <div class="carousel-item" id="carousel">
+            <img src="" alt="">
+            <div class="carousel-panel">
+              <h3 class="carousel-title">广告标题</h3>
+              <div class="carousel-content">
+                广告的详细描述
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="col-lg-12" style="margin-top: 20px;" id="form">
+          <div class="form-group">
+            <label>广告标题</label>
+            <input class="form-control" id="title" name="title" data-ad='title'>
+          </div>
+          <div class="form-group">
+            <label>广告描述</label>
+            <textarea class="form-control" rows="3" cols="10" name="content" id="content" data-ad="content"></textarea>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label>广告图片</label>
+                <p><button type="button" class="btn btn-primary" id="file">点击上传图片</button></p>
+                <input type="hidden" name="picurl" id="picurl">
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="form-group">
+                <label class="col-lg-12 col-md-12 col-sm-12">广告商品</label>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <select class="form-control" id="lm1" data-ad="lm1" class="form-control"></select>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <select class="form-control" id="lm2" data-ad="lm2" class="form-control"></select>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <select class="form-control" id="itemname" data-ad="itemname" class="form-control"></select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>广告链接</label>
+            <input class="form-control" id="url" name="url" data-ad='url' disabled="disabled">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" id="save">保存</button>
+            <button class="btn btn-danger" id="delete">删除</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="__PUBLIC__/Common/js/upload/jquery.upload.min.js"></script>
+  <script src="__PUBLIC__/Common/js/selector.js"></script>
+  <script>
+    $(function(){
+      var $carousel = $('#carousel'),
+          $form = $('#form');
+      $form.on('change', '.form-control', function(event) {
+        event.preventDefault();
+        if (this.tagName.toLowerCase() != 'select') {
+          var act = $(this).data('ad'),
+              value = this.value;
+          $carousel.find('.carousel-'+act).text(value);
+        }
+      });
+      
+      var selectors,
+          allDatas = {};
+      //获取商品的目录
+      $.get('../Catalog/getAllCatalogsFront', function(data) {
+          catalogData = data;
+          selectors = new selector({
+              selecotor:['lm1', 'lm2'],
+              data:data
+          })
+          selectors.setValue([0 , 0])
+          $s2.change();
+      });
+
+      //选择展示商品
+      var s1 = document.getElementById('lm1'),
+          s2 = document.getElementById('lm2'),
+          s3 = document.getElementById('itemname'),
+          $s1 = $(s1),
+          $s2 = $(s2),
+          $s3 = $(s3),
+          url = $('#url');
+      function getItems(){
+        var lm1 = s1.selectedIndex,//s1.options[s1.selectedIndex].value,
+            lm2 = s2.selectedIndex;//s2.options[s2.selectedIndex].value;
+        if (allDatas[lm1+','+lm2] == undefined) {
+          $.post('../Items/getItemsFront', {lm1: lm1,lm2: lm2}, function(data, textStatus, xhr) {
+            allDatas[lm1+','+lm2] = data;
+            //if (data) {setItems(data)}
+            setItems(data)
+          });
+        }else{
+          setItems(allDatas[lm1+','+lm2]);
+        }
+        
+      }
+      function setItems(items){
+        s3.options.length = 0;
+        if (items) {
+          for (var i = items.length - 1; i >= 0; i--) {
+            s3.options[i] = new Option(items[i]['title'],items[i]['_id']);
+          }
+        }
+        
+      }
+
+      $('#lm2').on('change',getItems);
+      $('#lm1').change(function(){
+        $('#lm2').change();
+      });
+
+      $('#itemname').change(function(){
+        url.val('/item/'+this.value).change();
+      });
+
+
+      //初始化上传控件
+      var uploader = new Uploader({
+        trigger: '#file',
+        action: '../Upload/uploadAD',
+        data:{'ad':true},
+      }).change(function(filename) {
+        console.log(filename);
+        this.submit();
+      }).success(function(data) {
+        console.log(data);
+        var file_path = data.file_path;
+        $carousel.find('img').attr('src', '__ROOT__'+file_path);
+        $('#picurl').val(file_path);
+      });
+
+      function arrayToObject(array){
+        var obj = {};
+        for (var i = 0; i < array.length; i++) {
+          obj[array[i]['name']] = array[i]['value']
+        }
+        return obj;
+      }
+
+      $('#save').click(function(event) {
+        event.preventDefault();
+        var dataTmp = $form.serializeArray(),
+            type = 'carousel';
+        var data = arrayToObject(dataTmp)
+        $.post('./add', {data: data, type: type}, function(data, textStatus, xhr) {
+          console.log(data);
+        });
+      });
+
+
+    });
+  </script>
+</body>

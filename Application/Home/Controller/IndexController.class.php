@@ -4,16 +4,7 @@ use Think\Controller;
 class IndexController extends Controller {
 
     function _initialize(){
-        // $catalogs = session('?catalogs') ? session('catalogs') : null;
-        // if (!$catalogs) {
-            $catalogs = A('Catalog')->getAllCatalog();
-            //session('catalogs', $catalogs);
-        // }
-        // for ($i=0; $i < count($catalogs); $i++) {
-        //     if (is_array($catalogs[$i]['id'])) {
-        //         $catalogs[$i]['id'] = $catalogs[$i]['id']['$numberLong'];
-        //     }
-        // }
+        $catalogs = A('Catalog')->getAllCatalog();
         $this->assign('catalogs', $catalogs);
     }
 
@@ -30,6 +21,15 @@ class IndexController extends Controller {
         $items = M('items');
         $data = $items->select();
         $this->assign('data', $data);
+
+        $adv = M('advertise');
+        $advertise = $adv->select();
+        $ads = array();
+        for ($i=0 , $count = count($advertise); $i < $count; $i++) { 
+            $ads[$advertise[$i]['name']] = $advertise[$i]['advertise'];
+        }
+        $this->assign('advertise', $ads);
+
     	$this->display();
 
     }
