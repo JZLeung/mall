@@ -17,7 +17,7 @@
   <link href="__PUBLIC__/Admin/ad.css" rel="stylesheet" type="text/css"></head>
   <style>
     .items-box .item{
-      width: 250px;
+      width: 240px;
       display: inline-block;
       padding: 10px;
       border: 1px solid #eee; 
@@ -46,24 +46,45 @@
       overflow: hidden;
     }
     .item-mask{
-      top: 20px;
-      left: 50%;
-      margin-left: -550px;
-      max-width: 1100px;
+      margin: 20px;
       padding: 20px;
+      padding-bottom: 30px;
       box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
       overflow-y: scroll;
+      opacity: 0;
+    }
+    .item-mask.show,.item-mask.show ~ .mask-foot{
+      opacity: 1;
       visibility: visible;
       -webkit-transform: scale(1);
       -ms-transform: scale(1);
       -o-transform: scale(1);
       transform: scale(1);
     }
+    .mask-foot{
+      visibility: hidden;
+      opacity: 0;
+      z-index: 11111;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      margin: 20px;
+      text-align: right;
+      padding: 10px 20px;
+      -webkit-transform: scale(0.5);
+      -ms-transform: scale(0.5);
+      -o-transform: scale(0.5);
+      transform: scale(0.5);
+      -webkit-transition: all 0.5s;
+      -o-transition: all 0.5s;
+      transition: all 0.5s;
+    }
   </style>
 <body>
   <div id="wrapper">
     <include file='./Public/Template/Admin/_header_.html' />
-    <!-- begin of the content -->
     <pre style="display: none;">{$advertise|json_decode}</pre>
     <div id="page-wrapper">
       <div class="row">
@@ -74,8 +95,6 @@
         </div>
         <div class="col-lg-12" style="margin-top: 20px;">
           <button class="btn btn-primary" id="edit">编辑该广告</button>
-          <button class="btn btn-danger" id="delete">删除该广告</button>
-          <a class="btn btn-success" href="../Advertise/toAdd?type=carousel">添加新广告</a>
         </div>
       </div>
     </div>
@@ -83,54 +102,67 @@
   <div class="item-mask" id="mask">
     <div class="items-box">
     <foreach name="items" item="all">
-      <h3>{$all.name}</h3>
-      <foreach name="all.item" item="one">
-      <div class="item clear">
-        <div class="image"><img src="{$one.pictures.0.src}" alt=""></div>
-        <div class="content">
-          <p class="title">{$one.title}</p>
-          <small>{$one.desc}</small>
+      <div class="inner-box">
+        <h3>{$all.name}</h3>
+        <foreach name="all.item" item="one">
+        <div class="item clear" data-id="{$one['_id']}">
+          <div class="image"><img src="{$one.pictures.0.src}" alt=""></div>
+          <div class="content">
+            <p class="title">{$one.title}</p>
+            <small>{$one.desc}</small>
+          </div>
         </div>
+        </foreach>
+        <hr>
       </div>
-      </foreach>
-      <hr>
     </foreach>
     </div>
   </div>
+  <div class="mask-foot">
+    <button class="btn btn-info" id="save">保存</button>
+  </div>
   <script>
     (function(){
-      var count = 0, all = 8;
-      $('#mask').on('click', '.item', function(event) {
+      var count = 0, all = 8,
+          stars = [];
+      var $mask = $('#mask'),
+          $edit = $('#edit'),
+          $save = $('#save');
+
+      $mask.on('click', '.item', function(event) {
         event.preventDefault();
-        var _this = $(this);
+        var _this = $(this),
+            id = _this.data('id'),
+            add = true;
         _this.toggleClass('active');
         if (!_this.hasClass('active')) {
           count --;
+          add = false;
         }else{
           count ++;
         }
         if (count > all) {
           alert('最多只能选'+all+'个明星产品');
           count--;
+          add = false;
           _this.removeClass('active');
         }
-        
-        
-      });
-      /*var mask = document.getElementById('mask');
-      function toggleClass(ele, className){
-        if (ele.classList.contains(className)) {
-          ele.classList.remove(className)
+        if (add) {
+          stars.push(id);
         }else{
-          ele.classList.add(className)
+          var pos = $.inArray(id, stars);
+          stars.splice(pos, 1);
         }
-      }
-      mask.addEventListener('click', function(e){
-        e = e || window.event;
-        e.preventDefault();
-        var target = e.target || e.srcElement;
-        toggleClass(target, 'active');
-      })*/
+      });
+
+      $edit.on('click', function(event) {
+        event.preventDefault();
+        $mask.toggleClass('show');
+      });
+
+      $save.click(function(event) {
+        $mask.toggleClass('show');
+      });
     })();
   </script>
 </body>
