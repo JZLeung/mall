@@ -63,4 +63,26 @@ class IndexController extends CommonController {
         $this->assign('advertise', $adv['advertise']);
         $this->display('Advertise/carousel');
     }
+    public function ad_star(){
+        $adv = A('advertise')->getAllAdvertises('star');
+        $this->assign('advertise', $adv['advertise']);
+
+        $allCatalog = A('catalog')->getAllCatalogs();
+        
+        $items = A('items')->getAllItem();
+        $item = array();
+        for ($i=0, $count1 = count($allCatalog); $i < $count1; $i++) { 
+            $name1 = $allCatalog[$i]['name'];
+            $children = $allCatalog[$i]['children'];
+            for ($j=0, $count2 = count($children); $j < $count2; $j++) { 
+                $item[$i.','.$j]['name'] = $name1.' / '.$children[$j];
+            }
+        }
+        for ($i=0, $count = count($items); $i < $count; $i++) { 
+            $tmp = $items[$i];
+            $item[$tmp['lm1'].','.$tmp['lm2']]['item'][] = $tmp;
+        }
+        $this->assign('items', $item);
+        $this->display('Advertise/star');
+    }
 }
