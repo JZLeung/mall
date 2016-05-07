@@ -55,7 +55,7 @@ class UserController extends Controller {
 	public function user_collect(){
 		$this->assign('user', $this->user);
 		$myCollectionsId = A('Collection')->getAllCollections($this->user['_id']);
-		$myCollections = A('Items')->getItemsByCollection($myCollectionsId);
+		$myCollections = A('Items')->getItemsByIdGroup($myCollectionsId);
 		$this->assign('collections', $myCollections);
 		$this->display();
 	}

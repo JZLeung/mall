@@ -114,8 +114,13 @@ class ItemsController extends Controller {
         //print_r(count($data));
     }
 
+    public function getAllItems(){
+        $items = M('items');
+        return $items->select();
+    }
+
     //根据收藏查找所有商品
-    public function getItemsByCollection($collections){
+    public function getItemsByIdGroup($collections){
         $item = M('items');
         for ($i=0, $length = count($collections); $i < $length; $i++) { 
             $items[] = $item->where(array('_id' => $collections[$i]))->find();

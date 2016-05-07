@@ -36,6 +36,15 @@ class ItemsController extends Controller {
         //$this->assign('data',  $data);
         return $data;
     }
+    //根据一组ID获取商品
+    public function getItemsByIdGroup($ids){
+        $items = M('items');
+        for ($i=0, $count = count($ids); $i < $count; $i++) { 
+            $data[] = $items->where(array('_id'=>$ids[$i]))->find();
+            
+        }
+        return $data;
+    }
     //根据目录获取商品
     public function getItems($lm1, $lm2){
         if ($lm1 == -1) {

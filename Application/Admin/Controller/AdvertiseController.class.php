@@ -49,6 +49,7 @@ class AdvertiseController extends CommonController {
 		$msg['msg'] = $res;
 		$this->ajaxReturn($msg);
 	}
+	//删除
 	public function delete(){
 		$type = I('get.type');
 		$index = I('get.index');
@@ -56,5 +57,17 @@ class AdvertiseController extends CommonController {
 		$where = array('name'=> $type);
 		$editData['advertise.'.$index] = array('pull', '');
 		$res = $ad->where($where)->save($editData);
+	}
+	//设置
+	public function set(){
+		$data = I('post.data');
+		$type = I('post.type');
+		$ad = M('advertise');
+		$where = array('name'=> $type);
+		$editData['advertise'] = $data;
+		$res = $ad->where($where)->save($editData);
+		$msg['code'] = 'ok';
+		$msg['msg'] = $res;
+		$this->ajaxReturn($msg);
 	}
 }

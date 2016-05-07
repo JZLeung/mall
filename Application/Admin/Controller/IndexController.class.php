@@ -65,7 +65,7 @@ class IndexController extends CommonController {
     }
     public function ad_star(){
         $adv = A('advertise')->getAllAdvertises('star');
-        $this->assign('advertise', $adv['advertise']);
+        $advertise = A('Items')->getItemsByIdGroup($adv['advertise']);
 
         $allCatalog = A('catalog')->getAllCatalogs();
         
@@ -82,6 +82,8 @@ class IndexController extends CommonController {
             $tmp = $items[$i];
             $item[$tmp['lm1'].','.$tmp['lm2']]['item'][] = $tmp;
         }
+        $this->assign('advertise', $advertise);
+        $this->assign('advertiseID', $adv['advertise']);
         $this->assign('items', $item);
         $this->display('Advertise/star');
     }

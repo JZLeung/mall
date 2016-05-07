@@ -12,7 +12,7 @@
 </head>
 <body>
 	<include file='./Public/Template/Index/_header_.html' />
-	<div class="top-list">
+	<div class="top-list list">
 		<div class="content-w clear">
 		<div class="carousel" id="carousel">
             <div class="carousel-container" id="carousel-body">
@@ -31,30 +31,25 @@
 				<div class="nextbtn clickbtn"><span></span></div>
             </div>
     	</div>
-			<!-- <div class="cursor-w">
-				<ul class="horizon-list list">
-					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
-					<li class="list-item"><img src="__PUBLIC__/Common/images/1.jpg" alt=""></li>
-				</ul>
-				<span class="nextbtn"></span>
-				<span class="prevbtn"></span>
-			</div> -->
 		</div>
 	</div>
-	<!-- <div class="sale-list ">
-		<div class="content-w flex">
-			<div class="sale-item"><a  href="item/2" ><img src="__PUBLIC__/Common/images/2.jpg" alt=""></a></div>
-			<div class="sale-item"><a  href="item/2" ><img src="__PUBLIC__/Common/images/2.jpg" alt=""></a></div>
-			<div class="sale-item"><a  href="item/2" ><img src="__PUBLIC__/Common/images/2.jpg" alt=""></a></div>
-			<div class="sale-item"><a  href="item/2" ><img src="__PUBLIC__/Common/images/2.jpg" alt=""></a></div>
-		</div>
-	</div> -->
-	<div class="star-list clear">
-		<div class="content-w">
+	<div class="star-list list clear">
+		<div class="content-w" style="overflow-x: hidden;">
 			<h1 class="header-2">明星产品</h1>
+			<div class="star-content" id="star-content">
+				<foreach name="stars" item="one" key="key">
+				<div class="item item{$key%5+1}">
+					<img src="{$one.pictures.0.src}" alt="">
+					<p class="title">{$one.title}</p>
+					<p class="price">{$one.price} 元</p>
+				</div>
+				</foreach>
+			</div>
+		</div>
+	</div>
+	<div class="all-list clear">
+		<div class="content-w">
+			<h1 class="header-2">所有产品</h1>
 			<foreach name="data" item="item" key="key">
 				<a class="left item" {$key%5==0?'style="margin-left:0"':''} href="item/{$item['_id']}">
 					<img src="{$item['pictures'][0]['src']}" alt="{$item['pictures'][0]['title']}" class="image">
@@ -63,36 +58,6 @@
 					<p class="price">{$item.price}元</p>
 				</a>
 			</foreach>
-			<!-- <div class="left item">
-				<img src="__PUBLIC__/Common/images/4c.jpg" alt="" class="image">
-				<h4 class="title">小米4c</h4>
-				<p class="desc">高通骁龙808，发烧专用</p>
-				<p class="price">998元</p>
-			</div>
-			<div class="left item">
-				<img src="__PUBLIC__/Common/images/4c.jpg" alt="" class="image">
-				<h4 class="title">小米4c</h4>
-				<p class="desc">高通骁龙808，发烧专用</p>
-				<p class="price">998元</p>
-			</div>
-			<div class="left item">
-				<img src="__PUBLIC__/Common/images/4c.jpg" alt="" class="image">
-				<h4 class="title">小米4c</h4>
-				<p class="desc">高通骁龙808，发烧专用</p>
-				<p class="price">998元</p>
-			</div>
-			<div class="left item">
-				<img src="__PUBLIC__/Common/images/4c.jpg" alt="" class="image">
-				<h4 class="title">小米4c</h4>
-				<p class="desc">高通骁龙808，发烧专用</p>
-				<p class="price">998元</p>
-			</div>
-			<div class="left item">
-				<img src="__PUBLIC__/Common/images/4c.jpg" alt="" class="image">
-				<h4 class="title">小米4c</h4>
-				<p class="desc">高通骁龙808，发烧专用</p>
-				<p class="price">998元</p>
-			</div> -->
 		</div>
 	</div>
 	<script>
@@ -114,6 +79,11 @@
 			}
 		}
 		init();
+
+
+		/*轮播*/
+		var isHover = false,
+			carouselTimer;
 		carouselBtn.addEventListener('click', function(e){
 			e = e || window.event;
 			var target = e.target || e.srcElement,
@@ -124,8 +94,56 @@
 				index = index + 1 == count ? 0 : index +1;
 			}
 			carouselBody.style.transform = 'translate(-'+ (index*step) +'%)';
-		})
-    	
+		});
+		$(carousel).hover(function() {
+			isHover = true;
+			carouselTimer = null;
+			console.log('hover')
+		}, function() {
+			isHover = false;
+			console.log('hover out')
+			carouselTimer = setTimeout(carouselStart, 2500);
+		});
+    	function carouselStart(){
+    		if (!isHover) {
+    			index = index + 1 == count ? 0 : index +1;
+    			carouselBody.style.transform = 'translate(-'+ (index*step) +'%)';
+    			carouselTimer = setTimeout(carouselStart, 2500);
+    		}else{
+    			carouselTimer = null;
+    		}
+    	}
+		carouselTimer = setTimeout(carouselStart, 2500);
+
+		/*明星轮播*/
+		var starTimer,
+			starHover = false,
+			starContent = document.getElementById('star-content');
+		function toggleClass(ele, className){
+			if (ele.classList.contains(className)) {
+				ele.classList.remove(className);
+			}else{
+				ele.classList.add(className);
+			}
+		}
+		function starCarousel(){
+			if (!starHover) {
+				toggleClass(starContent, 'move');
+				starTimer = setTimeout(starCarousel, 2500);
+			}else{
+				starTimer = null;
+			}
+		}
+		starTimer = setTimeout(starCarousel, 2500);
+		$(starContent).hover(function() {
+			console.log('star hover')
+			starHover = !starHover;
+			starTimer = null;
+		}, function() {
+			console.log('star hover out')
+			starHover = !starHover;
+			starTimer = setTimeout(starCarousel, 2500);
+		});
 	})();
 	</script>
 </body>
