@@ -101,8 +101,18 @@
       $('#delete').click(function(event) {
         event.preventDefault();
         if (confirm('确认要删除该广告吗？')) {
-          $.get('../Advertise/delete?type=carousel&index='+index, function(data) {
+          var item = $(carouselItems[index]), data = {};
+          data['title'] = $.trim(item.find('.carousel-title').text());
+          data['content'] = $.trim(item.find('.carousel-content').text());
+
+          $.post('../Advertise/delete', {data:data,type:'carousel'}, function(data) {
               console.log(data);
+              if (data.msg.ok) {
+                item.remove();
+                index --;
+                init();
+                carouselBody.style.transform = 'translateX(-'+(index*step)+'%)';
+              }
           });
         }
         //location.href = '__ROOT__/Admin/Advertise/toEdit?type=carousel&index='+index;

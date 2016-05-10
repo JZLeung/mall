@@ -51,12 +51,15 @@ class AdvertiseController extends CommonController {
 	}
 	//删除
 	public function delete(){
-		$type = I('get.type');
-		$index = I('get.index');
+		$postData = I('post.data');
+		$type = I('post.type');
 		$ad = M('advertise');
 		$where = array('name'=> $type);
-		$editData['advertise.'.$index] = array('pull', '');
+		$editData['advertise'] = array('pull', $postData);
 		$res = $ad->where($where)->save($editData);
+		$msg['code'] = 'ok';
+		$msg['msg'] = $res;
+		$this->ajaxReturn($msg);
 	}
 	//设置
 	public function set(){

@@ -185,6 +185,10 @@
         var data = arrayToObject(dataTmp)
         $.post('./add', {data: data, type: type}, function(data, textStatus, xhr) {
           console.log(data);
+          if (data.msg.ok) {
+            alert('添加成功');
+            location.reload();
+          }
         });
       });
 
