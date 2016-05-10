@@ -58,8 +58,11 @@
 		right: 0;
 		bottom: 0;
 		padding: 10px;
+		padding-top: 0;
+		background-color: rgba(255,255,255,0.5);
 		h3.carousel-title{
 			font-size: 1.4em;
+			font-weight: bold;
 		}
 		.carousel-content{
 			font-size: 1.2em;

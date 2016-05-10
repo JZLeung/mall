@@ -58,9 +58,12 @@
   right: 0;
   bottom: 0;
   padding: 10px;
+  padding-top: 0;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .carousel-item .carousel-panel h3.carousel-title {
   font-size: 1.4em;
+  font-weight: bold;
 }
 .carousel-item .carousel-panel .carousel-content {
   font-size: 1.2em;
