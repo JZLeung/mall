@@ -8,22 +8,38 @@
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/index.css">
+	<style>
+		.catalog-list{
+			background-color: #f6f6f6;
+		}
+		.catalog-list .item{
+			background-color: #fff;
+		}
+		.head-nav{
+			font-size: 16px;
+			font-weight: bold;
+			line-height: 3em;
+			height: 3em;
+		}
+		.head-nav > a {
+			margin-right: 5px;
+		}
+		.head-nav > a.active{
+			color: #ff6709;
+		}
+	</style>
 </head>
 <body>
 	<include file='./Public/Template/Index/_header_.html' />
-	<div class="star-list ">
-
+	<div class="catalog-list">
 		<div class="content-w">
-
-			<div class="item-list clear">
+			<div class="all-list clear">
 				<div class="head-nav">
-					<div class="content-w">
-						<a href="__ROOT__">首页</a>
-						<span class="nav-sub">/</span>
-						<a href="javascript:;">{$c[0]['name']}</a>
-						<span class="nav-sub">/</span>
-						<a href="javascript:;">{$c[1]['name']}</a>
-					</div>
+					<a href="__ROOT__">首页</a>
+					<span class="nav-sub">/</span>
+					<a href="javascript:;" class="active">{$c[0]['name']}</a>
+					<span class="nav-sub">/</span>
+					<a href="javascript:;" class="active">{$c[1]['name']}</a>
 				</div>
 			<foreach name="data" item="item" key="key">
 				<a class="left item" {$key%5==0?'style="margin-left:0"':''} href="__ROOT__/item/{$item['_id']}">
@@ -39,5 +55,4 @@
 			</div>
 		</div>
 	</div>
-
 </body>

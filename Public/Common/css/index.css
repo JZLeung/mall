@@ -103,12 +103,15 @@ a > img {
     margin-left: 0;
 }
 .all-list .item .title{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     font-size: 16px;
     line-height: 1.2em;
     margin-top: 5px;
     margin-bottom: 10px;
     overflow: hidden;
-    height: 1.2em;
+    height: 2.4em;
 }
 .all-list .item .desc{
     margin-bottom: 10px;

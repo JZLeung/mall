@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>首页</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/cart.css?v=sd">
+	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/cart.css?v=sd">
 	<style>
 		
 	</style>
@@ -14,14 +14,14 @@
 <body onselectstart="return false;" style="-moz-user-select:none;">
 	<div class="header">
 		<div class="content-w">
-			<a href="__ROOT__" class="left header-logo">
+			<a href="/mall" class="left header-logo">
 				<div class="">
 					<span class="logo"></span>
 					<span class="home"></span>
 				</div>
 			</a>
 			<div class="right">
-				<a href="">{$user.username}</a>
+				<a href=""><?php echo ($user["username"]); ?></a>
 				<span class="sub">|</span>
 				<a href="">我的订单</a>
 			</div>
@@ -40,28 +40,26 @@
 				<div class="cart-amount">总价</div>
 			</div>
 			<div class="cart-body" id="cart">
-				<foreach name="mycart" item="cart">
-				<div class="cart-item" data-index="{++$index}">
+				<?php if(is_array($mycart)): foreach($mycart as $key=>$cart): ?><div class="cart-item" data-index="<?php echo ++$index;?>">
 					<div class="cart-select">
 						<span class="checkbox"></span>
 					</div>
-					<div class="cart-img"><img src="{$cart.item.pictures.0.src}" alt=""></div>
-					<div class="cart-name">{$cart.item.name}</div>
-					<div class="cart-opt">{$cart['optname']}</div>
+					<div class="cart-img"><img src="<?php echo ($cart["item"]["pictures"]["0"]["src"]); ?>" alt=""></div>
+					<div class="cart-name"><?php echo ($cart["item"]["name"]); ?></div>
+					<div class="cart-opt"><?php echo ($cart['optname']); ?></div>
 					<div class="cart-num">
 						<div class="btn-group">
 							<div class="left-btn btn reduce">-</div>
-							<input type="text" value="{$cart.num}">
+							<input type="text" value="<?php echo ($cart["num"]); ?>">
 							<div class="right-btn btn add">+</div>
 						</div>
 					</div>
-					<div class="cart-price">{$cart.price}</div>
-					<div class="cart-amount">{$cart['price']*$cart['num']}</div>
+					<div class="cart-price"><?php echo ($cart["price"]); ?></div>
+					<div class="cart-amount"><?php echo ($cart['price']*$cart['num']); ?></div>
 					<div class="cart-action" >
 						<a href="" class="remove">+</a>
 					</div>
-				</div>
-				</foreach>
+				</div><?php endforeach; endif; ?>
 			</div>
 			<div class="cart-foot clear cart-fixed">
 				<p class="right">
@@ -71,7 +69,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="__PUBLIC__/Common/js/jquery-1.12.0.js"></script>
+	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script>
 		var $amount = $('#cart .cart-amount'),
 			amount = $('#amount');
@@ -100,7 +98,7 @@
 				return new Promise(function(resolve, reject){
 					var action = reduce || 'add';
 					$.ajax({
-						url: '__ROOT__/Home/Cart/'+action,
+						url: '/mall/Home/Cart/'+action,
 						type: 'post',
 						data: {index: curIndex},
 						success: function(data){
@@ -166,7 +164,7 @@
 				$.post('./Home/Buy/generateOrder', {indexs: indexs}, function(data, textStatus, xhr) {
 					console.log(data);
 					var id = data['order']['$id'];
-					location.href = '__ROOT__/order/checkout?o='+id;
+					location.href = '/mall/order/checkout?o='+id;
 				});
 			});
 		});

@@ -25,7 +25,8 @@ return array(
         '/^catalogs\/(\d+)$/' => 'Home/Items/getItemsByCatalog?lm1=:1&lm2=-1',
         
         'UserCenter' => 'Home/User/Index',
-        'myCart' => 'Home/User/user_cart'
+        'myCart' => 'Home/User/user_cart',                      //购物车
+        'order/checkout' => 'Home/Buy/checkout'                //确认订单
     ),
     //'配置项'=>'配置值'
     'DB_TYPE' => 'mongo', // 数据库类型

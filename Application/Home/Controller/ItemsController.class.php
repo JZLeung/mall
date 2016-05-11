@@ -1,8 +1,8 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class ItemsController extends Controller {
-    function _initialize(){
+class ItemsController extends CommonController {
+    /*function _initialize(){
         $catalogs = A('Catalog')->getAllCatalog();
         $this->assign('catalogs', $catalogs);
 
@@ -14,7 +14,7 @@ class ItemsController extends Controller {
         }
         $this->user = $user;
         $this->assign('username', $user['username']);
-    }
+    }*/
     //商品详情页
     public function index($id){
         $items = M('items');

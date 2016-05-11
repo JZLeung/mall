@@ -13,12 +13,10 @@
 
   <link href="/mall/Public/Admin/sb/css/bootstrap.min.css" rel="stylesheet">
   <link href="/mall/Public/Admin/sb/css/sb-admin-2.css" rel="stylesheet">
-  <link href="/mall/Public/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css">
-
-</head>
-
+  <link href="/mall/Public/Admin/sb/css/font-awesome.css" rel="stylesheet" type="text/css"></head>
+  <link href="/mall/Public/Admin/ad.css" rel="stylesheet" type="text/css"></head>
+  
 <body>
-
   <div id="wrapper">
     <?php if(empty($admin)): ?><script>location.href = '/mall/Admin/login';</script><?php endif; ?>
 
@@ -163,104 +161,101 @@
 <script src="/mall/Public/Admin/sb/js/metisMenu.min.js"></script>
 <script src="/mall/Public/Admin/sb/js/sb-admin-2.js"></script>
     <!-- begin of the content -->
+    <pre style="display: none;"><?php echo (json_decode($advertise)); ?></pre>
     <div id="page-wrapper">
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">轮播广告设置</h1>
         </div>
-        <!-- /.col-lg-12 -->
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <i class="fa fa-comments fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div class="huge">26</div>
-                    <div>新评论</div>
-                  </div>
+        <div class="col-lg-12">
+          <div class="carousel" id="carousel">
+            <div class="carousel-container" id="carousel-body">
+            <?php if(is_array($advertise)): foreach($advertise as $key=>$ad): ?><div class="carousel-item">
+                <img src="/mall/<?php echo ($ad["picurl"]); ?>" alt="">
+                <div class="carousel-panel">
+                  <h3 class="carousel-title"><?php echo ($ad["title"]); ?></h3>
+                  <div class="carousel-content"><?php echo ($ad["content"]); ?></div>
                 </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer">
-                  <span class="pull-left">查看详情</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
+              </div><?php endforeach; endif; ?>
+            </div>
+            <div class="carousel-btns" id="carousel-btns">
+              <div class="prevbtn clickbtn"><span></span></div>
+              <div class="nextbtn clickbtn"><span></span></div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <i class="fa fa-tasks fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div class="huge">12</div>
-                    <div>新商品</div>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer">
-                  <span class="pull-left">查看详情</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <i class="fa fa-shopping-cart fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div class="huge">124</div>
-                    <div>新订单</div>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer">
-                  <span class="pull-left">查看详情</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <i class="fa fa-support fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div class="huge">13</div>
-                    <div>新用户</div>
-                  </div>
-                </div>
-              </div>
-              <a href="#">
-                <div class="panel-footer">
-                  <span class="pull-left">查看详情</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
-            </div>
-          </div>
+        </div>
+        <div class="col-lg-12" style="margin-top: 20px;">
+          <button class="btn btn-primary" id="edit">编辑该广告</button>
+          <button class="btn btn-danger" id="delete">删除该广告</button>
+          <a class="btn btn-success" href="../Advertise/toAdd?type=carousel">添加新广告</a>
         </div>
       </div>
     </div>
-    <!-- end of the content -->
-    <!-- end of _header_.html -->
   </div>
+  <div class="item-mask" id="mask">
+    
+  </div>
+  <script src="/mall/Public/Common/js/upload/jquery.upload.min.js"></script>
+  <script src="/mall/Public/Common/js/selector.js"></script>
+  <script>
+    $(function(){
+      var carousel = document.getElementById('carousel'),
+          carouselBody = document.getElementById('carousel-body'),
+          carouselBtn = document.getElementById('carousel-btns');
+      var carouselItems,//carouselBody.querySelectorAll('.carousel-item'),
+          count,
+          step;
+      var adtitle = $('#title'),
+          adcontent = $('#content'),
+          form = $('#form');
+
+      function init(){
+        carouselItems = $('.carousel-item');
+        count = carouselItems.length;
+        carouselBody.style.width = count*100+'%';
+        step = 1/count *100;
+        for (var i = carouselItems.length - 1; i >= 0; i--) {
+          carouselItems[i].style.width = step + '%';
+        }
+      }
+      init();
+      
+      var index = 0;
+      //上下页动作
+      $(carouselBtn).on('click', '.prevbtn', function(event) {
+        event.preventDefault();
+        index -= 1;
+        if (index < 0) {index = count - 1;}
+        carouselBody.style.transform = 'translateX(-'+(index*step)+'%)';
+      }).on('click', '.nextbtn', function(event) {
+        event.preventDefault();
+        index += 1;
+        if (index == count) {index = 0;}
+        carouselBody.style.transform = 'translateX(-'+(index*step)+'%)';
+      });
+
+      $('#edit').click(function(event) {
+        location.href = '/mall/Admin/Advertise/toEdit?type=carousel&index='+index;
+      });
+      $('#delete').click(function(event) {
+        event.preventDefault();
+        if (confirm('确认要删除该广告吗？')) {
+          var item = $(carouselItems[index]), data = {};
+          data['title'] = $.trim(item.find('.carousel-title').text());
+          data['content'] = $.trim(item.find('.carousel-content').text());
+
+          $.post('../Advertise/delete', {data:data,type:'carousel'}, function(data) {
+              console.log(data);
+              if (data.msg.ok) {
+                item.remove();
+                index --;
+                init();
+                carouselBody.style.transform = 'translateX(-'+(index*step)+'%)';
+              }
+          });
+        }
+        //location.href = '/mall/Admin/Advertise/toEdit?type=carousel&index='+index;
+      });
+    });
+  </script>
+</body>

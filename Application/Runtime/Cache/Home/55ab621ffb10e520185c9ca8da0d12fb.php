@@ -36,9 +36,13 @@
 			<span class="dev">|</span>
 		</div>
 		<div class="right">
-			<?php if($username): ?><a href="javascript:void(0)"><?php echo ($username); ?></a>
+			<?php if($username): ?><a href="/mall/UserCenter"><?php echo ($username); ?></a>
 				<span class="dev">|</span>
-				<a href="javascript:void(0)">退出</a>
+				<a href="/mall/myCart">我的购物车</a>
+				<span class="dev">|</span>
+				<a href="/mall/Home/User/user_collect">我的收藏</a>
+				<span class="dev">|</span>
+				<a href="javascript:void(0)" id="logout">退出</a>
 			<?php else: ?>
 				<a href="/mall/login">登陆</a>
 				<span class="dev">|</span>
@@ -55,8 +59,18 @@
 		</div>
 		<div class="nav-bar left">
 			<ul class="horizon-list clear">
-				<li class="list-item">
+				<?php if(is_array($catalogs)): foreach($catalogs as $key=>$catalog): ?><li class="list-item">
+						<a href="/mall/catalogs/<?php echo ($catalog["id"]); ?>"><?php echo ($catalog["name"]); ?></a>
+						<div class="sub-items">
+							<?php define('index', '0'); ?>
+							<?php if(is_array($catalog["children"])): foreach($catalog["children"] as $key=>$child): ?><a href="/mall/catalogs/<?php echo ($catalog["id"]); ?>/<?php echo ($key); ?>"><?php echo ($child); ?></a><?php endforeach; endif; ?>
+						</div>
+					</li><?php endforeach; endif; ?>
+				<!-- <li class="list-item">
 					<a href="javascipt:;">分类1</a>
+					<div class="sub-items">
+
+					</div>
 				</li>
 				<li class="list-item">
 					<a href="javascipt:;">分类2</a>
@@ -69,15 +83,43 @@
 				</li>
 				<li class="list-item">
 					<a href="javascipt:;">分类5</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
-		<div class="nav-search right">
-				<input type="text" class="search left">
+		<form action="/mall/search" onsubmit="search.value = search.value.replace(/(^\s*)|(\s*$)/g, '')">
+		<div class="nav-search right" id="searchBox">
+				<input type="text" class="search left" name="search" value="<?php echo ($_GET['search']); ?>" id="search">
 				<input type="submit" class="submit">
 		</div>
+		</form>
 	</div>
 </div>
+<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
+<script>
+	var search = document.getElementById('search'),
+		box = document.getElementById('searchBox'),
+		oName = box.className;
+	if (search.value != '') {
+		box.className = oName + ' active';
+	}
+	search.addEventListener('blur', function(e){
+		if (this.value == '') {
+			box.className = oName;
+		}
+	})
+	$('#logout').click(function(e){
+		e.preventDefault();
+		if (confirm('确认要退出登录吗？')) {
+			$.get('/mall/logout',function(data){
+				console.log(data);
+				if (data.code == 1) {
+					alert(data.msg)
+					location.reload();
+				}
+			})
+		}
+	})
+</script>
 
 	<?php if(empty($data)): ?><div class="nodata content-w">
 			<h1 class="title">商品编号：<?php echo ($id); ?> 不存在</h1>
@@ -90,9 +132,9 @@
 		<div class="content-w">
 			<a href="javascript:;">首页</a>
 			<span class="nav-sub">/</span>
-			<a href="javascript:;">配件</a>
+			<a href="/mall/catalogs/<?php echo ($c[0]['id']); ?>"><?php echo ($c[0]['name']); ?></a>
 			<span class="nav-sub">/</span>
-			<a href="javascript:;">后盖</a>
+			<a href="/mall/catalogs/<?php echo ($c[0]['id']); ?>/<?php echo ($c[1]['id']); ?>"><?php echo ($c[1]['name']); ?></a>
 			<span class="nav-sub">/</span>
 			<a href="javascript:;"><?php echo ($data["name"]); ?></a>
 		</div>
@@ -156,8 +198,10 @@
 					</div>
 				</div> -->
 				<div class="item-buttons">
-					<button class="btn btn-buy btn-confirm">加入购物车</button>
-					<button class="btn btn-like btn-cancel">喜欢</button>
+					<button class="btn btn-buy btn-confirm" id="addCart">加入购物车</button>
+					<?php if(!$isCollect ): ?><button class="btn btn-like btn-cancel" data-act="add" id="collection">喜欢</button>
+					<?php else: ?>
+						<button class="btn btn-like btn-cancel" data-act="remove" id="collection">取消收藏</button><?php endif; ?>
 				</div>
 				<div class="item-options flex">
 					<a href="javascript:;">评论(888)</a>
@@ -213,14 +257,34 @@
 			<div class="sup-text">
 				<p>评价晒单</p>
 			</div>
+			<!-- 多说评论框 start -->
+			<div class="content-w">
+				<div class="ds-thread" data-thread-key="<?php echo ($data['_id']); ?>" data-title="<?php echo ($data["title"]); ?>" data-url="<?php echo ($_SERVER['REQUEST_SCHEME']); ?>://<?php echo ($_SERVER['SERVER_NAME']); echo ($_SERVER['REQUEST_URI']); ?>"></div>
+				<div class="ds-share flat" data-thread-key="<?php echo ($data['_id']); ?>" data-title="<?php echo ($data["title"]); ?>" data-images="<?php echo ($data['pictures'][0]['src']); ?>" data-content="<?php echo ($data["desc"]); ?>" data-url="<?php echo ($_SERVER['REQUEST_SCHEME']); ?>://<?php echo ($_SERVER['SERVER_NAME']); echo ($_SERVER['REQUEST_URI']); ?>">
+					<div class="ds-share-inline">
+						<ul  class="ds-share-icons-16">
+							<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+							<li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+							<li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+							<li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+							<li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+						</ul>
+						<div class="ds-share-icons-more">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 多说评论框 end -->
 		</div>
 		<div style="width: 100%;height: 1000px;"></div>
 	</div><?php endif; ?>
 	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
+	<script src="/mall/Public/Common/js/jquery.lazyload.min.js"></script>
 	<script>
 	var prices = JSON.parse('<?php echo (json_encode($prices)); ?>');
 		$(document).ready(function() {
-
+			 $("img").lazyload({effect: "fadeIn"});
 			var $pic = $('#picShow').find('img'),
 				$classify = $('#classify'),
 				$body = $('body'),
@@ -296,7 +360,64 @@
 				setNowOption()
 			});
 
+			$('#collection').click(function(event) {
+				event.preventDefault();
+				if ($(this).data('act') == 'add') {
+					$.post('/mall/Home/Collection/add', {id: '<?php echo ($data['_id']); ?>'}, function(data, textStatus, xhr) {
+						console.log(data);
+						if (data.code == 'ok') {
+							if (data.msg.nModified == 1) {
+								alert('收藏成功')
+							}else{
+								alert('你已经收藏过了')
+							}
+						}else{
+							alert(data.msg);
+						}
+					});
+				}else{
+					$.post('/mall/Home/Collection/remove', {id: '<?php echo ($data['_id']); ?>'}, function(data, textStatus, xhr) {
+						console.log(data);
+						if (data.code == 'ok') {
+							if (data.msg.nModified == 1) {
+								alert('取消收藏成功')
+							}else{
+								alert('你没有收藏该商品')
+							}
+						}else{
+							alert(data.msg);
+						}
+					});
+					
+				}
+			});
+
+			$('#addCart').click(function(event) {
+				var data = {};
+				data['id'] = "<?php echo ($data['_id']); ?>";
+				data['opt'] = getNowOption();
+				data['num'] = 1;
+				$.post('/mall/Home/Cart/add', {data:data}, function(data, textStatus, xhr) {
+					console.log(data);
+					//if (data.code == 'ok') {
+						alert(data.msg);
+					//}
+				});
+			});
 		});
 	</script>
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+		var duoshuoQuery = {short_name:"buctmall"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 	|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+	<!-- 多说公共JS代码 end -->
 </body>
 </html>

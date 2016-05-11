@@ -1,21 +1,21 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class IndexController extends CommonController {
 
-    function _initialize(){
+    /*function _initialize(){
         $catalogs = A('Catalog')->getAllCatalog();
         $this->assign('catalogs', $catalogs);
-    }
+    }*/
 
     public function index(){
-    	$user = cookie('user');
+    	/*$user = cookie('user');
     	if (!$user) {
     		$user = session('?user') ? session('user') : null;
     	}else{
     		session('user', $user);
     	}
-    	$this->assign('username', $user['username']);
+    	$this->assign('username', $user['username']);*/
 
         $items = A('Items');
         
