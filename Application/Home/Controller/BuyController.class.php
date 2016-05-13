@@ -59,7 +59,12 @@ class BuyController extends CommonController {
 	}
 
 	public function checkout(){
+		$userBD = M('user');
+		$addBD = A('address');
+		$where = array('_id' => $this->user['_id']);
 
+		$addresses = $addBD->getAllAddress($this->user['_id']);
+		$this->assign('addresses', $addresses);
 		$this->display();
 	}
 }
