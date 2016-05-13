@@ -57,4 +57,10 @@ class UserController extends CommonController {
 		$this->display();
 	}
 
+	public function user_order(){
+		$u = M('user')->where(array('_id'=> $this->user['_id']))->find();
+		$this->assign('user', $u);
+		$this->assign('orders', A('Order')->getOrdersByUid($u['_id']));
+		$this->display();
+	}
 }

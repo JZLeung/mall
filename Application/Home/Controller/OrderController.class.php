@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class BuyController extends CommonController {
+class OrderController extends CommonController {
 
 	//生成订单
 	public function generateOrder(){
@@ -62,9 +62,19 @@ class BuyController extends CommonController {
 		$userBD = M('user');
 		$addBD = A('address');
 		$where = array('_id' => $this->user['_id']);
-
+		$oid = I('get.o');
 		$addresses = $addBD->getAllAddress($this->user['_id']);
 		$this->assign('addresses', $addresses);
+
+		$order = M('order')->where(array('_id'=>$oid))->find();
+		$items = A('items')->getItemsByCart($order['items']);
+		$this->assign('items', $items);
+		//print_r($order);
+
 		$this->display();
+	}
+
+	public function getOrdersByUid($uid){
+		return M('order')->where(array('uid' => $uid))->select();
 	}
 }

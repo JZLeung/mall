@@ -99,3 +99,53 @@ SQL: tp_mall.getCollection(user) [ RunTime:0.0000s ]
 NOTIC: [8] Undefined offset: 0 D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 590 行.
 SQL: tp_mall.user.update({"_id":{"$id":"56f2c0765bf7676818000029"}},{"$set":{"cart":[]}}) [ RunTime:0.0004s ]
 
+[ 2016-05-13T16:23:02+08:00 ] ::1 /mall/Home/Passport/login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000706s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001393s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+SQL: tp_mall.getCollection(user) [ RunTime:0.0000s ]
+SQL: tp_mall.user.find({"username":"admin"}).limit(1) [ RunTime:0.0000s ]
+NOTIC: [2] urlencode() expects parameter 1 to be string, array given D:\xampp\htdocs\mall\ThinkPHP\Common\functions.php 第 1414 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000927s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001013s ]
+
+[ 2016-05-13T16:23:15+08:00 ] ::1 /mall/Home/Cart/add
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000514s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000961s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+SQL: tp_mall.getCollection(user) [ RunTime:0.0001s ]
+SQL: tp_mall.user.find({"_id":{"$id":"56f2c0765bf7676818000029"}}).limit(1) [ RunTime:0.0001s ]
+SQL: tp_mall.user.update({"_id":{"$id":"56f2c0765bf7676818000029"}},{"$addToSet":{"cart":{"id":"5701e17889d15e6d56af87b9","opt":"0","num":1}}}) [ RunTime:0.0022s ]
+
+[ 2016-05-13T16:23:21+08:00 ] ::1 /mall/Home/Order/generateOrder
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000459s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000932s ]
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setInc() should be compatible with Think\Model::setInc($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Model\MongoModel::setDec() should be compatible with Think\Model::setDec($field, $step = 1, $lazyTime = 0) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Model\MongoModel.class.php 第 17 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::connect() should be compatible with Think\Db\Driver::connect($config = '', $linkNum = 0, $autoConnection = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+NOTIC: [2048] Declaration of Think\Db\Driver\Mongo::insertAll() should be compatible with Think\Db\Driver::insertAll($dataSet, $options = Array, $replace = false) D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 18 行.
+SQL: tp_mall.getCollection(catalog) [ RunTime:0.0001s ]
+SQL: tp_mall.catalog.find({}) [ RunTime:0.0000s ]
+SQL: tp_mall.getCollection(user) [ RunTime:0.0001s ]
+SQL: tp_mall.getCollection(order) [ RunTime:0.0000s ]
+SQL: tp_mall.getCollection(user) [ RunTime:0.0000s ]
+SQL: tp_mall.user.find({"_id":{"$id":"56f2c0765bf7676818000029"}}).limit(1) [ RunTime:0.0001s ]
+SQL: tp_mall.getCollection(order) [ RunTime:0.0001s ]
+SQL: tp_mall.order.insert({"uid":"56f2c0765bf7676818000029","items":[{"id":"5701e17889d15e6d56af87b9","opt":"0","num":1}],"starttime":1463127801,"statu":0}) [ RunTime:0.0013s ]
+SQL: tp_mall.getCollection(user) [ RunTime:0.0000s ]
+NOTIC: [8] Undefined offset: 0 D:\xampp\htdocs\mall\ThinkPHP\Library\Think\Db\Driver\Mongo.class.php 第 590 行.
+SQL: tp_mall.user.update({"_id":{"$id":"56f2c0765bf7676818000029"}},{"$set":{"cart":[]}}) [ RunTime:0.0011s ]
+
+[ 2016-05-13T16:23:21+08:00 ] ::1 /mall/order/checkout?o=57358ef95bf767281e00002a
+ERR: 无法加载控制器:Buy
+

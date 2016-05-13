@@ -161,7 +161,7 @@
 					}
 				});
 				console.log(indexs)
-				$.post('./Home/Buy/generateOrder', {indexs: indexs}, function(data, textStatus, xhr) {
+				$.post('./Home/Order/generateOrder', {indexs: indexs}, function(data, textStatus, xhr) {
 					console.log(data);
 					var id = data['order']['$id'];
 					location.href = '/mall/order/checkout?o='+id;
