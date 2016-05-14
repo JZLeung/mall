@@ -39,7 +39,7 @@
 			<div class="star-content" id="star-content">
 				<foreach name="stars" item="one" key="key">
 				<div class="item item{$key%5+1}">
-					<a href="__ROOT__/item/{$one['_id']}"><img src="{$one.pictures.0.src}" alt=""></a>
+					<a href="__ROOT__/item/{$one['_id']}" target="_blank"><img src="{$one.pictures.0.src}" alt=""></a>
 					<p class="title">{$one.title}</p>
 					<p class="price">{$one.price} 元</p>
 				</div>
