@@ -7,8 +7,50 @@
 	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/header.css">
-	<link rel="stylesheet" href="/mall/Public/Common/css/index.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/user.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/modal.css">
+	<style>
+		.collections{
+			margin-top: 25px;
+			padding-top: 15px;
+			border-top: 1px solid #eeeeee;
+		}
+		.collection{
+			display: inline-block;
+			padding: 20px;
+			padding-bottom: 10px;
+			border: 1px solid #eeeeee;
+			margin-right: 10px;
+			margin-top: 10px;
+			transition: border 0.5s;
+		}
+		.collection:hover{
+			border-color: #555;
+			background: #F9F9F9;
+		}
+		.collection .image{
+			width: 150px;
+		}
+		.collection .image img{
+			width: 100%;
+			display: block;
+		}
+		.collection p{
+		    -webkit-line-clamp: 2;
+		    display: -webkit-box;
+		    width: 150px;
+		    -webkit-box-orient: vertical;
+		    overflow: hidden;
+		    padding: 0;
+		    margin-top: 10px;
+		}
+		.collection .price{
+			text-align: center;
+			color: red;
+			font-size: 1.5em;
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body style="background: #f5f5f5">
 	
@@ -119,6 +161,8 @@
 			<a href="/mall">首页</a>
 			<span class="gt"></span>
 			<a href="/mall/UserCenter">用户中心</a>
+			<span class="gt"></span>
+			<a href="javascript:;">我的收藏</a>
 		</nav>
 		<?php if(empty($user)): ?><script>location.href = '/mall/login';</script><?php endif; ?>
 <div class="sidebar left">
@@ -132,56 +176,22 @@
 		<a href="/mall/myCart" class="action">购物车</a>
 	</ul>
 </div>
-		<div class="user-center ">
-			<div class="portrait left"><img src="/mall/Public/Common/images/default.jpg" alt=""></div>
-			<div class="main-info clear">
-				<div class="userinfo panel left">
-					<h3 class="username"><?php echo ($user["username"]); ?></h3>
-					<p style="margin-bottom: 10px;">晚上好</p>
-					<p><a href="" class="active">修改个人信息 ></a></p>
-				</div>
-				<div class="userinfo panel left">
-					<p>绑定邮箱：<?php echo ($user["eamil"]); ?></p>
-					<p>绑定手机：<?php echo ($user["phone"]); ?></p>
-				</div>
-			</div>
-			<div class="other-info clear">
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-1.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
-					</div>
-				</div>
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-2.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
-					</div>
-				</div>
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-3.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
-					</div>
-				</div>
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-4.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
-					</div>
-				</div>
+		<div class="user-center" style="padding-left: 40px;">
+			<h3>我的收藏</h3>
+			<div class="collections">
+				<?php if(is_array($collections)): foreach($collections as $key=>$collection): ?><a href="/mall/item/<?php echo ($collection['_id']); ?>" target="_blank">
+				<div class="collection">
+					<div class="image"><img src="<?php echo ($collection["pictures"]["0"]["src"]); ?>" alt="<?php echo ($collection["title"]); ?>"></div>
+					<p><?php echo ($collection["title"]); ?></p>
+					<p class="price">￥<?php echo ($collection["price"]); ?></p>
+				</div></a><?php endforeach; endif; ?>
 				
 			</div>
 		</div>
 	</div>
-		<script>
+	<script>
 		$(document).ready(function() {
-			$('#action-list').find('a').eq(0).addClass('active');
+			$('#action-list').find('a').eq(3).addClass('active');
 		});
 	</script>
 </body>
-</html>

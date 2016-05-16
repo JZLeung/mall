@@ -138,7 +138,7 @@
 			<h1 class="header-2">明星产品</h1>
 			<div class="star-content" id="star-content">
 				<?php if(is_array($stars)): foreach($stars as $key=>$one): ?><div class="item item<?php echo ($key%5+1); ?>">
-					<a href="/mall/item/<?php echo ($one['_id']); ?>"><img src="<?php echo ($one["pictures"]["0"]["src"]); ?>" alt=""></a>
+					<a href="/mall/item/<?php echo ($one['_id']); ?>" target="_blank"><img src="<?php echo ($one["pictures"]["0"]["src"]); ?>" alt=""></a>
 					<p class="title"><?php echo ($one["title"]); ?></p>
 					<p class="price"><?php echo ($one["price"]); ?> 元</p>
 				</div><?php endforeach; endif; ?>

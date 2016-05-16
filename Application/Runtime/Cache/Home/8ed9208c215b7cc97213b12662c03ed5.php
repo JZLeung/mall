@@ -28,6 +28,9 @@
 		</div>
 	</div>
 	<div class="content-w main">
+	<form action="./success?o=<?php echo ($_GET['o']); ?>" method="post" id="form1">
+		
+	
 		<div class="line line-address">
 			<h3>选择收货地址</h3>	
 			<div>
@@ -66,7 +69,7 @@
 		<div class="line line-time">
 			<h3>配送时间</h3>
 			<div class="line-body option" id="timing-option">
-				<a href="javascript:;" class="timing active">不限送货时间：周一至周日<input type="radio" hidden name="time" value="0"></a>
+				<a href="javascript:;" class="timing active">不限送货时间：周一至周日<input type="radio" hidden checked="checked" name="time" value="0"></a>
 				<a href="javascript:;" class="timing">工作日送货：周一至周五<input type="radio" hidden name="time" value="1"></a>
 				<a href="javascript:;" class="timing">双休日、假日送货：周六至周日<input type="radio" hidden name="time" value="2"></a>
 			</div>
@@ -104,6 +107,7 @@
 					<li>
 						<div class="title">应付总额：</div>
 						<div class="content"><span id="all-amount" style="font-size: 32px;"></span>元</div>
+						<input type="hidden" value="" name="amount" id="all-amount2">
 					</li>
 				</ul>
 			</div>
@@ -119,10 +123,12 @@
 					<a href="#addresses" style="color: #ff6700">修改</a>
 				</p>
 			</div>
-			<a class="btn btn-confirm right" href="javascript:;">
+			<!-- <a class="btn btn-confirm right" href="javascript:;">
 				去结算
-			</a>
+			</a> -->
+			<input type="submit" value="去结算" class="btn btn-confirm right" id="submit">
 		</div>
+	</form>
 	</div>
 	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script>
@@ -142,7 +148,9 @@
 			});
 			$timeOpt.on('click', '.timing', function(event) {
 				event.preventDefault();
-				$(this).addClass('active').siblings().removeClass('active');
+				var _this = $(this);
+				_this.addClass('active').siblings().removeClass('active');
+				_this.find('input').prop('checked', 'checked')
 			});
 			var num = 0, amount = 0;
 			$('#items').find('.amount > span').each(function(index, el) {
@@ -155,7 +163,17 @@
 			$confirm.find('span#num').text(num);
 			$confirm.find('span#amount').text(amount);
 			$confirm.find('span#all-amount').text(amount+$confirm.find('#ship').text()*1);
+			$confirm.find('#all-amount2').val(amount+$confirm.find('#ship').text()*1);
 
+			$('#submit').click(function(event) {
+				if ($('input[name=address]:checked').val()) {
+					return true;
+				}else{
+					alert('请选择收货地址')
+					event.preventDefault();
+					return false;
+				}
+			});
 		});
 	</script>
 </body>

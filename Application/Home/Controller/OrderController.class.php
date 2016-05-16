@@ -39,18 +39,6 @@ class OrderController extends CommonController {
 				$msg['code'] = 'ok';
 				$msg['msg'] = '创建订单成功';
 				$msg['order'] = $resOrder;
-				/*if ($resOrder['ok'] == 1) {
-					$msg['code'] = 'ok';
-					$msg['msg'] = '创建订单成功';
-					$msg['order'] = $resOrder;
-				}else{
-					$msg['code'] = 'error';
-					$msg['msg'] = '创建订单失败，请重试';
-				}
-			}else{
-				$msg['code'] = 'error';
-				$msg['msg'] = '创建订单失败，请重试';
-			}*/
 		} catch (Exception $e) {
 			$msg['code'] = 'error';
 			$msg['msg'] = '创建订单失败，请重试';
@@ -75,6 +63,32 @@ class OrderController extends CommonController {
 	}
 
 	public function getOrdersByUid($uid){
-		return M('order')->where(array('uid' => $uid))->select();
+		$orders = M('order')->where(array('uid' => $uid,'statu'=>array('gt',0)))->select();
+		$status = array('等待付款','已付款','等待收货','已完成','已取消');
+		for ($i=0, $count1 = count($orders); $i < $count1; $i++) { 
+			$tmp = $orders[$i]['items'];
+			$orders[$i]['items'] = A('items')->getItemsByCart($tmp);
+			$orders[$i]['statuText'] = $status[$orders[$i]['statu']];
+		}
+		return $orders;
+	}
+
+	public function success(){
+		$oid = I('get.o');
+		$orderData = I('post.');
+		$orderData['statu'] = 1;
+		$order = M('order');
+		$res = $order->where(array('_id'=>$oid))->save($orderData);
+		$this->display();
+	}
+
+	public function getOrderDetail($oid){
+		//$oid = I('get.o');
+		$order = M('order');
+		$res = $order->where(array('_id'=>$oid))->find();
+		$res['items'] = A('items')->getItemsByCart($res['items']);
+		return $res;
+		//$this->assign('order', $res);
+		//$this->display();
 	}
 }

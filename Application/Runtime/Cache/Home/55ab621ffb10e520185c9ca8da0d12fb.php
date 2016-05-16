@@ -258,7 +258,7 @@
 				<p>评价晒单</p>
 			</div>
 			<!-- 多说评论框 start -->
-			<div class="content-w">
+			<!-- <div class="content-w">
 				<div class="ds-thread" data-thread-key="<?php echo ($data['_id']); ?>" data-title="<?php echo ($data["title"]); ?>" data-url="<?php echo ($_SERVER['REQUEST_SCHEME']); ?>://<?php echo ($_SERVER['SERVER_NAME']); echo ($_SERVER['REQUEST_URI']); ?>"></div>
 				<div class="ds-share flat" data-thread-key="<?php echo ($data['_id']); ?>" data-title="<?php echo ($data["title"]); ?>" data-images="<?php echo ($data['pictures'][0]['src']); ?>" data-content="<?php echo ($data["desc"]); ?>" data-url="<?php echo ($_SERVER['REQUEST_SCHEME']); ?>://<?php echo ($_SERVER['SERVER_NAME']); echo ($_SERVER['REQUEST_URI']); ?>">
 					<div class="ds-share-inline">
@@ -273,7 +273,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- 多说评论框 end -->
 		</div>
@@ -282,7 +282,7 @@
 	<script src="/mall/Public/Common/js/jquery-1.12.0.js"></script>
 	<script src="/mall/Public/Common/js/jquery.lazyload.min.js"></script>
 	<script>
-	var prices = JSON.parse('<?php echo (json_encode($prices)); ?>');
+		var prices = JSON.parse('<?php echo (json_encode($prices)); ?>');
 		$(document).ready(function() {
 			 $("img").lazyload({effect: "fadeIn"});
 			var $pic = $('#picShow').find('img'),
@@ -408,7 +408,7 @@
 	</script>
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
-		var duoshuoQuery = {short_name:"buctmall"};
+		/*var duoshuoQuery = {short_name:"buctmall"};
 		(function() {
 			var ds = document.createElement('script');
 			ds.type = 'text/javascript';ds.async = true;
@@ -416,7 +416,7 @@
 			ds.charset = 'UTF-8';
 			(document.getElementsByTagName('head')[0] 
 			 	|| document.getElementsByTagName('body')[0]).appendChild(ds);
-		})();
+		})();*/
 	</script>
 	<!-- 多说公共JS代码 end -->
 </body>

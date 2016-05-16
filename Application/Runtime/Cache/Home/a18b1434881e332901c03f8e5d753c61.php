@@ -2,13 +2,95 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>首页</title>
+	<title>我的订单</title>
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="/mall/Public/Common/css/reset.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/common.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/header.css">
-	<link rel="stylesheet" href="/mall/Public/Common/css/index.css">
 	<link rel="stylesheet" href="/mall/Public/Common/css/user.css">
+	<link rel="stylesheet" href="/mall/Public/Common/css/modal.css">
+	<style>
+		.hidden{display: none;}
+		.user-center p{padding: 0;}
+		.orders{
+			margin-top: 30px;
+			margin-right: 40px;
+			font-size: 14px;
+		}
+		.order{
+			box-sizing: border-box;
+			border: 1px solid #ff6700;
+			margin-bottom: 20px;
+			background-color: #fffaf7;
+		}
+		.order-head{
+			border-bottom: 1px solid #ff6700;
+			padding: 20px;
+			padding-top: 5px;
+		}
+		.order-body{
+			padding: 20px;
+			padding-bottom: 30px;
+			position: relative;
+			background-color: #fff;
+		}
+		.order-body .image {
+		    display: inline-block;
+		    width: 60px;
+		}
+		.order-body .item > div {
+		    display: inline-block;
+		    vertical-align: middle;
+		}
+		.order-body .info {
+		    margin-left: 15px;
+			max-width: 600px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.order-body .others{
+			padding-top: 10px;
+			color: #666;
+		}
+		.order-body .info p{
+			margin-bottom: 5px;
+		}
+		.order-body .order-btn{
+			position: absolute;
+			right: 20px;
+			top: 20px;
+		}
+		.order-body .order-btn .btn{
+			padding: 5px 30px;
+			font-size: 12px;
+		}
+
+		.order-head .detail li {
+		    display: inline-block;
+		    padding-left: 10px;
+		    border-left: 1px solid #666;
+		    margin-right: 10px;
+		}
+		.order-head .detail li:first-child{
+			border-left: 0;
+		}
+		.order-head .statu{
+			font-size: 18px;
+			margin-left: 10px;
+			color: #ff6700;
+			line-height: 2.5em;
+		}
+		.order .amount{
+			margin-top: 20px;
+			margin-right: 20px;
+		}
+		.order .amount span{
+			font-size: 1.5em;
+			color: #ff6700;
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body style="background: #f5f5f5">
 	
@@ -119,6 +201,8 @@
 			<a href="/mall">首页</a>
 			<span class="gt"></span>
 			<a href="/mall/UserCenter">用户中心</a>
+			<span class="gt"></span>
+			<a href="javascript:;">我的订单</a>
 		</nav>
 		<?php if(empty($user)): ?><script>location.href = '/mall/login';</script><?php endif; ?>
 <div class="sidebar left">
@@ -132,56 +216,41 @@
 		<a href="/mall/myCart" class="action">购物车</a>
 	</ul>
 </div>
-		<div class="user-center ">
-			<div class="portrait left"><img src="/mall/Public/Common/images/default.jpg" alt=""></div>
-			<div class="main-info clear">
-				<div class="userinfo panel left">
-					<h3 class="username"><?php echo ($user["username"]); ?></h3>
-					<p style="margin-bottom: 10px;">晚上好</p>
-					<p><a href="" class="active">修改个人信息 ></a></p>
-				</div>
-				<div class="userinfo panel left">
-					<p>绑定邮箱：<?php echo ($user["eamil"]); ?></p>
-					<p>绑定手机：<?php echo ($user["phone"]); ?></p>
-				</div>
-			</div>
-			<div class="other-info clear">
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-1.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
+		<div class="user-center" style="padding-left: 40px;">
+			<h3>我的订单</h3>
+			<div class="orders">
+				<?php if(is_array($orders)): foreach($orders as $key=>$order): ?><div class="order">
+					<p class="right amount">订单总额：<span><?php echo ($order["amount"]); ?></span>元</p>
+					<div class="order-head">
+						<p class="statu"><?php echo ($order["statuText"]); ?></p>
+						<div class="detail">
+							<ul>
+								<li><?php echo (date("Y-m-d H:i",$order["starttime"])); ?></li>
+								<li>订单号：<?php echo ($order["_id"]); ?></li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-2.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
+					<div class="order-body">
+						<div class="item">
+							<div class="image"><img src="<?php echo ($order["items"]["0"]["item"]["pictures"]["0"]["src"]); ?>" alt=""></div>
+							<div class="info">
+								<p><a href="/mall/item/<?php echo ($order["items"]["0"]["item"]["_id"]); ?>" target="_blank"><?php echo ($order["items"]["0"]["item"]["title"]); ?> <?php echo ($order["items"]["0"]["optname"]); ?></a></p>
+								<p><?php echo ($order["items"]["0"]["price"]); ?>元 x <?php echo ($order["items"]["0"]["num"]); ?></p>
+							</div>
+							<?php if(count($order['items']) > 1 ): ?><p class="others">还有<?php echo (count($order['items'])); ?>件商品</p><?php endif; ?>
+						</div>
+						<div class="order-btn right">
+							<a class="btn" href="">订单详情</a>
+						</div>
 					</div>
-				</div>
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-3.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
-					</div>
-				</div>
-				<div class="panel left">
-					<div class="img left"><img src="/mall/Public/Common/images/portal-icon-4.png" alt=""></div>
-					<div class="desc">
-						<h3>待支付的订单：</h3>
-						<p>查看待支付的订单 ></p>
-					</div>
-				</div>
-				
+					
+				</div><?php endforeach; endif; ?>
 			</div>
 		</div>
 	</div>
-		<script>
+	<script>
 		$(document).ready(function() {
-			$('#action-list').find('a').eq(0).addClass('active');
+			$('#action-list').find('a').eq(3).addClass('active');
 		});
 	</script>
 </body>
-</html>

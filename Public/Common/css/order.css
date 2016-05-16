@@ -1,11 +1,4 @@
-.main{
-	background-color: #fff;
-	min-height: 100px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	padding: 30px 40px;
-	box-sizing: border-box;
-}
+
 .line{
 	padding: 20px 0;
 	border-bottom: 1px solid #e0e0e0;
