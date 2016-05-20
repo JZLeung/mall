@@ -50,7 +50,7 @@ img {
 }
 .user-center h3 {
   font-size: 2em;
-  font-weight: bold;
+  line-height: 2em;
 }
 .user-center p {
   padding: 10px 0;

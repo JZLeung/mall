@@ -22,7 +22,7 @@
 			<div class="right">
 				<a href="__ROOT__/UserCenter">{$username}</a>
 				<span class="sub">|</span>
-				<a href="">我的订单</a>
+				<a href="__ROOT__/Home/User/user_order">我的订单</a>
 			</div>
 			<h3>我的购物车</h3>
 		</div>
@@ -106,7 +106,8 @@
 					</li>
 					<li>
 						<div class="title">运费：</div>
-						<div class="content"><span id="ship">10</span>元</div>
+						<div class="content"><span id="ship"></span>元</div>
+						<input type="hidden" value="" name="ship" id="ship2">
 					</li>
 					<li>
 						<div class="title">应付总额：</div>
@@ -166,8 +167,11 @@
 			console.log(amount,num);
 			$confirm.find('span#num').text(num);
 			$confirm.find('span#amount').text(amount);
-			$confirm.find('span#all-amount').text(amount+$confirm.find('#ship').text()*1);
-			$confirm.find('#all-amount2').val(amount+$confirm.find('#ship').text()*1);
+			var ship = amount > 99 ? 0 : 10;
+			$confirm.find('#ship').text(ship);
+			$confirm.find('#ship2').val(ship);
+			$confirm.find('span#all-amount').text(amount+ship*1);
+			$confirm.find('#all-amount2').val(amount+ship*1);
 
 			$('#submit').click(function(event) {
 				if ($('input[name=address]:checked').val()) {

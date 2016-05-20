@@ -35,7 +35,7 @@
 					<ul class="error" id="nperror"></ul>
 				</li>
 				<li>
-					<input type="submit" value="登录" class="btn btn-submit" id="submit">
+					<input type="submit" value="注册" class="btn btn-submit" id="submit">
 				</li>
 			</ul>
 			</form>
@@ -55,14 +55,14 @@
 				}
 				return data;
 			}
+			var $form = $('#form');
 			$('#login-box').find('#submit').click(function(event) {
 				event.preventDefault();
-				var sData = $('#form').serialize();
-				/*if (!$('#form').checkForm()) {
-					//alert('验证失败')
+				if (!$form.checkForm()) {
+					alert('你填写的信息不符合要求，请检查')
 					return false;
-				}*/
-				//return false;
+				}
+				var sData = $('#form').serialize();
 				$.ajax({
 					url: 'Home/Passport/regist',
 					type: 'post',

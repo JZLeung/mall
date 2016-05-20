@@ -63,12 +63,14 @@ class OrderController extends CommonController {
 	}
 
 	public function getOrdersByUid($uid){
-		$orders = M('order')->where(array('uid' => $uid,'statu'=>array('gt',0)))->select();
-		$status = array('等待付款','已付款','等待收货','已完成','已取消');
+		$orders = M('order')->where(array('uid' => $uid,'statu'=>array('neq',0)))->select();
+		$statuText = array('等待付款','已付款','等待收货','已完成','已取消');
+		$statuText['-1'] = '已提交取消订单申请，请等待回复';
+		$statuText['-2'] = '订单已取消';
 		for ($i=0, $count1 = count($orders); $i < $count1; $i++) { 
 			$tmp = $orders[$i]['items'];
 			$orders[$i]['items'] = A('items')->getItemsByCart($tmp);
-			$orders[$i]['statuText'] = $status[$orders[$i]['statu']];
+			$orders[$i]['statuText'] = $statuText[$orders[$i]['statu']];
 		}
 		return $orders;
 	}
@@ -85,10 +87,22 @@ class OrderController extends CommonController {
 	public function getOrderDetail($oid){
 		//$oid = I('get.o');
 		$order = M('order');
+		$statuText = array('等待付款','已付款','等待收货','已完成','已取消');
+		$statuText['-1'] = '已提交取消订单申请，请等待回复';
+		$statuText['-2'] = '订单已取消';
 		$res = $order->where(array('_id'=>$oid))->find();
 		$res['items'] = A('items')->getItemsByCart($res['items']);
+		$res['statuText'] = $statuText[$res['statu']];
 		return $res;
 		//$this->assign('order', $res);
 		//$this->display();
+	}
+
+	public function updateStatu(){
+		$id = I('post.id');
+		$opt = I('post.opt');
+		$update['statu'] = $opt;//待确认取消
+		$res = M('order')->where(array('_id' => $id))->save($update);
+		$this->ajaxReturn($res);
 	}
 }

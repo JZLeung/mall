@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订单详情页</title>
+	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
+	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
+	<style>
+		.hidden{display: none;}
+		.user-center p{padding: 0;}
+		.line-border{
+			border-bottom: 1px solid #e0e0e0;
+		}
+		.line{
+			padding: 10px 0;
+			margin-bottom: 10px;
+			font-size: 1.2em;
+			color: #949494;
+		}
+		.line h4{
+			font-size: 1.25em;
+			line-height: 1.5em;
+			color: #000;
+		}
+		.line h5{
+			line-height: 1.5em;
+			color: #000;
+		}
+		.line-items .image {
+		    display: inline-block;
+		    width: 60px;
+		}
+		.line-items .item {
+			padding: 10px;
+			box-sizing: border-box;
+
+		}
+		.line-items .item > div {
+		    display: inline-block;
+		    vertical-align: middle;
+		}
+		.line-info table{
+			margin: 0; 
+			border-spacing: 5px;
+    		border-collapse: separate;
+		}
+		.line-items .info > *{
+			display: inline-block;
+			margin-left: 25px;
+		}
+		.line-items .info > *:nth-child(1){
+			width: 555px;
+			margin-left: 15px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		    vertical-align: middle;
+		}
+		.line .form {
+			text-align: right;
+		}
+		.line .right{
+			margin-right: 20px;
+		}
+		.line .form li{
+			width: 250px;
+			padding: 10px 0;
+		}
+		.line .form .title{
+			width: 100px;
+			display: inline-block;
+		}
+		.line .form .content{
+			width: 120px;
+			display: inline-block;
+			color: #ff6700;
+		}
+		.line-btns .btn{
+			padding: 5px 30px;
+		}
+		.btn.btn-danger{
+			color: #fff;
+			background-color: #FB2525;
+			border: 0;
+		}
+		.btn.btn-success{
+			color: #fff;
+			background-color: #07B107;
+			border: 0;
+		}
+		a.comment{
+			margin-left: 50px !important;
+		}
+	</style>
+</head>
+<body style="background: #f5f5f5">
+	<include file='./Public/Template/Index/_header_.html' />
+	<div class="content-w clear">
+		<nav class="nav">
+			<a href="__ROOT__">首页</a>
+			<span class="gt"></span>
+			<a href="__ROOT__/UserCenter">用户中心</a>
+			<span class="gt"></span>
+			<a href="javascript:;">订单详情页</a>
+		</nav>
+		<include file='./Public/Template/User/_sidebar_.html' />
+		<div class="user-center" style="padding: 40px;margin-bottom: 40px">
+			<h3>订单详情页</h3>
+			<div class="line line-id line-border">
+				<h4>订单号：{$order._id}</h4>
+			</div>
+			<div class="line line-statu">
+				<h4><span class="statu active">{$order.statuText}</span></h4>
+				<!-- <div class="progress"></div> -->
+			</div>
+			<div class="line line-items" id="items">
+				<define name="index" value="0" />
+				<foreach name="order.items" item="item">
+					<div class="item line-border">
+						<div class="image"><img src="{$item.item.pictures.0.src}" alt=""></div>
+						<div class="info">
+							<span><a href="__ROOT__/item/{$item.item._id}" target="_blank">{$item.item.title} {$item.optname}</a></span>
+							<p><span class="price">{$item.price}</span>元 x <span class="num">{$item.num}</span></p>
+							<empty name="item['comment']">
+							<a href="#" class="right comment" data-index="{++$index}" data-id="{$item.item._id}">评价</a>
+							</empty>
+						</div>
+					</div>
+				</foreach>
+			</div>
+			<div class="line line-info line-border">
+				<h4>收货信息</h4>
+				<table>
+					<tr>
+						<td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
+						<td>{$address.name}</td>
+					</tr>
+					<tr>
+						<td>联系电话：</td>
+						<td>{$address.phone}</td>
+					</tr>
+					<tr>
+						<td>收货地址：</td>
+						<td>{$address.province} {$address.city} {$address.area},{$address.detail}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="line line-form clear">
+				<div class="form right">
+					<ul>
+						<li>
+							<div class="title">商品件数：</div>
+							<div class="content"><span id="num"></span>件</div>
+						</li>
+						<li>
+							<div class="title">金额总计：</div>
+							<div class="content"><span id="amount">{$order['amount']-$order['ship']}</span>元</div>
+						</li>
+						<li>
+							<div class="title">运费：</div>
+							<div class="content"><span id="ship">{$order.ship}</span>元</div>
+						</li>
+						<li>
+							<div class="title">实付总额：</div>
+							<div class="content"><span id="all-amount" style="font-size: 32px;">{$order.amount}</span>元</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="line line-btns clear">
+				
+				<div class="right btn-group" id="btn-group">
+				<if condition="($order['statu'] lt 3) AND ($order['statu'] egt 0)">
+					<a href="" class="btn btn-danger" data-opt="-1" data-msg="成功提交取消订单申请，等待商城确认。">取消订单</a>
+					<a href="" class="btn btn-success" data-opt="3" data-msg="成功确认收货，你可以对商品进行评价">确认收货</a>
+				</if>
+				</div>
+				
+			</div>
+		</div>
+		<div class="modal" id="modal">
+			<div class="modal-content">
+				<form action="" id="form">
+				<input type="hidden" id="id" value="" name="id">
+				<input type="hidden" id="oid" value="{$order._id}" name="oid">
+				<input type="hidden" id="index" value="" name="index">
+				<div class="modal-head">添加评价</div>
+				<div class="modal-body">
+					<p class="info-line" style="margin: auto;width: 100px;">
+						<img src="" alt="">
+					</p>
+					<!-- <p class="info-line">
+						<span class="name mustfill">请打分</span>
+						<span class="value">
+							
+						</span>
+					</p> -->
+					<p class="info-line">
+						<span class="name mustfill">评价</span>
+					</p>
+					<p class="info-line">
+						<textarea name="comment" id="" cols="30" rows="10" style="resize: none;width: 100%"></textarea>
+					</p>
+				</div>
+				<div class="modal-foot">
+					<a href="javascript:;" class="btn btn-sm btn-submit">提交</a>
+					<a href="javascript:;" class="btn btn-sm btn-cancel">取消</a>
+				</div>
+				</form>
+			</div>
+		</div>
+		<div class="mask" id="mask"></div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			//$('#action-list').find('a').eq(3).addClass('active');
+			var $items = $('#items'),
+				$modal = $('#modal'),
+				$form = $('#form'),
+				oid = '{$order._id}'
+
+			var count = 0,
+				num = 0
+			$items.find('.num').each(function(index, el) {
+				var _this = $(this);
+				num += _this.text() * 1;
+			});
+			$('#num').text(num)
+			$('#btn-group').on('click','.btn',function(event) {
+				event.preventDefault();
+				var opt = $(this).data('opt'),
+					msg = $(this).data('msg');
+				$.post('__ROOT__/Home/order/updateStatu', {id: oid, opt: opt}, function(data, textStatus, xhr) {
+					if (data.ok == 1) {
+						alert(msg);
+						location.reload();
+					}else{
+						alert('发送请求失败。请重试。');
+					}
+				});
+			});
+
+			var $formImg = $form.find('img'),
+				$formId = $form.find('#id'),
+				$index = $form.find('#index')
+
+			$items.on('click', '.comment', function(event) {
+				event.preventDefault();
+				$formImg.attr('src', $(this).parent().parent().find('img')[0].src);
+				$formId.val($(this).data('id'));
+				$index.val($(this).data('index')*1-1);
+				$modal.toggleClass('modal-show');
+			});
+
+			$modal.on('click', '.btn-cancel', function(event) {
+				event.preventDefault();
+				$modal.toggleClass('modal-show');
+			}).on('click', '.btn-submit', function(event) {
+				event.preventDefault();
+				var datas = $form.serialize();
+				console.log($form.serialize())
+				$.post('__ROOT__/Home/Comment/add', datas, function(data, textStatus, xhr) {
+					console.log(data);
+					if (data.msg.ok == 1) {
+						alert('评论成功')
+						location.reload();
+					}
+				});
+			});
+		});
+	</script>
+</body>

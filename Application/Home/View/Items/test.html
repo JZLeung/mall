@@ -170,6 +170,9 @@
 			<div class="sup-text">
 				<p>评价晒单</p>
 			</div>
+			<pre class="hidden">
+				{$data.comment|json_encode}
+			</pre>
 			<!-- 多说评论框 start -->
 			<!-- <div class="content-w">
 				<div class="ds-thread" data-thread-key="{$data['_id']}" data-title="{$data.title}" data-url="{$Think.server.REQUEST_SCHEME}://{$Think.server.server_name}{$Think.server.REQUEST_URI}"></div>

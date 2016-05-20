@@ -44,10 +44,11 @@
 		}
 		.order-body .info {
 		    margin-left: 15px;
-			max-width: 600px;
+			max-width: 555px;
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
+			vertical-align: middle;
 		}
 		.order-body .others{
 			padding-top: 10px;
@@ -64,6 +65,8 @@
 		.order-body .order-btn .btn{
 			padding: 5px 30px;
 			font-size: 12px;
+		    margin-bottom: 5px;
+			display: block;
 		}
 
 		.order-head .detail li {
@@ -126,14 +129,16 @@
 								<p>{$order.items.0.price}元 x {$order.items.0.num}</p>
 							</div>
 							<if condition="count($order['items']) gt 1 ">
-								<p class="others">还有{$order['items']|count}件商品</p>
+								<p class="others">共有{$order['items']|count}件商品</p>
 							</if>
 						</div>
 						<div class="order-btn right">
-							<a class="btn" href="">订单详情</a>
+							<a class="btn" href="__ROOT__/order/detail/{$order._id}">订单详情</a>
+							<if condition="$order['statu'] egt 3">
+							<a href="javascript:;" class="btn">评价订单</a>
+							</if>
 						</div>
 					</div>
-					
 				</div>
 				</foreach>
 			</div>
@@ -141,7 +146,7 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			$('#action-list').find('a').eq(3).addClass('active');
+			$('#action-list').find('a').eq(4).addClass('active');
 		});
 	</script>
 </body>

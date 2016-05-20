@@ -28,6 +28,7 @@ return array(
         'myCart' => 'Home/User/user_cart',                      //购物车
         'order/checkout' => 'Home/Order/checkout',                //确认订单
         'order/success' => 'Home/Order/success',                //确认订单
+        '/^order\/detail\/(\w+)$/' => 'Home/User/user_orderDetail?o=:1',                //确认订单
     ),
     //'配置项'=>'配置值'
     'DB_TYPE' => 'mongo', // 数据库类型

@@ -7,6 +7,10 @@ class AddressController extends Controller {
 		return M('address')->where(array('userid' => $uid))->select();
 	}
 
+	public function getAddress($aid){
+		return M('address')->where(array('_id' => $aid))->find();
+	}
+
 	//新增地址
 	public function addAddress(){
 		$addressData = I('post.address');

@@ -56,12 +56,22 @@ class UserController extends CommonController {
 		$this->assign('mycart', A('items')->getItemsByCart($u['cart']));
 		$this->display();
 	}
-
+	//我的订单
 	public function user_order(){
 		$u = M('user')->where(array('_id'=> $this->user['_id']))->find();
 		$this->assign('user', $u);
 		$this->assign('orders', A('Order')->getOrdersByUid($u['_id']));
 		//print_r(A('Order')->getOrdersByUid($u['_id']));
 		$this->display();
+	}
+	//订单详情
+	public function user_orderDetail(){
+		$this->assign('user', $this->user);
+		$oid = I('get.o');
+		$order = A('Order')->getOrderDetail($oid);
+		$address = A('Address')->getAddress($order['address']);
+		$this->assign('order', $order);
+		$this->assign('address', $address);
+		$this->display('detail');
 	}
 }
