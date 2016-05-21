@@ -87,4 +87,12 @@ class IndexController extends CommonController {
         $this->assign('items', $item);
         $this->display('Advertise/star');
     }
+
+
+    /*order*/
+    public function order_list($u='', $s='null'){
+        $orders = A('order')->getAllOrders($s,$u);
+        $this->assign('orders', $orders);
+        $this->display('Order/list');
+    }
 }

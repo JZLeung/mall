@@ -72,4 +72,19 @@ class ItemsController extends Controller {
         $this->ajaxReturn($all);
     }
     
+    public function getItemsByCart($cart){
+        $item = M('items');
+        for ($i=0, $length = count($cart); $i < $length; $i++) { 
+            $temp = $item->where(array('_id' => $cart[$i]['id']))->find();
+            $opts = split(',', $cart[$i]['opt']);
+            $opt = array();
+            foreach ($opts as $key => $value) {
+                $opt[] = $temp['attr'][$key]['value'][$value];
+            }
+            $cart[$i]['optname'] = join($opt, ',');
+            $cart[$i]['item'] = $temp;
+            $cart[$i]['price'] = $temp['prices'][$cart[$i]['opt']]['price'];
+        }
+        return $cart;
+    }
 }

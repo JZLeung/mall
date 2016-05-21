@@ -6,12 +6,11 @@
 	<link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/header.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/modal.css">
 	<style>
+		.content-w{background-color: #fff;}
 		.hidden{display: none;}
 		.user-center p{padding: 0;}
+		.active{color: #ff6700;}
 		.line-border{
 			border-bottom: 1px solid #e0e0e0;
 		}
@@ -97,17 +96,8 @@
 		}
 	</style>
 </head>
-<body style="background: #f5f5f5">
-	<include file='./Public/Template/Index/_header_.html' />
+<body style="background: #f5f5f5;max-width: 1100px;margin: auto;">
 	<div class="content-w clear">
-		<nav class="nav">
-			<a href="__ROOT__">首页</a>
-			<span class="gt"></span>
-			<a href="__ROOT__/UserCenter">用户中心</a>
-			<span class="gt"></span>
-			<a href="javascript:;">订单详情页</a>
-		</nav>
-		<include file='./Public/Template/User/_sidebar_.html' />
 		<div class="user-center" style="padding: 40px;margin-bottom: 40px">
 			<h3>订单详情页</h3>
 			<div class="line line-id line-border">
@@ -130,11 +120,6 @@
 						<div class="info">
 							<span><a href="__ROOT__/item/{$item.item._id}" target="_blank">{$item.item.title} {$item.optname}</a></span>
 							<p><span class="price">{$item.price}</span>元 x <span class="num">{$item.num}</span></p>
-							<if condition="$order['statu'] egt 3">
-							<empty name="item['comment']">
-							<a href="#" class="right comment" data-index="{++$index}" data-id="{$item.item._id}">评价</a>
-							</empty>
-							</if>
 						</div>
 					</div>
 				</foreach>
@@ -178,106 +163,17 @@
 					</ul>
 				</div>
 			</div>
-			<div class="line line-btns clear">
-				
-				<div class="right btn-group" id="btn-group">
-				<if condition="($order['statu'] lt 3) AND ($order['statu'] egt 0)">
-					<a href="" class="btn btn-danger" data-opt="-1" data-msg="成功提交取消订单申请，等待商城确认。">取消订单</a>
-					<a href="" class="btn btn-success" data-opt="3" data-msg="成功确认收货，你可以对商品进行评价">确认收货</a>
-				</if>
-				</div>
-				
-			</div>
 		</div>
-		<div class="modal" id="modal">
-			<div class="modal-content">
-				<form action="" id="form">
-				<input type="hidden" id="id" value="" name="id">
-				<input type="hidden" id="oid" value="{$order._id}" name="oid">
-				<input type="hidden" id="index" value="" name="index">
-				<div class="modal-head">添加评价</div>
-				<div class="modal-body">
-					<p class="info-line" style="margin: auto;width: 100px;">
-						<img src="" alt="">
-					</p>
-					<!-- <p class="info-line">
-						<span class="name mustfill">请打分</span>
-						<span class="value">
-							
-						</span>
-					</p> -->
-					<p class="info-line">
-						<span class="name mustfill">评价</span>
-					</p>
-					<p class="info-line">
-						<textarea name="comment" id="" cols="30" rows="10" style="resize: none;width: 100%"></textarea>
-					</p>
-				</div>
-				<div class="modal-foot">
-					<a href="javascript:;" class="btn btn-sm btn-submit">提交</a>
-					<a href="javascript:;" class="btn btn-sm btn-cancel">取消</a>
-				</div>
-				</form>
-			</div>
-		</div>
-		<div class="mask" id="mask"></div>
 	</div>
 	<script>
-		$(document).ready(function() {
-			//$('#action-list').find('a').eq(3).addClass('active');
-			var $items = $('#items'),
-				$modal = $('#modal'),
-				$form = $('#form'),
-				oid = '{$order._id}'
-
+		(function() {
 			var count = 0,
-				num = 0
-			$items.find('.num').each(function(index, el) {
-				var _this = $(this);
-				num += _this.text() * 1;
-			});
-			$('#num').text(num)
-			$('#btn-group').on('click','.btn',function(event) {
-				event.preventDefault();
-				var opt = $(this).data('opt'),
-					msg = $(this).data('msg');
-				$.post('__ROOT__/Home/order/updateStatu', {id: oid, opt: opt}, function(data, textStatus, xhr) {
-					if (data.ok == 1) {
-						alert(msg);
-						location.reload();
-					}else{
-						alert('发送请求失败。请重试。');
-					}
-				});
-			});
-
-			var $formImg = $form.find('img'),
-				$formId = $form.find('#id'),
-				$index = $form.find('#index')
-
-			$items.on('click', '.comment', function(event) {
-				event.preventDefault();
-				$formImg.attr('src', $(this).parent().parent().find('img')[0].src);
-				$formId.val($(this).data('id'));
-				$index.val($(this).data('index')*1-1);
-				$modal.toggleClass('modal-show');
-			});
-
-			$modal.on('click', '.btn-cancel', function(event) {
-				event.preventDefault();
-				$modal.toggleClass('modal-show');
-			}).on('click', '.btn-submit', function(event) {
-				event.preventDefault();
-				var datas = $form.serialize();
-				console.log($form.serialize())
-				$.post('__ROOT__/Home/Comment/add', datas, function(data, textStatus, xhr) {
-					console.log(data);
-					if (data.msg.ok == 1) {
-						alert('评论成功')
-						location.reload();
-					}
-				});
-			});
-		});
+				num = 0;
+			var items = document.querySelectorAll('.num');
+			for (var i = items.length - 1; i >= 0; i--) {
+				num += items[i].innerText * 1;
+			}
+			document.getElementById('num').innerText = num;
+		})();
 	</script>
 </body>

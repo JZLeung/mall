@@ -92,6 +92,7 @@ class OrderController extends CommonController {
 		$statuText['-2'] = '订单已取消';
 		$res = $order->where(array('_id'=>$oid))->find();
 		$res['items'] = A('items')->getItemsByCart($res['items']);
+		$res['statu'] = (int)$res['statu'];
 		$res['statuText'] = $statuText[$res['statu']];
 		return $res;
 		//$this->assign('order', $res);
@@ -101,7 +102,8 @@ class OrderController extends CommonController {
 	public function updateStatu(){
 		$id = I('post.id');
 		$opt = I('post.opt');
-		$update['statu'] = $opt;//待确认取消
+		$update['statu'] = (int)$opt;//待确认取消
+		$update['endtime'] = time();//待确认取消
 		$res = M('order')->where(array('_id' => $id))->save($update);
 		$this->ajaxReturn($res);
 	}

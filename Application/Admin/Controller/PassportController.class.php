@@ -72,4 +72,13 @@ class PassportController extends Controller {
       $data['password'] = md5($data['password']);
       return $data;
     }
+
+    public function setpower(){
+      $uid = I('post.uid');
+      $power = I('post.type');
+      $user2['usertype'] = (int)$power;
+      $msg['msg'] = M('user')->where(array('_id' => $uid))->save($user2);
+      $msg['code'] = 'ok';
+      $this->ajaxReturn($msg);
+    }
 }

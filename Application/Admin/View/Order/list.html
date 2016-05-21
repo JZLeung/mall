@@ -17,14 +17,20 @@
     <style>
         .modal2{
             position: fixed;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+            margin: 40px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: 0px 2px 3px rgba(0,0,0,0.5);
             visibility: hidden;
-            z-index: 1002;
+            -webkit-transform: scale(0.5);
+            -ms-transform: scale(0.5);
+            -o-transform: scale(0.5);
+            transform: scale(0.5);
+            -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            transition: all 0.5s;
         }
         .mask{
             position: fixed;
@@ -38,6 +44,10 @@
         }
         .modal2.modal-show,.modal-show ~ .mask{
             visibility: visible;
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
         }
     </style>
 </head>
@@ -48,7 +58,7 @@
 	<div id="page-wrapper">
 		<div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">用户列表</h1>
+                <h1 class="page-header">订单列表</h1>
             </div>
         </div>
         <div class="row" style="padding-bottom: 50px;">
@@ -56,10 +66,11 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>UID</th>
-                        <th>用户名</th>
-                        <th>Email</th>
-                        <th>用户类型</th>
+                        <th>会员</th>
+                        <th>订单开始时间</th>
+                        <th>订单状态</th>
+                        <th>商品数目</th>
+                        <th>订单总额</th>
                         <th>操作</th>
                         <!-- <th></th>
                         <th></th> -->
@@ -67,16 +78,25 @@
                 </thead>
                 <tbody>
                     <define name="index" value="0" />
-                    <foreach name="users" item="user">
-                        <tr data-id="{$user['_id']}">
+                    <foreach name="orders" item="order">
+                        <tr data-id="{$order['_id']}">
                             <td>{++$index}</td>
-                            <td>{$user.uid}</td>
-                            <td>{$user.username}</td>
-                            <td>{$user.email}</td>
-                            <td>{$user['usertype'] == 5  ? '管理员' : '普通用户'}</td>
+                            <td><a href="__ROOT__/Admin/Index/order_list/u/{$order.user._id}">{$order.user.username}</a></td>
+                            <td>{$order.starttime|date="Y-m-d H:i",###}</td>
+                            <td><a href="__ROOT__/Admin/Index/order_list/s/{$order.statu}">{$order.statuText}</a></td>
+                            <td>{$order.items|count}</td>
                             <td>
-                                <a href="javascript:;" class="btn btn-info btn-circle btn-edit" data-toggle="modal" data-target="#modal"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:;" class="btn btn-info btn-circle btn-check"><i class="fa fa-user"></i></a>
+                                <empty name="order.amount">
+                                0
+                                <else /> 
+                                {$order.amount}
+                                </empty>
+                            </td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-info btn-circle btn-check"><i class="fa fa-info-circle"></i></a>
+                                <if condition="$order['statu'] eq -1">
+                                <a href="javascript:;" class="btn btn-info btn-circle btn-edit" data-toggle="modal" data-target="#modal"><i class="fa fa-minus-circle"></i></a>
+                                </if>
                             </td>
                         </tr>
                     </foreach>
@@ -89,13 +109,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">修改会员权限</h4>
+                    <h4 class="modal-title">处理取消订单</h4>
                 </div>
                 <div class="modal-body">
                     <p>
                         <select name="type" id="type">
-                            <option value="1">普通会员</option>
-                            <option value="5">管理员</option>
+                            <option value="-2">同意</option>
+                            <option value="2">拒绝</option>
                         </select>
                     </p>
                 </div>
@@ -115,19 +135,26 @@
             modal = $('#modal'),
             form = $('#form'),
             type = modal.find('#type');
-        var uid;
+        var oid;
         list.DataTable();
         list.on('click', '.btn-edit', function(event) {
             event.preventDefault();
-            uid = $(this).parent().parent().data('id');
-            modal.find('#uid').val(uid);
+            oid = $(this).parent().parent().data('id');
+        }).on('click', '.btn-check', function(event) {
+            event.preventDefault();
+            oid = $(this).parent().parent().data('id');
+            /*$.post('__ROOT__Admin/Order/getOrderFront', {oid: oid}, function(data, textStatus, xhr) {
+                
+            });*/
+            //location.href = '__ROOT__/Admin/Order/detail?o='+oid;
+            window.open('__ROOT__/Admin/Order/detail?o='+oid, 1100, 600);
         });
-        modal.on('click','.btn-primary', function(event) {
+        modal.on('click', '.btn-primary', function(event) {
             event.preventDefault();
             var value = type.val(), 
-                usertype = type.find('option:selected').text();
-            if (confirm('确认要将该用户权限设置为：'+usertype+'吗？')) {
-                $.post('__ROOT__/Admin/Passport/setpower', {uid: uid, type: value}, function(data, textStatus, xhr) {
+                type2 = type.find('option:selected').text();
+            if (confirm('确认要'+type2+'用户的取消订单申请吗？')) {
+                $.post('__ROOT__/Admin/Order/change', {oid: oid, statu: value}, function(data, textStatus, xhr) {
                     console.log(data);
                     if (data.msg.ok == 1) {
                         alert('修改成功');
@@ -135,7 +162,7 @@
                     }
                 });
             }
-        }); 
+        })
     });
     </script>
 </div>

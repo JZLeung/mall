@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/reset.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/cart.css">
-	<link rel="stylesheet" href="__PUBLIC__/Common/css/user.css">
 	<link rel="stylesheet" href="__PUBLIC__/Common/css/order.css">
 </head>
 <body onselectstart="return false;" style="-moz-user-select:none;color: #757575;">
@@ -29,17 +28,15 @@
 	</div>
 	<div class="content-w main">
 	<form action="./success?o={$Think.get.o}" method="post" id="form1">
-		
-	
 		<div class="line line-address">
 			<h3>选择收货地址</h3>	
 			<div>
 				<div class="addresses clear" id="addresses">
-					<div class="address" id="addNew">
+					<a href="__ROOT__/Home/User/user_address"><div class="address" id="addNew">
 						<p  style="margin-top: 60px;margin-left: 60px;">添加新地址</p>
-					</div>
+					</div></a>
 					<foreach name="addresses" item="address">
-					<div class="address">
+					<div class="address address2">
 						<input type="radio" hidden name="address" value="{$address['_id']}">
 						<p class="name"><span data-name="name">{$address.name}</span></p>
 						<div class="more">
@@ -142,7 +139,7 @@
 				$timeOpt = $('#timing-option'),
 				$confirm = $('#confirm'),
 				$myaddress = $('#myaddress');
-			$addresses.on('click', '.address', function(event) {
+			$addresses.on('click', '.address2', function(event) {
 				event.preventDefault();
 				var _this = $(this);
 				_this.addClass('active').siblings().removeClass('active');
