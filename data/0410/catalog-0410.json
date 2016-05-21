@@ -1,3 +1,0 @@
-{"_id":{"$oid":"570a12ce206f1ed6b58b4567"},"name":"手机、数码","children":["手机通讯","手机配件"],"id":{"$numberLong":"0"},"position":{"$numberLong":"2"}}
-{"_id":{"$oid":"570a12cf206f1ed6b58b4568"},"name":"电脑、办公","children":["电脑整机","电脑配件","文具耗材"],"id":{"$numberLong":"1"},"position":{"$numberLong":"0"}}
-{"_id":{"$oid":"570a12cf206f1ed6b58b4569"},"name":"食品、饮料","children":["进口食品","休闲食品","茗茶","饮料冲调","粮油调味"],"id":{"$numberLong":"2"},"position":{"$numberLong":"1"}}
