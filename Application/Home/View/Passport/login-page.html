@@ -19,11 +19,11 @@
 					<p class="head">会员登录</p>
 				</li>
 				<li>
-					<input type="text" name="username" placeholder="邮箱/手机号码">
+					<input type="text" name="username" placeholder="邮箱/手机号码" id="name">
 					<ul class="uerror error"></ul>
 				</li>
 				<li>
-					<input type="password" name="password" placeholder="密码">
+					<input type="password" name="password" placeholder="密码" id="pass">
 					<ul class="perror error"></ul>
 				</li>
 				<li>
@@ -49,9 +49,12 @@
 	<script src="__PUBLIC__/Common/js/base.js"></script>
 	<script>
 		$(document).ready(function() {
-
+			var name = $('#name'),
+				pass = $('#pass');
 			$('#login-box').find('#submit').click(function(event) {
 				event.preventDefault();
+				if (!name.val()) {alert('请输入用户名');return;}
+				if (!pass.val()) {alert('请输入密码');return;}
 				$.ajax({
 					url: 'Home/Passport/login',
 					type: 'post',
